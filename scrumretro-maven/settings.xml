@@ -25,6 +25,11 @@
 					<url>http://repo1.maven.org/maven/</url>
 					<layout>default</layout>
 				</repository>
+				<repository>
+					<id>org.springframework.maven.milestone</id>
+					<name>Maven Central Compatible Spring Milestone Repository</name>
+					<url>http:// maven.springframework.org/milestone</url>
+				</repository>
 			</repositories>
 		</profile>
 	</profiles>
