@@ -22,6 +22,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src/main/config"/>
+	<classpathentry kind="src" path="src/main/env/local"/>
+	<classpathentry kind="src" path="src/main/env/dev"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
