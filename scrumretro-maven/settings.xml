@@ -12,23 +12,17 @@
 				<repository>
 					<id>maven-central</id>
 					<name>maven-central</name>
-					<releases>
-						<enabled>false</enabled>
-						<updatePolicy>always</updatePolicy>
-						<checksumPolicy>warn</checksumPolicy>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-						<checksumPolicy>fail</checksumPolicy>
-					</snapshots>
 					<url>http://repo1.maven.org/maven/</url>
-					<layout>default</layout>
 				</repository>
 				<repository>
 					<id>org.springframework.maven.milestone</id>
 					<name>Maven Central Compatible Spring Milestone Repository</name>
-					<url>http:// maven.springframework.org/milestone</url>
+					<url>http://maven.springframework.org/milestone</url>
+				</repository>
+				<repository>
+					<id>maven-central2</id>
+					<name>maven-central2</name>
+					<url>http://repo2.maven.org/maven2/</url>
 				</repository>
 			</repositories>
 		</profile>
