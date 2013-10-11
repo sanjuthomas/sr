@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Item model class.
+ * Domain object for Item
  * 
  * @author Sanju Thomas
  * 
@@ -16,6 +16,11 @@ public class Item {
 	private String id;
 
 	private String login;
+	
+	private Integer votes;
+	
+	private Author author;
+	
 
 	public String getId() {
 		return id;
@@ -33,4 +38,20 @@ public class Item {
 		this.login = login;
 	}
 
+	public Integer getVotes() {
+		return votes;
+	}
+
+	public void setVotes(final Integer votes) {
+		this.votes = votes;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(final Author author) {
+		this.author = author;
+	}
+	
 }
