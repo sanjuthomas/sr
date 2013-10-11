@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Item model class.
  * 
- * @author thosan
+ * @author Sanju Thomas
  * 
  */
 @Document(collection = "item")

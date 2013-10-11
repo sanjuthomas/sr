@@ -7,7 +7,7 @@ package com.scrumretro.enums;
  * 2. Need Improvement
  * 3. Fuzzy
  * 
- * @author thosan
+ * @author Sanju Thomas
  *
  */
 public enum ItemType {
