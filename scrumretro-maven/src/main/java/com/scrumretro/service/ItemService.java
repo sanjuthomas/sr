@@ -5,7 +5,7 @@ import com.scrumretro.model.Item;
 /**
  * Service class for Item CURD operation.
  * 
- * @author thosan
+ * @author Sanju Thomas
  *
  */
 public class ItemService {
