@@ -62,7 +62,7 @@
 							<value>-XX:MaxPermSize=512m</value>
 						</jvmArgs>
 						<targetClasses>
-							<param>com.sgs*</param>
+							<param>com.scrumretro*</param>
 						</targetClasses>
 						<timeoutConstant>20000</timeoutConstant>
 						<excludedMethods>
