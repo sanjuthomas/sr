@@ -1,6 +1,5 @@
-package com.scrumretro.model;
+package com.scrumretro.data.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,14 +14,12 @@ public class Project {
 	@Id
 	private String id;
 	
-	@NotEmpty
 	private String name;
 	
 	private String description;
 	
 	private String organization;
 	
-	@NotEmpty
 	private User user;
 	
 

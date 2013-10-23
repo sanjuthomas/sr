@@ -1,6 +1,6 @@
 package com.scrumretro.service.impl;
 
-import com.scrumretro.model.Item;
+import com.scrumretro.data.model.Item;
 import com.scrumretro.service.ItemService;
 
 /**
