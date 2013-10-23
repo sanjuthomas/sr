@@ -1,6 +1,6 @@
 package com.scrumretro.service;
 
-import com.scrumretro.model.Item;
+import com.scrumretro.data.model.Item;
 
 /**
  * Service class for Item CURD operation.

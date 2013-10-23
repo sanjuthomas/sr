@@ -1,6 +1,5 @@
-package com.scrumretro.model;
+package com.scrumretro.data.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,13 +14,13 @@ public class Item {
 	@Id
 	private String id;
 
-	@NotEmpty
 	private User user;
 	
 	private Integer votes;
 	
-	@NotEmpty
 	private Retrospective retrospective;
+	
+	private String description;
 	
 
 	public String getId() {
@@ -55,5 +54,12 @@ public class Item {
 	public void setRetrospective(final Retrospective retrospective) {
 		this.retrospective = retrospective;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
+	}
 }
