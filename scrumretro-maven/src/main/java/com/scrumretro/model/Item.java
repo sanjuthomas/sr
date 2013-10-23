@@ -1,10 +1,10 @@
 package com.scrumretro.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Domain object for Item
  * 
  * @author Sanju Thomas
  * 
@@ -15,11 +15,13 @@ public class Item {
 	@Id
 	private String id;
 
+	@NotEmpty
 	private String login;
 	
 	private Integer votes;
 	
-	private Author author;
+	@NotEmpty
+	private User user;
 	
 
 	public String getId() {
@@ -46,12 +48,12 @@ public class Item {
 		this.votes = votes;
 	}
 
-	public Author getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(final Author author) {
-		this.author = author;
+	public void setUser(final User user) {
+		this.user = user;
 	}
 	
 }
