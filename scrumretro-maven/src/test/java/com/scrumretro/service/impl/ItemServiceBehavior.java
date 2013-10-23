@@ -1,4 +1,4 @@
-package com.scrumretro.service;
+package com.scrumretro.service.impl;
 
 /**
  * 

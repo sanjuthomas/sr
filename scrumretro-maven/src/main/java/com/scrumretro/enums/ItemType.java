@@ -3,15 +3,11 @@ package com.scrumretro.enums;
 /**
  * This enum shall list all possible type of items.
  * 
- * 1. Good
- * 2. Need Improvement
- * 3. Fuzzy
- * 
  * @author Sanju Thomas
  *
  */
 public enum ItemType {
 	
-	GOOD, NEED_IMPROVEMENT, FUZZY;
+	STOP_DOING, START_DOING, CONTINUE_DOING;
 
 }
