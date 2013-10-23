@@ -1,6 +1,5 @@
-package com.scrumretro.model;
+package com.scrumretro.data.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -11,10 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 public class User {
 	
-	@NotEmpty
 	private String emailId;
 	
-	@NotEmpty
 	private String password;
 
 	public String getEmailId() {

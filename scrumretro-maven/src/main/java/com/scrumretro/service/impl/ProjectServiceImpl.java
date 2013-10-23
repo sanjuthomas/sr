@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.scrumretro.model.Item;
+import com.scrumretro.data.model.Item;
 import com.scrumretro.service.ProjectService;
 
 @Repository
