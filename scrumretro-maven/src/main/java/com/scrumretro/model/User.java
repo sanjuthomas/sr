@@ -1,12 +1,14 @@
 package com.scrumretro.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 
  * @author Sanju Thomas
  *
  */
+@Document(collection = "user")
 public class User {
 	
 	@NotEmpty

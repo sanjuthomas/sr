@@ -16,12 +16,12 @@ public class Item {
 	private String id;
 
 	@NotEmpty
-	private String login;
+	private User user;
 	
 	private Integer votes;
 	
 	@NotEmpty
-	private User user;
+	private Retrospective retrospective;
 	
 
 	public String getId() {
@@ -30,14 +30,6 @@ public class Item {
 
 	public void setId(final String id) {
 		this.id = id;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(final String login) {
-		this.login = login;
 	}
 
 	public Integer getVotes() {
@@ -54,6 +46,14 @@ public class Item {
 
 	public void setUser(final User user) {
 		this.user = user;
+	}
+
+	public Retrospective getRetrospective() {
+		return retrospective;
+	}
+
+	public void setRetrospective(final Retrospective retrospective) {
+		this.retrospective = retrospective;
 	}
 	
 }

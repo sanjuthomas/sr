@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Sanju Thomas
  *
  */
-@Document(collection = "project")
-public class Project {
+@Document(collection = "retrospective")
+public class Retrospective {
 	
 	@Id
 	private String id;
@@ -18,13 +18,8 @@ public class Project {
 	@NotEmpty
 	private String name;
 	
-	private String description;
-	
-	private String organization;
-	
 	@NotEmpty
 	private User user;
-	
 
 	public String getId() {
 		return id;
@@ -40,22 +35,6 @@ public class Project {
 
 	public void setName(final String name) {
 		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(final String description) {
-		this.description = description;
-	}
-
-	public String getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(final String organization) {
-		this.organization = organization;
 	}
 
 	public User getUser() {
