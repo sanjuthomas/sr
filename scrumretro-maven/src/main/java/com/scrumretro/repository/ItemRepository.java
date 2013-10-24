@@ -1,12 +1,12 @@
-package com.scrumretro.service;
+package com.scrumretro.repository;
 
-import com.scrumretro.data.model.Item;
+import com.scrumretro.repository.mongo.model.Item;
 
 /**
  * Service class for Item CURD operation.
  * 
  */
-public interface ItemService {
+public interface ItemRepository {
 
 	/**
 	 * @param item
