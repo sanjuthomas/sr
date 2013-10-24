@@ -50,7 +50,7 @@ public class ProjectRepositoryImplBehavior {
 
 	@Configuration
 	@EnableMongoRepositories
-	@ComponentScan(basePackageClasses = { Project.class })
+	@ComponentScan(basePackageClasses = { ProjectRepositoryImpl.class })
 	@PropertySource("classpath:application.properties")
 	static class MongoBaseUnitTest extends AbstractMongoConfiguration {
 
