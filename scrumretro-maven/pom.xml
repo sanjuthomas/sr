@@ -4,96 +4,137 @@
 	<groupId>com.scrumretro</groupId>
 	<artifactId>scrumretro-maven</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
 	<properties>
-		<org.springframework.version>3.2.3.RELEASE</org.springframework.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.framework.version>3.2.4.RELEASE</spring.framework.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<spring.data.mongo.version>1.2.2.RELEASE</spring.data.mongo.version>
+		<junit.version>4.8.1</junit.version>
+		<nosqlunit.version>0.7.7</nosqlunit.version>
+		<servlet.version>2.5</servlet.version>
+	    <mongodb.java.driver.version>2.11.0</mongodb.java.driver.version>
+	    <pitest.version>0.30</pitest.version>
+	    <mockito.version>1.9.5</mockito.version>
+	    <easytest.version>1.4</easytest.version>
+	    <log4j.version>1.2.17</log4j.version>
+	    <bean.validation.version>1.0.0.GA</bean.validation.version>
+	    <bean.validation.hibernate>4.2.0.Final</bean.validation.hibernate>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-		</dependency>
-		<dependency>
-			<groupId>org.pitest</groupId>
-			<artifactId>pitest</artifactId>
-			<version>0.30</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>3.2.2.RELEASE</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>3.2.2.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>2.11.0</version>
-		</dependency>
+	<dependencies>
+	
+	
+		<!-- spring libraries -->	
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.2.0.RELEASE</version>
+			<version>${spring.data.mongo.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
-		</dependency>
+		
+		
+		<!-- servlet,  only for compile time -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		
+		<!-- mongo java driver -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>3.2.4.RELEASE</version>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>${mongodb.java.driver.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>3.2.4.RELEASE</version>
-			<scope>test</scope>
+		
+		<!-- jsr 303 bean validation -->
+	    <dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${bean.validation.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
+			<version>${bean.validation.hibernate}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
-			<version>4.2.0.Final</version>
+			<version>${bean.validation.hibernate}</version>
+		</dependency>
+
+
+		<!-- logging dependencies -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		
+
+		<!-- testing dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.framework.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>com.lordofthejars</groupId>
 			<artifactId>nosqlunit-mongodb</artifactId>
-			<version>0.7.7</version>
+			<version>${nosqlunit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>${easytest.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.pitest</groupId>
+			<artifactId>pitest</artifactId>
+			<version>${pitest.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
