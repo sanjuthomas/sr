@@ -1,4 +1,4 @@
-package com.scrumretro.data.model;
+package com.scrumretro.repository.mongo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
