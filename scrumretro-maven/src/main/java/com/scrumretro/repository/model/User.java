@@ -1,5 +1,6 @@
-package com.scrumretro.repository.mongo.model;
+package com.scrumretro.repository.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -10,9 +11,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 public class User {
 	
+	@Id
 	private String emailId;
 	
 	private String password;
+	
+	private UserDetail userDetail;
+	
+
+	public UserDetail getUserDetail() {
+		return userDetail;
+	}
+
+	public void setUserDetail(final UserDetail userDetail) {
+		this.userDetail = userDetail;
+	}
 
 	public String getEmailId() {
 		return emailId;
