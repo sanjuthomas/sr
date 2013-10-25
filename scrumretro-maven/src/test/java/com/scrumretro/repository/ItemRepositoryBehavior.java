@@ -4,6 +4,7 @@ import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder
 
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,8 +14,11 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.foursquare.fongo.Fongo;
+import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
+import com.scrumretro.enums.ItemType;
+import com.scrumretro.repository.model.Item;
 
 public class ItemRepositoryBehavior {
 	
@@ -33,7 +37,19 @@ public class ItemRepositoryBehavior {
 		itemRepository.deleteAll();
 	}
 	
+	@Test
+	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
+	public void shouldSaveOneProjectDocument() {
+		itemRepository.save(createItem());
+	}
 	
+	
+	private Item createItem(){
+		final Item item = new Item();
+		item.setItemType(ItemType.STOP_DOING);
+		item.setDescription("This is test item created for retrospective r1");
+		return  item;
+	}
 	
 
 	@Configuration
