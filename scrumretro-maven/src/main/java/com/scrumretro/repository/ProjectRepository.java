@@ -1,16 +1,13 @@
 package com.scrumretro.repository;
 
-import com.scrumretro.repository.mongo.model.Project;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import com.scrumretro.repository.model.Project;
+
 /**
  * 
+ * @author Sanju Thomas 
  *
  */
-public interface ProjectRepository {
+public interface ProjectRepository extends PagingAndSortingRepository<Project, String> {
 
-	/**
-	 * 
-	 * @param item
-	 * @return
-	 */
-	public void insert(final Project project);
 }
