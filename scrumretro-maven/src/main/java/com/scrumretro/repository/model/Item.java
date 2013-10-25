@@ -3,6 +3,8 @@ package com.scrumretro.repository.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.scrumretro.enums.ItemType;
+
 /**
  * 
  * @author Sanju Thomas
@@ -22,6 +24,16 @@ public class Item {
 	
 	private String description;
 	
+	private ItemType itemType;
+	
+
+	public ItemType getItemType() {
+		return itemType;
+	}
+
+	public void setItemType(final ItemType itemType) {
+		this.itemType = itemType;
+	}
 
 	public String getId() {
 		return id;

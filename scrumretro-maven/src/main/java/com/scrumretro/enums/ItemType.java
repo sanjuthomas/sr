@@ -8,6 +8,18 @@ package com.scrumretro.enums;
  */
 public enum ItemType {
 	
-	STOP_DOING, START_DOING, CONTINUE_DOING;
+	STOP_DOING("Stop Doing"), 
+	START_DOING("Start Doing"), 
+	CONTINUE_DOING("Continue Doing");
+	
+	private String displayString;
+	
+	public String getDisplayString() {
+		return displayString;
+	}
+
+	ItemType(final String displayString){
+		this.displayString = displayString;
+	}
 
 }
