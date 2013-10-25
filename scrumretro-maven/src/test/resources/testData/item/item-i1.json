@@ -1,9 +1,8 @@
 {
     "item": [
         {
-            "name": "p1",
-            "description": "This is a test project called p1",
-            "organization": "o1"
+            "type": "Stop Doing",
+            "description": "This is test item created for retrospective r1",
         }
     ]
 }
