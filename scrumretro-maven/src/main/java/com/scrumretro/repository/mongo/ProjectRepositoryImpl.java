@@ -22,4 +22,5 @@ public class ProjectRepositoryImpl implements ProjectRepository{
 	public void insert(final Project project) {
 		mongoTemplate.insert(project);
 	}
+	
 }

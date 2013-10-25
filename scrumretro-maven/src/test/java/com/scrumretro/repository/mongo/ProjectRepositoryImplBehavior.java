@@ -2,6 +2,7 @@ package com.scrumretro.repository.mongo;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -30,11 +32,13 @@ import com.scrumretro.repository.mongo.model.Project;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class ProjectRepositoryImplBehavior {
-	
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
 	@Autowired
 	private ApplicationContext applicationContext;
 
-	
 	@Rule
 	public MongoDbRule mongoDbRule = newMongoDbRule().defaultSpringMongoDb(
 			"scrumretro-test");
@@ -42,16 +46,30 @@ public class ProjectRepositoryImplBehavior {
 	@Autowired
 	private ProjectRepositoryImpl projectRepository;
 
+	@Before
+	public void setUp() {
+		mongoTemplate.dropCollection("project");
+	}
+
 	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
 	public void shouldSaveOneProjectDocument() {
 		projectRepository.insert(createProject("p1", "o1"));
 	}
 	
+	@Test
+	@ShouldMatchDataSet(location = "/testData/project/project-p1andp2.json")
+	public void shouldSaveTwoProjectDocument() {
+		projectRepository.insert(createProject("p1", "o1"));
+		projectRepository.insert(createProject("p2", "o2"));
+	}
+	
+	
+
 	private Project createProject(final String name, final String organization) {
 		final Project project = new Project();
 		project.setName(name);
-		project.setDescription("This is a test project called "+name);
+		project.setDescription("This is a test project called " + name);
 		project.setOrganization(organization);
 		return project;
 	}
