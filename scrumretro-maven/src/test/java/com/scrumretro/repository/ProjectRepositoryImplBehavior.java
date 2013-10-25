@@ -1,4 +1,4 @@
-package com.scrumretro.repository.mongo;
+package com.scrumretro.repository;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
 
@@ -12,7 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,7 +20,7 @@ import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
-import com.scrumretro.repository.mongo.model.Project;
+import com.scrumretro.repository.model.Project;
 
 /**
  * 
@@ -34,9 +33,6 @@ import com.scrumretro.repository.mongo.model.Project;
 public class ProjectRepositoryImplBehavior {
 
 	@Autowired
-	private MongoTemplate mongoTemplate;
-
-	@Autowired
 	private ApplicationContext applicationContext;
 
 	@Rule
@@ -44,24 +40,24 @@ public class ProjectRepositoryImplBehavior {
 			"scrumretro-test");
 
 	@Autowired
-	private ProjectRepositoryImpl projectRepository;
+	private ProjectRepository projectRepository;
 
 	@Before
 	public void setUp() {
-		mongoTemplate.dropCollection("project");
+		projectRepository.deleteAll();
 	}
 
 	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
 	public void shouldSaveOneProjectDocument() {
-		projectRepository.insert(createProject("p1", "o1"));
+		projectRepository.save(createProject("p1", "o1"));
 	}
 	
 	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1andp2.json")
-	public void shouldSaveTwoProjectDocument() {
-		projectRepository.insert(createProject("p1", "o1"));
-		projectRepository.insert(createProject("p2", "o2"));
+	public void shouldSaveTwoProjectDocuments() {
+		projectRepository.save(createProject("p1", "o1"));
+		projectRepository.save(createProject("p2", "o2"));
 	}
 	
 	
@@ -76,7 +72,7 @@ public class ProjectRepositoryImplBehavior {
 
 	@Configuration
 	@EnableMongoRepositories
-	@ComponentScan(basePackageClasses = { ProjectRepositoryImpl.class })
+	@ComponentScan(basePackageClasses = { ProjectRepository.class })
 	@PropertySource("classpath:application.properties")
 	static class MongoConfiguration extends AbstractMongoConfiguration {
 

@@ -1,17 +1,13 @@
 package com.scrumretro.repository;
 
-import com.scrumretro.repository.mongo.model.Item;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.scrumretro.repository.model.Project;
 
 /**
- * Service class for Item CURD operation.
+ *  @author Sanju Thomas 
  * 
  */
-public interface ItemRepository {
-
-	/**
-	 * @param item
-	 * @return
-	 */
-	public String save(final Item item);
+public interface ItemRepository extends PagingAndSortingRepository<Project, String> {
 	
 }

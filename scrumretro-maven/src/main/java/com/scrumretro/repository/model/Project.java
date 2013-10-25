@@ -1,4 +1,4 @@
-package com.scrumretro.repository.mongo.model;
+package com.scrumretro.repository.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Sanju Thomas
  *
  */
-@Document(collection ="project")
+@Document(collection = "project")
 public class Project {
 	
 	@Id
@@ -20,9 +20,7 @@ public class Project {
 	
 	private String organization;
 	
-	private User user;
 	
-
 	public String getId() {
 		return id;
 	}
@@ -54,15 +52,7 @@ public class Project {
 	public void setOrganization(final String organization) {
 		this.organization = organization;
 	}
-
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(final User user) {
-		this.user = user;
-	}
+	
 
 	@Override
 	public int hashCode() {
