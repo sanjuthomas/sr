@@ -4,10 +4,11 @@
             "name": "p1",
             "description": "This is a test project called p1",
             "organization": "o1"
-            "user":{
-            	"name": "u1",
-            	""
-            }
+        },
+        {
+            "name": "p2",
+            "description": "This is a test project called p2",
+            "organization": "o2"
         }
     ]
 }
