@@ -30,6 +30,14 @@ import com.scrumretro.repository.mongo.model.Project;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class ProjectRepositoryImplBehavior {
+	
+	@Autowired
+	private ApplicationContext applicationContext;
+
+	
+	@Rule
+	public MongoDbRule mongoDbRule = newMongoDbRule().defaultSpringMongoDb(
+			"scrumretro-test");
 
 	@Autowired
 	private ProjectRepositoryImpl projectRepository;
@@ -37,14 +45,14 @@ public class ProjectRepositoryImplBehavior {
 	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
 	public void shouldSaveOneProjectDocument() {
-		projectRepository.insert(createProject());
+		projectRepository.insert(createProject("p1", "o1"));
 	}
-
-	private Project createProject() {
+	
+	private Project createProject(final String name, final String organization) {
 		final Project project = new Project();
-		project.setName("p1");
-		project.setDescription("This is a test project called p1");
-		project.setOrganization("o1");
+		project.setName(name);
+		project.setDescription("This is a test project called "+name);
+		project.setOrganization(organization);
 		return project;
 	}
 
@@ -52,14 +60,7 @@ public class ProjectRepositoryImplBehavior {
 	@EnableMongoRepositories
 	@ComponentScan(basePackageClasses = { ProjectRepositoryImpl.class })
 	@PropertySource("classpath:application.properties")
-	static class MongoBaseUnitTest extends AbstractMongoConfiguration {
-
-		@Rule
-		public MongoDbRule mongoDbRule = newMongoDbRule().defaultSpringMongoDb(
-				"scrumretro-test");
-
-		@Autowired
-		private ApplicationContext applicationContext;
+	static class MongoConfiguration extends AbstractMongoConfiguration {
 
 		@Override
 		protected String getDatabaseName() {
