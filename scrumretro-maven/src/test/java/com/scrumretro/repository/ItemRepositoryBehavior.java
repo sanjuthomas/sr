@@ -20,6 +20,11 @@ import com.mongodb.Mongo;
 import com.scrumretro.enums.ItemType;
 import com.scrumretro.repository.model.Item;
 
+/**
+ * 
+ * @author Sanju Thomas
+ *
+ */
 public class ItemRepositoryBehavior {
 	
 	@Autowired
