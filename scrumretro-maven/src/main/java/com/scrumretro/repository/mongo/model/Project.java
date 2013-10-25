@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Sanju Thomas
  *
  */
-@Document(collection = "project")
+@Document
 public class Project {
 	
 	@Id

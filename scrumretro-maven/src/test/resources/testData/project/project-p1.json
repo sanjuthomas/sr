@@ -1,7 +1,9 @@
 {
-    "project": {
-        "name": "p1",
-        "description": "This is a test project called p1",
-        "organization": "o1"
-    }
+    "project": [
+        {
+            "name": "p1",
+            "description": "This is a test project called p1",
+            "organization": "o1"
+        }
+    ]
 }
