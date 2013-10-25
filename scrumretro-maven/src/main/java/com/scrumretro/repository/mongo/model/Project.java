@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Sanju Thomas
  *
  */
-@Document
+@Document(collection ="project")
 public class Project {
 	
 	@Id
@@ -19,6 +19,8 @@ public class Project {
 	private String description;
 	
 	private String organization;
+	
+	private User user;
 	
 
 	public String getId() {
@@ -53,6 +55,14 @@ public class Project {
 		this.organization = organization;
 	}
 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
+	}
 
 	@Override
 	public int hashCode() {
