@@ -2,4 +2,4 @@ language: java
 jdk:
   - openjdk7
   - oraclejdk7
-mvn -s scrumretro-maven/settings.xml -f scrumretro-maven/pom.xml clean install
+script: "./build.sh"
