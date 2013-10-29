@@ -1,9 +1,8 @@
 package com.scrumretro.repository;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,21 +18,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
-import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.Project;
+import com.scrumretro.repository.model.Retrospective;
+import com.scrumretro.repository.model.User;
+import com.scrumretro.repository.model.UserDetail;
 
 /**
  * 
  * @author Sanju Thomas
- * 
+ *
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class ProjectRepositoryBehavior {
-
+public class RetrospectiveBehavior {
+	
 	@Autowired
 	private ApplicationContext applicationContext;
 
@@ -42,44 +42,43 @@ public class ProjectRepositoryBehavior {
 			"scrumretro-test");
 
 	@Autowired
-	private ProjectRepository projectRepository;
-
-
-	@Test
-	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
-	public void shouldSaveOneProjectDocument() {
-		projectRepository.deleteAll();
-		projectRepository.save(createProject("p1", "o1"));
+	private RetrospectiveRepository retrospectiveRepository;
+	
+	@Before
+	public void setUp(){
+		this.retrospectiveRepository.deleteAll();
 	}
 	
 	@Test
-	@ShouldMatchDataSet(location = "/testData/project/project-p1andp2.json")
-	public void shouldSaveTwoProjectDocuments() {
-		projectRepository.deleteAll();
-		projectRepository.save(createProject("p1", "o1"));
-		projectRepository.save(createProject("p2", "o2"));
+	@ShouldMatchDataSet(location = "/testData/retrospective/retrospective-r1.json")
+	public void shouldSaveRetrospective(){
+		retrospectiveRepository.save(createRetrospective());
 	}
 	
-	
-	@Test
-	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
-	public void shouldFindByName(){
-		final Project project = projectRepository.findByName("p1");
-		assertNotNull(project);
-		assertEquals("p1", project.getName());
-	}
-	
-	private Project createProject(final String name, final String organization) {
+	private Retrospective createRetrospective(){
+		final Retrospective retrospective = new Retrospective();
+		retrospective.setName("retrospective-r1");
+		final User user = new User();
+		user.setEmailId("info@scrumretro.com");
+		final UserDetail userDetail = new UserDetail();
+		userDetail.setFirstName("firstName");
+		userDetail.setLastName("lastName");
+		userDetail.setOrganization("organization");
+		user.setUserDetail(userDetail);
+		retrospective.setUser(user);
 		final Project project = new Project();
-		project.setName(name);
-		project.setDescription("This is a test project called " + name);
-		project.setOrganization(organization);
-		return project;
+		project.setId("5270269044ae1440f787333a");
+		project.setName("p1");
+		project.setDescription("This is a test project called p1");
+		project.setOrganization("o1");
+		retrospective.setProject(project);
+		return retrospective;
 	}
-
+	
+	
 	@Configuration
 	@EnableMongoRepositories
-	@ComponentScan(basePackageClasses = { ProjectRepository.class })
+	@ComponentScan(basePackageClasses = { RetrospectiveRepository.class })
 	@PropertySource("classpath:application.properties")
 	static class MongoConfiguration extends AbstractMongoConfiguration {
 
@@ -98,4 +97,5 @@ public class ProjectRepositoryBehavior {
 			return "com.scrumretro.repository.mongo";
 		}
 	}
+
 }
