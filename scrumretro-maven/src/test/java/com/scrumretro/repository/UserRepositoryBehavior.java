@@ -2,6 +2,7 @@ package com.scrumretro.repository;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.User;
+import com.scrumretro.repository.model.UserDetail;
 
 /**
  * 
@@ -39,6 +41,11 @@ public class UserRepositoryBehavior {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Before
+	public void setUp(){
+		this.userRepository.deleteAll();
+	}
 
 	@Test
 	@ShouldMatchDataSet(location = "/testData/user/user-u1.json")
@@ -50,6 +57,11 @@ public class UserRepositoryBehavior {
 		final User user = new User();
 		user.setEmailId("info@scrumretro.com");
 		user.setPassword("password");
+		final UserDetail userDetail = new UserDetail();
+		userDetail.setFirstName("firstName");
+		userDetail.setLastName("lastName");
+		userDetail.setOrganization("organization");
+		user.setUserDetail(userDetail);
 		return user;
 	}
 

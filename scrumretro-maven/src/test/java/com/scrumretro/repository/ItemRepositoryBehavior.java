@@ -96,6 +96,5 @@ public class ItemRepositoryBehavior {
 			converters.add(new ItemWriteConverter());
 			return new CustomConversions(converters);
 		}
-		
 	}
 }
