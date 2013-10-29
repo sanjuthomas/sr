@@ -2,7 +2,12 @@
     "user": [
         {
             "_id": "info@scrumretro.com",
-            "password" : "password",
+            "password": "password",
+            "userDetail": {
+                "firstName": "firstName",
+                "lastName": "lastName",
+                "organization": "organization"
+            }
         }
     ]
 }
