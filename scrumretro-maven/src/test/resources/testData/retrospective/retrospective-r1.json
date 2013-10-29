@@ -1,0 +1,21 @@
+{
+    "retrospective": [
+        {
+            "name": "retrospective-r1",
+            "user": {
+                "_id": "info@scrumretro.com",
+                "userDetail": {
+                    "firstName": "firstName",
+                    "lastName": "lastName",
+                    "organization": "organization"
+                }
+            },
+            "project": {
+            	"_id": "5270269044ae1440f787333a",
+                "name": "p1",
+                "description": "This is a test project called p1",
+                "organization": "o1"
+            }
+        }
+    ]
+}
