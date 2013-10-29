@@ -1,6 +1,7 @@
 package com.scrumretro.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
+
 import com.scrumretro.repository.model.Project;
 
 /**
@@ -10,4 +11,5 @@ import com.scrumretro.repository.model.Project;
  */
 public interface ProjectRepository extends PagingAndSortingRepository<Project, String> {
 
+	public Project findByName(final String name);
 }
