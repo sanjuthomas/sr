@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -89,7 +90,7 @@ public class ItemRepositoryBehavior {
 			return "com.scrumretro.repository.mongo";
 		}
 		
-		@Override
+		@Bean
 		public CustomConversions customConversions() {
 			List<Converter<?, ?>> converters = new ArrayList<Converter<?, ?>>();
 			converters.add(new ItemWriteConverter());

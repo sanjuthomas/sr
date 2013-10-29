@@ -1,7 +1,7 @@
 {
     "item": [
         {
-            "type": "Stop Doing",
+            "itemType": "Stop Doing",
             "description": "This is test item created for retrospective r1"
         }
     ]
