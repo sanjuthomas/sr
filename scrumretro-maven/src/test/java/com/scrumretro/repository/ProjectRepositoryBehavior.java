@@ -30,7 +30,7 @@ import com.scrumretro.repository.model.Project;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class ProjectRepositoryImplBehavior {
+public class ProjectRepositoryBehavior {
 
 	@Autowired
 	private ApplicationContext applicationContext;

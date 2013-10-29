@@ -19,35 +19,40 @@ import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
+import com.scrumretro.repository.model.User;
 
 /**
  * 
  * @author Sanju Thomas
- *
+ * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-
 public class UserRepositoryBehavior {
-	
+
 	@Autowired
 	private ApplicationContext applicationContext;
 
 	@Rule
 	public MongoDbRule mongoDbRule = newMongoDbRule().defaultSpringMongoDb(
 			"scrumretro-test");
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
-	
+
 	@Test
 	@ShouldMatchDataSet(location = "/testData/user/user-u1.json")
-	public void shouldSaveUser(){
-		
+	public void shouldSaveUser() {
+		userRepository.save(createUser());
+	}
+	
+	private User createUser(){
+		final User user = new User();
+		user.setEmailId("info@scrumretro.com");
+		user.setPassword("password");
+		return user;
 	}
 
-	
 	@Configuration
 	@EnableMongoRepositories
 	@ComponentScan(basePackageClasses = { UserRepository.class })
@@ -68,7 +73,7 @@ public class UserRepositoryBehavior {
 		protected String getMappingBasePackage() {
 			return "com.scrumretro.repository.mongo";
 		}
+
 	}
-	
 
 }

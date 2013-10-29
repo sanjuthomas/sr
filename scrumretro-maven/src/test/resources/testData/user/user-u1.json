@@ -2,7 +2,7 @@
     "user": [
         {
             "_id": "info@scrumretro.com",
-            "description": "This is test item created for retrospective r1"
+            "password" : "password",
         }
     ]
 }
