@@ -57,14 +57,14 @@ public class User {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		final User other = (User) obj;
 		if (emailId == null) {
 			if (other.emailId != null)
 				return false;
