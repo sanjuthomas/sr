@@ -20,6 +20,8 @@ public class Project {
 	
 	private String organization;
 	
+	private User user;
+	
 	
 	public String getId() {
 		return id;
@@ -53,6 +55,13 @@ public class Project {
 		this.organization = organization;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
+	}
 
 	@Override
 	public int hashCode() {

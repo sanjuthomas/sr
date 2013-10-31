@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -40,7 +41,7 @@ import com.scrumretro.repository.model.UserDetail;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class RetrospectiveBehavior {
+public class RetrospectiveRepositoryBehavior {
 	
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -63,6 +64,12 @@ public class RetrospectiveBehavior {
 		retrospectiveRepository.save(createRetrospective());
 	}
 	
+	@Test
+	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
+	public void shouldFindByProject(){
+		
+	}
+	
 	private Retrospective createRetrospective(){
 		final Retrospective retrospective = new Retrospective();
 		retrospective.setName("retrospective-r1");
@@ -74,13 +81,18 @@ public class RetrospectiveBehavior {
 		userDetail.setOrganization("organization");
 		user.setUserDetail(userDetail);
 		retrospective.setUser(user);
+		final Project project = createProject();
+		retrospective.setProject(project);
+		return retrospective;
+	}
+	
+	private Project createProject(){
 		final Project project = new Project();
 		project.setId("5270269044ae1440f787333a");
 		project.setName("p1");
 		project.setDescription("This is a test project called p1");
 		project.setOrganization("o1");
-		retrospective.setProject(project);
-		return retrospective;
+		return project;
 	}
 	
 	
