@@ -1,5 +1,7 @@
 package com.scrumretro.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.scrumretro.repository.model.Item;
@@ -9,5 +11,7 @@ import com.scrumretro.repository.model.Item;
  * 
  */
 public interface ItemRepository extends PagingAndSortingRepository<Item, String> {
+	
+	public List<Item> findByRetrospectiveId(final String retrospectiveId);
 	
 }

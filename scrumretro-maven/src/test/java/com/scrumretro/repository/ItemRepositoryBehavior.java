@@ -5,7 +5,6 @@ import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,10 +48,6 @@ public class ItemRepositoryBehavior {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	@Before
-	public void setUp(){
-		itemRepository.deleteAll();
-	}
 	
 	@Test
 	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
@@ -60,11 +55,13 @@ public class ItemRepositoryBehavior {
 		itemRepository.save(createItem());
 	}
 	
-	
 	private Item createItem(){
 		final Item item = new Item();
 		item.setItemType(ItemType.STOP_DOING);
 		item.setDescription("This is test item created for retrospective r1");
+		item.setRetrospectiveId("234dqwer2wqer");
+		item.setUserId("info@scrumretro.com");
+		item.setVotes(1);
 		return  item;
 	}
 	
