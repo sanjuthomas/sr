@@ -22,7 +22,6 @@ public class Project {
 	
 	private User user;
 	
-	
 	public String getId() {
 		return id;
 	}
