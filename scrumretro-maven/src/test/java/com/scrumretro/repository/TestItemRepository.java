@@ -1,8 +1,12 @@
 package com.scrumretro.repository;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
+import java.util.List;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,20 +22,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
-import com.scrumretro.repository.model.User;
-import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.enums.ItemType;
+import com.scrumretro.repository.model.Item;
 
 /**
  * 
  * @author Sanju Thomas
- * 
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class TestUserRepositoryBehavior {
-
+public class TestItemRepository {
+	
 	@Autowired
 	private ApplicationContext applicationContext;
 
@@ -40,34 +45,38 @@ public class TestUserRepositoryBehavior {
 			"scrumretro-test");
 
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Before
-	public void setUp(){
-		this.userRepository.deleteAll();
-	}
+	private ItemRepository itemRepository;
 
+	
 	@Test
-	@ShouldMatchDataSet(location = "/testData/user/user-u1.json")
-	public void shouldSaveUser() {
-		userRepository.save(createUser());
+	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
+	public void shouldSaveOneProjectDocument() {
+		itemRepository.save(createItem());
 	}
 	
-	private User createUser(){
-		final User user = new User();
-		user.setEmailId("info@scrumretro.com");
-		user.setPassword("password");
-		final UserDetail userDetail = new UserDetail();
-		userDetail.setFirstName("firstName");
-		userDetail.setLastName("lastName");
-		userDetail.setOrganization("organization");
-		user.setUserDetail(userDetail);
-		return user;
+	@Test
+	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
+	public void shouldFindByRetrospectiveId(){
+		List<Item> items = itemRepository.findByRetrospectiveId("234dqwer2wqer");
+		assertNotNull(items);
+		assertTrue(items.size() > 0);
+		assertEquals("234dqwer2wqer", items.get(0).getRetrospectiveId());
 	}
+	
+	private Item createItem(){
+		final Item item = new Item();
+		item.setItemType(ItemType.STOP_DOING);
+		item.setDescription("This is test item created for retrospective r1");
+		item.setRetrospectiveId("234dqwer2wqer");
+		item.setUserId("info@scrumretro.com");
+		item.setVotes(1);
+		return  item;
+	}
+	
 
 	@Configuration
 	@EnableMongoRepositories
-	@ComponentScan(basePackageClasses = { UserRepository.class })
+	@ComponentScan(basePackageClasses = { ItemRepository.class })
 	@PropertySource("classpath:application.properties")
 	static class MongoConfiguration extends AbstractMongoConfiguration {
 
@@ -85,7 +94,6 @@ public class TestUserRepositoryBehavior {
 		protected String getMappingBasePackage() {
 			return "com.scrumretro.repository.mongo";
 		}
-
+		
 	}
-
 }

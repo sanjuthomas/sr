@@ -44,7 +44,7 @@ import com.scrumretro.repository.model.UserDetail;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class TestRetrospectiveRepositoryBehavior {
+public class TestRetrospectiveRepository {
 	
 	@Autowired
 	private ApplicationContext applicationContext;

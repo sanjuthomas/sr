@@ -9,7 +9,7 @@ import org.junit.Test;
  * @author Sanju Thomas
  *
  */
-public class ItemTypeBehavior {
+public class TestItemType {
 
 	@Test
 	public void shouldReturnItemTypeDisplayString(){
