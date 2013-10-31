@@ -18,9 +18,9 @@ public class Retrospective {
 	
 	private String name;
 	
-	private User user;
+	private String userId;
 	
-	private Project project;
+	private String projectId;
 	
 	private Timestamp meetingTime;
 
@@ -39,21 +39,21 @@ public class Retrospective {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
-	public User getUser() {
-		return user;
+	
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser(final User user) {
-		this.user = user;
+	public void setUserId(final String userId) {
+		this.userId = userId;
 	}
 
-	public Project getProject() {
-		return project;
+	public String getProjectId() {
+		return projectId;
 	}
 
-	public void setProject(final Project project) {
-		this.project = project;
+	public void setProjectId(final String projectId) {
+		this.projectId = projectId;
 	}
 
 	public Timestamp getMeetingTime() {
