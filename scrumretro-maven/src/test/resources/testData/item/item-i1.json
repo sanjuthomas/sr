@@ -1,7 +1,7 @@
 {
     "item": [
         {
-            "itemType": "Stop Doing",
+            "itemType": "STOP_DOING",
             "description": "This is test item created for retrospective r1",
             "votes": 1,
             "userId": "info@scrumretro.com",

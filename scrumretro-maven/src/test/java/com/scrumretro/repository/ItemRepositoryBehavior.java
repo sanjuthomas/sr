@@ -1,8 +1,10 @@
 package com.scrumretro.repository;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Rule;
@@ -10,23 +12,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
-import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
 import com.scrumretro.enums.ItemType;
-import com.scrumretro.repository.converter.ItemWriteConverter;
 import com.scrumretro.repository.model.Item;
 
 /**
@@ -53,6 +52,15 @@ public class ItemRepositoryBehavior {
 	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
 	public void shouldSaveOneProjectDocument() {
 		itemRepository.save(createItem());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
+	public void shouldFindByRetrospectiveId(){
+		List<Item> items = itemRepository.findByRetrospectiveId("234dqwer2wqer");
+		assertNotNull(items);
+		assertTrue(items.size() > 0);
+		assertEquals("234dqwer2wqer", items.get(0).getRetrospectiveId());
 	}
 	
 	private Item createItem(){
@@ -87,11 +95,5 @@ public class ItemRepositoryBehavior {
 			return "com.scrumretro.repository.mongo";
 		}
 		
-		@Bean
-		public CustomConversions customConversions() {
-			List<Converter<?, ?>> converters = new ArrayList<Converter<?, ?>>();
-			converters.add(new ItemWriteConverter());
-			return new CustomConversions(converters);
-		}
 	}
 }
