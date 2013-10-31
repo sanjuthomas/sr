@@ -118,13 +118,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert</artifactId>
-			<version>${easytest.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.pitest</groupId>
 			<artifactId>pitest</artifactId>
 			<version>${pitest.version}</version>
