@@ -3,7 +3,15 @@
         {
             "name": "p1",
             "description": "This is a test project called p1",
-            "organization": "o1"
+            "organization": "o1",
+            "user": {
+                "_id": "info@scrumretro.com",
+                "userDetail": {
+                    "firstName": "firstName",
+                    "lastName": "lastName",
+                    "organization": "organization"
+                }
+            }
         }
     ]
 }

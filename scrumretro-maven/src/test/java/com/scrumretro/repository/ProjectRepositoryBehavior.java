@@ -3,6 +3,9 @@ package com.scrumretro.repository;
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,6 +26,8 @@ import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.Project;
+import com.scrumretro.repository.model.User;
+import com.scrumretro.repository.model.UserDetail;
 
 /**
  * 
@@ -47,19 +52,9 @@ public class ProjectRepositoryBehavior {
 
 	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
-	public void shouldSaveOneProjectDocument() {
-		projectRepository.deleteAll();
-		projectRepository.save(createProject("p1", "o1"));
+	public void shouldSaveProject() {
+		projectRepository.save(createProject());
 	}
-	
-	@Test
-	@ShouldMatchDataSet(location = "/testData/project/project-p1andp2.json")
-	public void shouldSaveTwoProjectDocuments() {
-		projectRepository.deleteAll();
-		projectRepository.save(createProject("p1", "o1"));
-		projectRepository.save(createProject("p2", "o2"));
-	}
-	
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
@@ -69,12 +64,44 @@ public class ProjectRepositoryBehavior {
 		assertEquals("p1", project.getName());
 	}
 	
-	private Project createProject(final String name, final String organization) {
+	@Test
+	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
+	public void shouldFindByUserId(){
+		final List<Project> projects = projectRepository.findByUserId("info@scrumretro.com");
+		assertNotNull(projects);
+		assertTrue(projects.size() > 0);
+		assertEquals("p1", projects.get(0).getName());
+	}
+	
+
+	@Test
+	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
+	public void shouldFindByUser(){
+		final List<Project> projects = projectRepository.findByUser(createUser());
+		assertNotNull(projects);
+		assertTrue(projects.size() > 0);
+		assertEquals("p1", projects.get(0).getName());
+	}
+	
+	private Project createProject() {
 		final Project project = new Project();
-		project.setName(name);
-		project.setDescription("This is a test project called " + name);
-		project.setOrganization(organization);
+		project.setName("p1");
+		project.setDescription("This is a test project called o1");
+		project.setOrganization("o1");
+		final User user = createUser();
+		project.setUser(user);
 		return project;
+	}
+	
+	private User createUser(){
+		final User user = new User();
+		user.setEmailId("info@scrumretro.com");
+		final UserDetail userDetail = new UserDetail();
+		userDetail.setFirstName("firstName");
+		userDetail.setLastName("lastName");
+		userDetail.setOrganization("organization");
+		user.setUserDetail(userDetail);
+		return user;
 	}
 
 	@Configuration
