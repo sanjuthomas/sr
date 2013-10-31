@@ -35,7 +35,7 @@ import com.scrumretro.repository.model.Item;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class ItemRepositoryBehavior {
+public class TestItemRepositoryBehavior {
 	
 	@Autowired
 	private ApplicationContext applicationContext;
