@@ -2,7 +2,10 @@
     "item": [
         {
             "itemType": "Stop Doing",
-            "description": "This is test item created for retrospective r1"
+            "description": "This is test item created for retrospective r1",
+            "votes": 1,
+            "userId": "info@scrumretro.com",
+            "retrospectiveId": "234dqwer2wqer"
         }
     ]
 }
