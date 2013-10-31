@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,18 +26,20 @@ import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
-import com.scrumretro.enums.ItemType;
-import com.scrumretro.repository.model.Item;
+import com.scrumretro.repository.model.Project;
+import com.scrumretro.repository.model.User;
+import com.scrumretro.repository.model.UserDetail;
 
 /**
  * 
  * @author Sanju Thomas
- *
+ * 
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class TestItemRepositoryBehavior {
-	
+public class TestProjectRepository {
+
 	@Autowired
 	private ApplicationContext applicationContext;
 
@@ -45,38 +48,66 @@ public class TestItemRepositoryBehavior {
 			"scrumretro-test");
 
 	@Autowired
-	private ItemRepository itemRepository;
+	private ProjectRepository projectRepository;
+	
 
-	
-	@Test
-	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
-	public void shouldSaveOneProjectDocument() {
-		itemRepository.save(createItem());
+//	@Test
+	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
+	public void shouldSaveProject() {
+		projectRepository.save(createProject());
 	}
 	
 	@Test
-	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
-	public void shouldFindByRetrospectiveId(){
-		List<Item> items = itemRepository.findByRetrospectiveId("234dqwer2wqer");
-		assertNotNull(items);
-		assertTrue(items.size() > 0);
-		assertEquals("234dqwer2wqer", items.get(0).getRetrospectiveId());
+	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
+	public void shouldFindByName(){
+		final Project project = projectRepository.findByName("p1");
+		assertNotNull(project);
+		assertEquals("p1", project.getName());
 	}
 	
-	private Item createItem(){
-		final Item item = new Item();
-		item.setItemType(ItemType.STOP_DOING);
-		item.setDescription("This is test item created for retrospective r1");
-		item.setRetrospectiveId("234dqwer2wqer");
-		item.setUserId("info@scrumretro.com");
-		item.setVotes(1);
-		return  item;
+	@Test
+	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
+	public void shouldFindByUserId(){
+		final List<Project> projects = projectRepository.findByUserId("info@scrumretro.com");
+		assertNotNull(projects);
+		assertTrue(projects.size() > 0);
+		assertEquals("p1", projects.get(0).getName());
 	}
 	
+
+	@Test
+	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
+	public void shouldFindByUser(){
+		final List<Project> projects = projectRepository.findByUser(createUser());
+		assertNotNull(projects);
+		assertTrue(projects.size() > 0);
+		assertEquals("p1", projects.get(0).getName());
+	}
+	
+	private Project createProject() {
+		final Project project = new Project();
+		project.setName("p1");
+		project.setDescription("This is a test project called p1");
+		project.setOrganization("o1");
+		final User user = createUser();
+		project.setUser(user);
+		return project;
+	}
+	
+	private User createUser(){
+		final User user = new User();
+		user.setEmailId("info@scrumretro.com");
+		final UserDetail userDetail = new UserDetail();
+		userDetail.setFirstName("firstName");
+		userDetail.setLastName("lastName");
+		userDetail.setOrganization("organization");
+		user.setUserDetail(userDetail);
+		return user;
+	}
 
 	@Configuration
 	@EnableMongoRepositories
-	@ComponentScan(basePackageClasses = { ItemRepository.class })
+	@ComponentScan(basePackageClasses = { ProjectRepository.class })
 	@PropertySource("classpath:application.properties")
 	static class MongoConfiguration extends AbstractMongoConfiguration {
 
@@ -94,6 +125,5 @@ public class TestItemRepositoryBehavior {
 		protected String getMappingBasePackage() {
 			return "com.scrumretro.repository.mongo";
 		}
-		
 	}
 }
