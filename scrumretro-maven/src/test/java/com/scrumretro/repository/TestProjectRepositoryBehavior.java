@@ -51,7 +51,7 @@ public class TestProjectRepositoryBehavior {
 	private ProjectRepository projectRepository;
 	
 
-	@Test
+//	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
 	public void shouldSaveProject() {
 		projectRepository.save(createProject());
@@ -86,7 +86,6 @@ public class TestProjectRepositoryBehavior {
 	
 	private Project createProject() {
 		final Project project = new Project();
-		project.setTest("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		project.setName("p1");
 		project.setDescription("This is a test project called p1");
 		project.setOrganization("o1");
