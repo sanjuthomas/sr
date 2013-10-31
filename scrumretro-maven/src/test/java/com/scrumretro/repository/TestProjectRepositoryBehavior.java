@@ -57,7 +57,7 @@ public class TestProjectRepositoryBehavior {
 		projectRepository.save(createProject());
 	}
 	
-	/*@Test
+	@Test
 	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
 	public void shouldFindByName(){
 		final Project project = projectRepository.findByName("p1");
@@ -82,7 +82,7 @@ public class TestProjectRepositoryBehavior {
 		assertNotNull(projects);
 		assertTrue(projects.size() > 0);
 		assertEquals("p1", projects.get(0).getName());
-	}*/
+	}
 	
 	private Project createProject() {
 		final Project project = new Project();
