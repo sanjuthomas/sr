@@ -18,6 +18,9 @@ public class ItemWriteConverter implements Converter<Item, DBObject> {
 		DBObject dbo = new BasicDBObject();
 		dbo.put("description", item.getDescription());
 		dbo.put("itemType", item.getItemType().getDisplayString());
+		dbo.put("userId", item.getUserId());
+		dbo.put("retrospectiveId", item.getRetrospectiveId());
+		dbo.put("votes", item.getVotes());
 		return dbo;
 	}
 	
