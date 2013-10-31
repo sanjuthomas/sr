@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +38,7 @@ import com.scrumretro.repository.model.UserDetail;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class ProjectRepositoryBehavior {
+public class TestProjectRepositoryBehavior {
 
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -48,7 +49,7 @@ public class ProjectRepositoryBehavior {
 
 	@Autowired
 	private ProjectRepository projectRepository;
-
+	
 
 	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
@@ -56,7 +57,7 @@ public class ProjectRepositoryBehavior {
 		projectRepository.save(createProject());
 	}
 	
-	@Test
+	/*@Test
 	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
 	public void shouldFindByName(){
 		final Project project = projectRepository.findByName("p1");
@@ -81,12 +82,13 @@ public class ProjectRepositoryBehavior {
 		assertNotNull(projects);
 		assertTrue(projects.size() > 0);
 		assertEquals("p1", projects.get(0).getName());
-	}
+	}*/
 	
 	private Project createProject() {
 		final Project project = new Project();
+		project.setTest("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		project.setName("p1");
-		project.setDescription("This is a test project called o1");
+		project.setDescription("This is a test project called p1");
 		project.setOrganization("o1");
 		final User user = createUser();
 		project.setUser(user);
