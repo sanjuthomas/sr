@@ -1,0 +1,18 @@
+{
+    "project": [
+        {
+            "_id" : "2fasdf123333",
+            "name": "p2",
+            "description": "This is a test project called p2",
+            "organization": "o1",
+            "user": {
+                "_id": "info@scrumretro.com",
+                "userDetail": {
+                    "firstName": "firstName",
+                    "lastName": "lastName",
+                    "organization": "organization"
+                }
+            }
+        }
+    ]
+}

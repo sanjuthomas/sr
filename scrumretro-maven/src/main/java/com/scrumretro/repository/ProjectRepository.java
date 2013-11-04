@@ -21,4 +21,7 @@ public interface ProjectRepository extends PagingAndSortingRepository<Project, S
 	
 	@Query("{ 'user._id' : ?0 }")
 	public List<Project> findByUserId(final String userId);
+	
+	@Query("{ '_id' : ?0 }")
+	public Project findById(final String projectId);
 }
