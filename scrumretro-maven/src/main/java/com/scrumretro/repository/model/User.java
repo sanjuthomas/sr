@@ -47,6 +47,21 @@ public class User {
 	public String toString() {
 		return "User [emailId=" + emailId + "]";
 	}
+	
+
+	/**
+	 * userDetail.lastName, userDetail.firstName
+	 * 
+	 * @return
+	 */
+	public String getDisplayName(){
+		final StringBuilder builder = new StringBuilder();
+		builder.append(this.userDetail.getLastName());
+		builder.append(", ");
+		builder.append(this.userDetail.getFirstName());
+		return builder.toString();
+	}
+	
 
 	@Override
 	public int hashCode() {
