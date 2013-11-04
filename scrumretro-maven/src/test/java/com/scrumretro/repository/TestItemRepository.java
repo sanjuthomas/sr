@@ -50,18 +50,29 @@ public class TestItemRepository {
 	
 	@Test
 	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
-	public void shouldSaveOneProjectDocument() {
+	public void shouldSave() {
 		itemRepository.save(createItem());
 	}
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
 	public void shouldFindByRetrospectiveId(){
-		List<Item> items = itemRepository.findByRetrospectiveId("234dqwer2wqer");
+		final List<Item> items = itemRepository.findByRetrospectiveId("234dqwer2wqer");
 		assertNotNull(items);
 		assertTrue(items.size() > 0);
 		assertEquals("234dqwer2wqer", items.get(0).getRetrospectiveId());
 	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/item/item-i2.json"})
+	public void shouldFindById(){
+		final Item item = itemRepository.findById("i2");
+		assertNotNull(item);
+		assertEquals("i2", item.getId());
+		itemRepository.deleteAll();
+	}
+	
+	
 	
 	private Item createItem(){
 		final Item item = new Item();
