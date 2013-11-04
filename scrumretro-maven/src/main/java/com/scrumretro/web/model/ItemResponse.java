@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * 
  *
  */
-public class ItemBean {
+public class ItemResponse {
 	
 	private String id;
 	
