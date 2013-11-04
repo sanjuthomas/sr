@@ -18,8 +18,6 @@ public class Project {
 	
 	private String description;
 	
-	private String organization;
-	
 	private User user;
 	
 	public String getId() {
@@ -46,14 +44,6 @@ public class Project {
 		this.description = description;
 	}
 
-	public String getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(final String organization) {
-		this.organization = organization;
-	}
-	
 	public User getUser() {
 		return user;
 	}
