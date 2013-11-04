@@ -1,8 +1,10 @@
 package com.scrumretro.worker;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scrumretro.repository.ProjectRepository;
+import com.scrumretro.repository.model.Project;
 import com.scrumretro.web.model.ProjectResponse;
 
 /**
@@ -21,9 +23,11 @@ public class ProjectWorker {
 	}
 	
 	public ProjectResponse findById(final String projectId){
-		return null;
+		final Project project = projectRepository.findById(projectId);
+		final ProjectResponse projectResponse = new ProjectResponse();
+		BeanUtils.copyProperties(project, projectResponse);
+		projectResponse.setOwnerDisplayName(project.getUser().getDisplayName());
+		return projectResponse;
 	}
-	
-	
 
 }
