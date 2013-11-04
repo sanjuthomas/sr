@@ -37,4 +37,5 @@ public class UserDetail {
 	public void setOrganization(final String organization) {
 		this.organization = organization;
 	}
+	
 }

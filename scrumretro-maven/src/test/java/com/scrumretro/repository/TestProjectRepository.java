@@ -97,7 +97,6 @@ public class TestProjectRepository {
 		final Project project = new Project();
 		project.setName("p1");
 		project.setDescription("This is a test project called p1");
-		project.setOrganization("o1");
 		final User user = createUser();
 		project.setUser(user);
 		return project;
