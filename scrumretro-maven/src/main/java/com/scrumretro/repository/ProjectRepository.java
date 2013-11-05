@@ -15,13 +15,13 @@ import com.scrumretro.repository.model.User;
  */
 public interface ProjectRepository extends PagingAndSortingRepository<Project, String> {
 
-	public Project findByName(final String name);
+	Project findByName(final String name);
 	
-	public List<Project> findByUser(final User user);
+	List<Project> findByUser(final User user);
 	
 	@Query("{ 'user._id' : ?0 }")
-	public List<Project> findByUserId(final String userId);
+    List<Project> findByUserId(final String userId);
 	
 	@Query("{ '_id' : ?0 }")
-	public Project findById(final String id);
+	Project findById(final String id);
 }

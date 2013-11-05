@@ -13,9 +13,9 @@ import com.scrumretro.repository.model.Item;
  */
 public interface ItemRepository extends PagingAndSortingRepository<Item, String> {
 	
-	public List<Item> findByRetrospectiveId(final String retrospectiveId);
+	List<Item> findByRetrospectiveId(final String retrospectiveId);
 	
 	@Query("{ '_id' : ?0 }")
-	public Item findById(final String id);
+	Item findById(final String id);
 	
 }
