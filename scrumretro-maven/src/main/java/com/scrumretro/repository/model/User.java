@@ -16,6 +16,8 @@ public class User {
 	
 	private String password;
 	
+	private Boolean active;
+	
 	private UserDetail userDetail;
 	
 
@@ -41,6 +43,14 @@ public class User {
 
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	@Override

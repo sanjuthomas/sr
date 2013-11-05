@@ -3,6 +3,7 @@
         {
             "_id": "info@scrumretro.com",
             "password": "password",
+            "active": true,
             "userDetail": {
                 "firstName": "firstName",
                 "lastName": "lastName",
