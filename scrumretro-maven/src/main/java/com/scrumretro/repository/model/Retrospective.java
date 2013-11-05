@@ -57,11 +57,11 @@ public class Retrospective {
 	}
 
 	public Timestamp getMeetingTime() {
-		return meetingTime;
+		return (Timestamp) meetingTime.clone();
 	}
 
 	public void setMeetingTime(final Timestamp meetingTime) {
-		this.meetingTime = meetingTime;
+		this.meetingTime = (Timestamp) meetingTime.clone();
 	}
 
 	@Override
