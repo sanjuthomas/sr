@@ -1,8 +1,12 @@
 package com.scrumretro.repository;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
+import java.util.List;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.User;
@@ -42,21 +47,52 @@ public class TestUserRepository {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Before
-	public void setUp(){
-		this.userRepository.deleteAll();
-	}
-
+	
 	@Test
 	@ShouldMatchDataSet(location = "/testData/user/user-u1.json")
 	public void shouldSaveUser() {
 		userRepository.save(createUser());
 	}
 	
+	@Test
+	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
+	public void shouldFindByUserIdAndPassword(){
+		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", "password");
+		assertNotNull(user);
+		assertEquals("info@scrumretro.com", user.getEmailId());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
+	public void shouldFindByUserId(){
+		User user = userRepository.findByUserId("info@scrumretro.com");
+		assertNotNull(user);
+		assertEquals("info@scrumretro.com", user.getEmailId());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
+	public void shouldFindByEmailId(){
+		User user = userRepository.findByEmailId("info@scrumretro.com");
+		assertNotNull(user);
+		assertEquals("info@scrumretro.com", user.getEmailId());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
+	public void shouldGetActiveList(){
+		List<User> list = userRepository.findActiveList();
+		assertNotNull(list);
+		assertTrue(list.size() > 0);
+		assertEquals("info@scrumretro.com", list.get(0).getEmailId());
+	}
+	
+	
 	private User createUser(){
 		final User user = new User();
 		user.setEmailId("info@scrumretro.com");
 		user.setPassword("password");
+		user.setActive(true);
 		final UserDetail userDetail = new UserDetail();
 		userDetail.setFirstName("firstName");
 		userDetail.setLastName("lastName");
