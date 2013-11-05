@@ -20,6 +20,7 @@
 		<log4j.version>1.2.17</log4j.version>
 		<bean.validation.version>1.0.0.GA</bean.validation.version>
 		<bean.validation.hibernate>4.2.0.Final</bean.validation.hibernate>
+		<find.bug.version>2.5.2</find.bug.version>
 	</properties>
 
 	<dependencies>
@@ -130,6 +131,12 @@
 			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>findbugs-maven-plugin</artifactId>
+			<version>${find.bug.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -193,7 +200,33 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
 	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+					<targetJdk>1.7</targetJdk>
+					<excludes>
+						<exclude>**/Test*.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${find.bug.version}</version>
+				<configuration>
+					<xmlOutput>true</xmlOutput>
+					<xmlOutputDirectory>target/site</xmlOutputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 </project>
