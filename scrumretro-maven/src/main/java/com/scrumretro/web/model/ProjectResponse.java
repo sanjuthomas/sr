@@ -1,11 +1,13 @@
 package com.scrumretro.web.model;
 
+import com.scrumretro.rest.Response;
+
 /**
  * 
  * @author Sanju Thomas
  * 
  */
-public class ProjectResponse {
+public class ProjectResponse extends Response {
 	
 	private String id;
 	private String name;
