@@ -77,6 +77,13 @@ public class Item {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
+	
+	public Integer getVoteCount(){
+		if(null != this.votedUsers){
+			return this.votedUsers.size();
+		}
+		return 0;
+	}
 
 	@Override
 	public int hashCode() {
