@@ -55,6 +55,14 @@ public class TestRetrospectiveRepository {
 	}
 	
 	@Test
+	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r2.json"})
+	public void shouldFindById(){
+		final Retrospective retrospective = retrospectiveRepository.findById("r2");
+		assertNotNull(retrospective);
+		assertEquals("r2", retrospective.getId());
+	}
+	
+	@Test
 	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
 	public void shouldFindByProjectId(){
 		final List<Retrospective> retrospectives = retrospectiveRepository.findByProjectId("5270269044ae1440f787333a");
