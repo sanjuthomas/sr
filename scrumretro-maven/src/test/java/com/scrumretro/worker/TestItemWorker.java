@@ -1,10 +1,13 @@
 package com.scrumretro.worker;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,18 +50,37 @@ public class TestItemWorker {
 	public void setUp(){
 		initMocks(this);
 		itemWorker = new ItemWorker();
-		final Item item = createItem();
-		when(itemRepository.findById(any(String.class))).thenReturn(item);
-		itemWorker.setItemRepository(itemRepository);
-		final Retrospective retrospective = createRetrospective();
-		when(retrospectiveRepository.findById(any(String.class))).thenReturn(retrospective);
-		itemWorker.setRetrospectiveRepository(retrospectiveRepository);
-		final User user = createUser();
-		when(userRepository.findByUserId(any(String.class))).thenReturn(user);
-		itemWorker.setUserRepository(userRepository);
+		setUpMockItemRepository(itemWorker);
+		setUpMockRetrospectiveRepository(itemWorker);
+		setUpMockUserRepository(itemWorker);
+		setUpMockProjectRepository(itemWorker);
+	}
+	
+	private void setUpMockProjectRepository(final ItemWorker itemWorker){
 		final Project project = createProject();
 		when(projectRepository.findById(any(String.class))).thenReturn(project);
 		itemWorker.setProjectRepository(projectRepository);
+	}
+	
+	private void setUpMockRetrospectiveRepository(final ItemWorker itemWorker){
+		final Retrospective retrospective = createRetrospective();
+		when(retrospectiveRepository.findById(any(String.class))).thenReturn(retrospective);
+		itemWorker.setRetrospectiveRepository(retrospectiveRepository);
+	}
+	
+	private void setUpMockUserRepository(final ItemWorker itemWorker){
+		final User user = createUser();
+		when(userRepository.findByUserId(any(String.class))).thenReturn(user);
+		itemWorker.setUserRepository(userRepository);
+	}
+	
+	private void setUpMockItemRepository(final ItemWorker itemWorker){
+		final Item item = createItem();
+		final List<Item> items = new ArrayList<Item>();
+		items.add(item);
+		when(itemRepository.findById(any(String.class))).thenReturn(item);
+		when(itemRepository.findByRetrospectiveId(any(String.class))).thenReturn(items);
+		itemWorker.setItemRepository(itemRepository);
 	}
 	
 	@Test
