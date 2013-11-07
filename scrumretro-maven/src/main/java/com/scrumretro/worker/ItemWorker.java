@@ -97,7 +97,7 @@ public class ItemWorker {
 		final Project project = projectRepository.findById(retrospective.getProjectId());
 		final ItemResponse itemResponse = new ItemResponse();
 		BeanUtils.copyProperties(item, itemResponse);
-		itemResponse.setOwnerDispalyName(user.getDisplayName());
+		itemResponse.setOwnerDisplayName(user.getDisplayName());
 		itemResponse.setItemTypeDisplayString(item.getItemType().getDisplayString());
 		itemResponse.setProjectName(project.getName());
 		itemResponse.setRetrospectiveName(retrospective.getName());
