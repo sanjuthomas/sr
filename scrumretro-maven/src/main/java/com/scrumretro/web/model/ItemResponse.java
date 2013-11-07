@@ -25,7 +25,7 @@ public class ItemResponse extends Response{
 	private String createdTime;
 	
 	private Integer votes;
-
+	
 	
 	public String getId() {
 		return id;
