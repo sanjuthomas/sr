@@ -90,6 +90,20 @@ public class TestItemWorker {
 		assertEquals("i1", itemResponse.getId());
 	}
 	
+	@Test
+	public void shouldFindByRetrospectiveId(){
+		final List<ItemResponse> itemResponses = itemWorker.findByRetrospectiveId("r1");
+		assertNotNull(itemResponses);
+		assertEquals(1, itemResponses.size());
+		assertEquals("i1", itemResponses.get(0).getId());
+		assertEquals("description", itemResponses.get(0).getDescription());
+		assertEquals("Stop Doing", itemResponses.get(0).getItemTypeDisplayString());
+		assertEquals("rname", itemResponses.get(0).getRetrospectiveName());
+		assertEquals("pname", itemResponses.get(0).getProjectName());
+		assertEquals("lastName, firstName", itemResponses.get(0).getOwnerDisplayName());
+		assertEquals(2, itemResponses.get(0).getVoteCount().intValue());
+	}
+	
 	
 	private Item createItem(){
 		final Item item = new Item();
@@ -98,6 +112,10 @@ public class TestItemWorker {
 		item.setItemType(ItemType.STOP_DOING);
 		item.setRetrospectiveId("r1");
 		item.setUserId("u1");
+		final List<String> votedUsers = new ArrayList<String>();
+		votedUsers.add("info@scrumretro.com");
+		votedUsers.add("user@scrumretro.com");
+		item.setVotedUsers(votedUsers);
 		return item;
 	}
 	

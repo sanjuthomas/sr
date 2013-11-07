@@ -14,7 +14,7 @@ public class ItemResponse extends Response{
 	
 	private String description;
 	
-	private String ownerDispalyName;
+	private String ownerDisplayName;
 	
 	private String itemTypeDisplayString;
 	
@@ -24,7 +24,7 @@ public class ItemResponse extends Response{
 	
 	private String createdTime;
 	
-	private Integer votes;
+	private Integer voteCount;
 	
 	
 	public String getId() {
@@ -43,12 +43,12 @@ public class ItemResponse extends Response{
 		this.description = description;
 	}
 
-	public String getOwnerDispalyName() {
-		return ownerDispalyName;
+	public String getOwnerDisplayName() {
+		return ownerDisplayName;
 	}
 
-	public void setOwnerDispalyName(final String ownerDispalyName) {
-		this.ownerDispalyName = ownerDispalyName;
+	public void setOwnerDisplayName(final String ownerDisplayName) {
+		this.ownerDisplayName = ownerDisplayName;
 	}
 
 	public String getItemTypeDisplayString() {
@@ -83,14 +83,12 @@ public class ItemResponse extends Response{
 		this.createdTime = createdTime;
 	}
 
-	public Integer getVotes() {
-		return votes;
+	public Integer getVoteCount() {
+		return voteCount;
 	}
 
-	public void setVotes(final Integer votes) {
-		this.votes = votes;
+	public void setVoteCount(final Integer voteCount) {
+		this.voteCount = voteCount;
 	}
-	
-	
-	
+
 }
