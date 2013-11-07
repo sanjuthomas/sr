@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Rule;
@@ -69,6 +70,8 @@ public class TestItemRepository {
 	public void shouldFindById(){
 		final Item item = itemRepository.findById("i2");
 		assertNotNull(item);
+		assertTrue(item.getVotedUsers().contains("info@scrumretro.com"));
+		assertTrue(item.getVotedUsers().contains("user@scrumretro.com"));
 		assertEquals("i2", item.getId());
 	}
 	
@@ -80,7 +83,10 @@ public class TestItemRepository {
 		item.setDescription("This is test item created for retrospective r1");
 		item.setRetrospectiveId("234dqwer2wqer");
 		item.setUserId("info@scrumretro.com");
-		item.setVotes(1);
+		final List<String> votedUsers = new ArrayList<String>();
+		votedUsers.add("info@scrumretro.com");
+		votedUsers.add("user@scrumretro.com");
+		//item.setVotedUsers(votedUsers);
 		return  item;
 	}
 	
