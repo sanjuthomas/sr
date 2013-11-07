@@ -2,12 +2,16 @@ package com.scrumretro.worker;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.scrumretro.repository.ItemRepository;
 import com.scrumretro.repository.RetrospectiveRepository;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Item;
+import com.scrumretro.repository.model.Retrospective;
+import com.scrumretro.repository.model.User;
+import com.scrumretro.web.model.ItemResponse;
 
 /**
  * 
@@ -39,7 +43,13 @@ public class ItemWorker {
 		this.userRepository = userRepository;
 	}
 
-	public Item findById(final String id){
+	public ItemResponse findById(final String id){
+		final Item item = itemRepository.findById(id);
+		final User user = userRepository.findByUserId(item.getUserId());
+		final Retrospective retrospective = retrospectiveRepository.findById(item.getRetrospectiveId());
+		final ItemResponse itemResponse = new ItemResponse();
+		BeanUtils.copyProperties(item, itemResponse);
+		
 		return null;
 	}
 	
