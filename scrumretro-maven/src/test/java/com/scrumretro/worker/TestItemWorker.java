@@ -76,7 +76,6 @@ public class TestItemWorker {
 		item.setItemType(ItemType.STOP_DOING);
 		item.setRetrospectiveId("r1");
 		item.setUserId("u1");
-		item.setVotes(3);
 		return item;
 	}
 	
