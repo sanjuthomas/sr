@@ -6,6 +6,7 @@ import org.mockito.Mock;
 import com.scrumretro.repository.ItemRepository;
 import com.scrumretro.repository.RetrospectiveRepository;
 import com.scrumretro.repository.UserRepository;
+import com.scrumretro.repository.model.Item;
 
 /**
  * 
@@ -32,6 +33,7 @@ public class TestItemWorker {
 		itemWorker.setRetrospectiveRepository(retrospectiveRepository);
 		itemWorker.setUserRepository(userRepository);
 	}
+	
 	
 	
 
