@@ -1,5 +1,6 @@
 package com.scrumretro.worker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -63,8 +64,20 @@ public class ItemWorker {
 		return createItemResponse(item);
 	}
 	
-	public List<Item> findByRetrospectiveId(final String projectId){
-		return null;
+	/**
+	 * This method shall take a retrospective id, find all item associated with it 
+	 * and construct the ItemResponse object for UI.
+	 * 
+	 * @param retrospectiveId
+	 * @return
+	 */
+	public List<ItemResponse> findByRetrospectiveId(final String retrospectiveId){
+		final List<Item> items = itemRepository.findByRetrospectiveId(retrospectiveId);
+		final List<ItemResponse> itemResponses = new ArrayList<ItemResponse>();
+		for(Item item : items){
+			itemResponses.add(createItemResponse(item));
+		}
+		return itemResponses;
 	}
 	
 	public List<Item> findByUserId(final String projectId){
