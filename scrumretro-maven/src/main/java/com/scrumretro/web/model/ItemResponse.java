@@ -23,6 +23,8 @@ public class ItemResponse extends Response{
 	private String projectName;
 	
 	private String createdTime;
+	
+	private Integer votes;
 
 	
 	public String getId() {
@@ -80,5 +82,15 @@ public class ItemResponse extends Response{
 	public void setCreatedTime(final String createdTime) {
 		this.createdTime = createdTime;
 	}
+
+	public Integer getVotes() {
+		return votes;
+	}
+
+	public void setVotes(final Integer votes) {
+		this.votes = votes;
+	}
+	
+	
 	
 }

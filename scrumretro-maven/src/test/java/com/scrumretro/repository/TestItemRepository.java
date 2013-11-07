@@ -51,6 +51,7 @@ public class TestItemRepository {
 	@Test
 	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
 	public void shouldSave() {
+		itemRepository.deleteAll();
 		itemRepository.save(createItem());
 	}
 	
@@ -69,7 +70,6 @@ public class TestItemRepository {
 		final Item item = itemRepository.findById("i2");
 		assertNotNull(item);
 		assertEquals("i2", item.getId());
-		itemRepository.deleteAll();
 	}
 	
 	
