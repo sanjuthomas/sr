@@ -1,5 +1,7 @@
 package com.scrumretro.repository.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,7 +20,7 @@ public class Item {
 
 	private String userId;
 	
-	private Integer votes;
+	private List<String> votedUsers;
 	
 	private String retrospectiveId;
 	
@@ -43,12 +45,13 @@ public class Item {
 		this.id = id;
 	}
 
-	public Integer getVotes() {
-		return votes;
+	
+	public List<String> getVotedUsers() {
+		return votedUsers;
 	}
 
-	public void setVotes(final Integer votes) {
-		this.votes = votes;
+	public void setVotedUsers(final List<String> votedUsers) {
+		this.votedUsers = votedUsers;
 	}
 
 	public String getUserId() {

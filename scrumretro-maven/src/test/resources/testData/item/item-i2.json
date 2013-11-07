@@ -4,9 +4,9 @@
             "_id": "i2",
             "itemType": "STOP_DOING",
             "description": "This is test item created for retrospective r1",
-            "votes": 1,
             "userId": "info@scrumretro.com",
-            "retrospectiveId": "234dqwer2wqer"
+            "retrospectiveId": "234dqwer2wqer",
+            "votedUsers": ["info@scrumretro.com", "user@scrumretro.com"]
         }
     ]
 }
