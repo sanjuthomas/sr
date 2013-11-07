@@ -27,6 +27,7 @@ import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.util.EncryptionUtil;
 
 /**
  * 
@@ -51,13 +52,15 @@ public class TestUserRepository {
 	@Test
 	@ShouldMatchDataSet(location = "/testData/user/user-u1.json")
 	public void shouldSaveUser() {
-		userRepository.save(createUser());
+		User user = createUser();
+		user.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
+		userRepository.save(user);
 	}
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
 	public void shouldFindByUserIdAndPassword(){
-		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", "password");
+		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", EncryptionUtil.encryptPassword("password"));
 		assertNotNull(user);
 		assertEquals("info@scrumretro.com", user.getEmailId());
 	}
