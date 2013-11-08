@@ -11,7 +11,7 @@ import com.scrumretro.enums.ResponseStatus;
 
 public class Response {
 	
-	private ResponseStatus responseStatus;
+	private ResponseStatus responseStatus = ResponseStatus.SUCCESS;
 
 	public ResponseStatus getResponseStatus() {
 		return responseStatus;
