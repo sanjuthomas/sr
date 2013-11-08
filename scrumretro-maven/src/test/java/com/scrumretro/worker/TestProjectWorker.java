@@ -59,7 +59,7 @@ public class TestProjectWorker {
 	
 	private User createUser(){
 		final User user = new User();
-		user.setEmailId("info@scrumretro.com");
+		user.setUserId("info@scrumretro.com");
 		user.setPassword("password");
 		final UserDetail userDetail = new UserDetail();
 		userDetail.setFirstName("firstName");

@@ -2,7 +2,7 @@ package com.scrumretro.web.model;
 
 public class UserResponse {
 
-	private String emailId;
+	private String userId;
 	
 	private String firstName;
 	
@@ -12,12 +12,12 @@ public class UserResponse {
 	
 	private String displayName;
 
-	public String getEmailId() {
-		return emailId;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setUserId(final String userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
