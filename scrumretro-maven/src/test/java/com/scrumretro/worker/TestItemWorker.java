@@ -121,7 +121,7 @@ public class TestItemWorker {
 	
 	private User createUser(){
 		final User user = new User();
-		user.setEmailId("info@scrumretro.com");
+		user.setUserId("info@scrumretro.com");
 		user.setActive(true);
 		user.setPassword("password");
 		final UserDetail userDetail = new UserDetail();

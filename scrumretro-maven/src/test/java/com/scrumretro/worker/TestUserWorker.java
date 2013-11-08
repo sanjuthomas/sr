@@ -37,7 +37,7 @@ private UserWorker userWorker;
 	public void shouldFindByUserIdAndPassword(){
 		UserResponse userResponse = userWorker.findByUserIdAndPassword("info@scrumretro.com","password");
 		assertNotNull(userResponse);
-		assertEquals("info@scrumretro.com", userResponse.getEmailId());
+		assertEquals("info@scrumretro.com", userResponse.getUserId());
 		assertEquals("firstName", userResponse.getFirstName());
 		assertEquals("lastName", userResponse.getLastName());
 		assertEquals("lastName, firstName", userResponse.getDisplayName());
@@ -48,7 +48,7 @@ private UserWorker userWorker;
 	public void shouldFindByUserId(){
 		UserResponse userResponse = userWorker.findByUserId("info@scrumretro.com");
 		assertNotNull(userResponse);
-		assertEquals("info@scrumretro.com", userResponse.getEmailId());
+		assertEquals("info@scrumretro.com", userResponse.getUserId());
 		assertEquals("firstName", userResponse.getFirstName());
 		assertEquals("lastName", userResponse.getLastName());
 		assertEquals("lastName, firstName", userResponse.getDisplayName());
@@ -57,7 +57,7 @@ private UserWorker userWorker;
 	
 	private User createUser(){
 		final User user = new User();
-		user.setEmailId("info@scrumretro.com");
+		user.setUserId("info@scrumretro.com");
 		user.setPassword("password");
 		user.setActive(true);
 		final UserDetail userDetail = new UserDetail();
