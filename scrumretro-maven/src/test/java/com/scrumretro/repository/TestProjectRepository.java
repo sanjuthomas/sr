@@ -104,7 +104,7 @@ public class TestProjectRepository {
 	
 	private User createUser(){
 		final User user = new User();
-		user.setEmailId("info@scrumretro.com");
+		user.setUserId("info@scrumretro.com");
 		final UserDetail userDetail = new UserDetail();
 		userDetail.setFirstName("firstName");
 		userDetail.setLastName("lastName");

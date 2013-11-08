@@ -14,12 +14,9 @@ import com.scrumretro.repository.model.User;
  */
 public interface UserRepository extends PagingAndSortingRepository<User, String> {
 
-	@Query("{ emailId: ?0, password : ?1 }")
+	@Query("{ userId: ?0, password : ?1 }")
 	User findByUserIdAndPassword(final String emailId,final String password);
-	
-	User findByEmailId(final String emailId);
 		
-	@Query("{ emailId : ?0 }")
 	User findByUserId(final String emailId);
 	
 	@Query("{ active : true }")

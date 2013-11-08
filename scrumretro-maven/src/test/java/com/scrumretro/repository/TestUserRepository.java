@@ -62,7 +62,7 @@ public class TestUserRepository {
 	public void shouldFindByUserIdAndPassword(){
 		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", EncryptionUtil.encryptPassword("password"));
 		assertNotNull(user);
-		assertEquals("info@scrumretro.com", user.getEmailId());
+		assertEquals("info@scrumretro.com", user.getUserId());
 	}
 	
 	@Test
@@ -70,15 +70,15 @@ public class TestUserRepository {
 	public void shouldFindByUserId(){
 		User user = userRepository.findByUserId("info@scrumretro.com");
 		assertNotNull(user);
-		assertEquals("info@scrumretro.com", user.getEmailId());
+		assertEquals("info@scrumretro.com", user.getUserId());
 	}
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
 	public void shouldFindByEmailId(){
-		User user = userRepository.findByEmailId("info@scrumretro.com");
+		User user = userRepository.findByUserId("info@scrumretro.com");
 		assertNotNull(user);
-		assertEquals("info@scrumretro.com", user.getEmailId());
+		assertEquals("info@scrumretro.com", user.getUserId());
 	}
 	
 	@Test
@@ -87,13 +87,13 @@ public class TestUserRepository {
 		List<User> list = userRepository.findActiveList();
 		assertNotNull(list);
 		assertTrue(list.size() > 0);
-		assertEquals("info@scrumretro.com", list.get(0).getEmailId());
+		assertEquals("info@scrumretro.com", list.get(0).getUserId());
 	}
 	
 	
 	private User createUser(){
 		final User user = new User();
-		user.setEmailId("info@scrumretro.com");
+		user.setUserId("info@scrumretro.com");
 		user.setPassword("password");
 		user.setActive(true);
 		final UserDetail userDetail = new UserDetail();
