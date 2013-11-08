@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 	
 	@Id
-	private String emailId;
+	private String userId;
 	
 	private String password;
 	
@@ -29,12 +29,12 @@ public class User {
 		this.userDetail = userDetail;
 	}
 
-	public String getEmailId() {
-		return emailId;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setEmailId(final String emailId) {
-		this.emailId = emailId;
+	public void setUserId(final String userId) {
+		this.userId = userId;
 	}
 
 	public String getPassword() {
@@ -55,7 +55,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [emailId=" + emailId + "]";
+		return "User [userId=" + userId + "]";
 	}
 	
 
@@ -77,7 +77,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -90,10 +90,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		final User other = (User) obj;
-		if (emailId == null) {
-			if (other.emailId != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!emailId.equals(other.emailId))
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
