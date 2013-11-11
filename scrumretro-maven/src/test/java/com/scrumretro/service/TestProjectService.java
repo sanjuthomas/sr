@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -29,14 +28,15 @@ public class TestProjectService {
 	@Mock
 	private ProjectWorker projectWorker;
 	
-	@InjectMocks
 	private ProjectService projectService;
 	
 	@Before
 	public void setUp(){
 		initMocks(this);
+		projectService = new ProjectService();
 		this.mockMvc = MockMvcBuilders.standaloneSetup(projectService).build();
 		when(projectWorker.findById(any(String.class))).thenReturn(createProjectResponse());
+		projectService.setProjectWorker(projectWorker);
 	}
 	
 	@Test
