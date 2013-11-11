@@ -37,7 +37,6 @@ public class TestProjectService {
 		initMocks(this);
 		this.mockMvc = MockMvcBuilders.standaloneSetup(projectService).build();
 		when(projectWorker.findById(any(String.class))).thenReturn(createProjectResponse());
-		projectService.setProjectWorker(projectWorker);
 	}
 	
 	@Test
