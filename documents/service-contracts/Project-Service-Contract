@@ -1,0 +1,20 @@
+#Contract for Project Service.
+
+-------------------------------------------------------------------------------
+|Service  |URI                                    |parameter  |parameter type |
+-------------------------------------------------------------------------------
+|findById |http://scrumretro.com/project/findById |projectId  |String 	      |
+-------------------------------------------------------------------------------
+
+Sample Response :
+
+{
+	"id" : "p1",
+	"name" : "pname",
+	"description" : "pdescription",
+	"organization" : "organization",
+	"ownerDisplayName" : "lastName, firstName"
+}
+
+
+
