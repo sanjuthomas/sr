@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
 |Service  |URI                                    |parameter  |parameter type |
 -------------------------------------------------------------------------------
-|findById |http://scrumretro.com/project/findById |projectId  |String 	 |
+|findById |http://scrumretro.com/project/findById |projectId  |String 	|
 -------------------------------------------------------------------------------
 
 Sample Response :
