@@ -1,9 +1,12 @@
 package com.scrumretro.service;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -12,9 +15,11 @@ import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.scrumretro.rest.Response;
 import com.scrumretro.web.model.ProjectResponse;
 import com.scrumretro.web.service.ProjectService;
 import com.scrumretro.worker.ProjectWorker;
+
 
 /**
  * 
@@ -41,8 +46,14 @@ public class TestProjectService {
 	
 	@Test
 	public void testFindByProjectId() throws Exception{
-		mockMvc.perform(get("/project/findById/{id}", "p1")).andExpect(status().isOk());
-		
+		mockMvc.perform(get("/project/findById/{id}", "p1"))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
+		.andExpect(jsonPath("$id", is("p1")))
+		.andExpect(jsonPath("$name", is("pname")))
+		.andExpect(jsonPath("$description", is("pdescription")))
+		.andExpect(jsonPath("$organization", is("o1")))
+		.andExpect(jsonPath("$ownerDisplayName", is("lastName, firstName")));
 	}
 	
 	
