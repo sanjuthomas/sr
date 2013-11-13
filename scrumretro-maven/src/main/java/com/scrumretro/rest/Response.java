@@ -4,8 +4,6 @@ import java.nio.charset.Charset;
 
 import org.springframework.http.MediaType;
 
-import com.scrumretro.enums.ResponseStatus;
-
 /**
  * 
  * @author Sanju Thomas
