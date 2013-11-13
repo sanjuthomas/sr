@@ -1,4 +1,4 @@
-package com.scrumretro.service;
+package com.scrumretro.web.service;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
