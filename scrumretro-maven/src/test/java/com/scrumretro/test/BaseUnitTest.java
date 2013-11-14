@@ -1,4 +1,4 @@
-package com.scrumretro.repository;
+package com.scrumretro.test;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
 

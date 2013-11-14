@@ -25,6 +25,7 @@ import com.mongodb.Mongo;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.test.BaseUnitTest;
 
 /**
  * 
