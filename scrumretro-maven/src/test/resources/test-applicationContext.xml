@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
         
     
-    <description>test appliation context configuration</description>
+    <description>test application context configuration</description>
 
    
 </beans>
