@@ -23,6 +23,7 @@ import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.Retrospective;
+import com.scrumretro.test.BaseUnitTest;
 
 /**
  * 
