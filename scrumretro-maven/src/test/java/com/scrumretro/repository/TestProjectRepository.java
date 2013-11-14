@@ -2,6 +2,7 @@ package com.scrumretro.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -61,6 +62,13 @@ public class TestProjectRepository extends BaseUnitTest{
 	}
 	
 	@Test
+	@UsingDataSet(locations = {"/testData/project/project-p2.json"})
+	public void shouldNotFindById(){
+		final Project project = projectRepository.findById("2df123333");
+		assertNull(project);
+	}
+	
+	@Test
 	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
 	public void shouldFindByName(){
 		final Project project = projectRepository.findByName("p1");
@@ -70,11 +78,25 @@ public class TestProjectRepository extends BaseUnitTest{
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
+	public void shouldNotFindByName(){
+		final Project project = projectRepository.findByName("p41");
+		assertNull(project);
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
 	public void shouldFindByUserId(){
 		final List<Project> projects = projectRepository.findByUserId("info@scrumretro.com");
 		assertNotNull(projects);
 		assertTrue(projects.size() > 0);
 		assertEquals("p1", projects.get(0).getName());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
+	public void shouldNotFindByUserId(){
+		final List<Project> projects = projectRepository.findByUserId("inf@scrumretro.com");
+		assertEquals(0, projects.size());
 	}
 	
 
