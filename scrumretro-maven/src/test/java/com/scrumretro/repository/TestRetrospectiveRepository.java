@@ -3,6 +3,7 @@ package com.scrumretro.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -57,6 +58,13 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 	}
 	
 	@Test
+	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r2.json"})
+	public void shouldNotFindById(){
+		final Retrospective retrospective = retrospectiveRepository.findById("r3s2");
+		assertNull(retrospective);
+	}
+	
+	@Test
 	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
 	public void shouldFindByProjectId(){
 		final List<Retrospective> retrospectives = retrospectiveRepository.findByProjectId("5270269044ae1440f787333a");
@@ -67,11 +75,25 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
+	public void shouldNotFindByProjectId(){
+		final List<Retrospective> retrospectives = retrospectiveRepository.findByProjectId("044ae1440f787333a");
+		assertEquals(0, retrospectives.size());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
 	public void shouldFindByUserId(){
 		final List<Retrospective> retrospectives = retrospectiveRepository.findByUserId("info@scrumretro.com");
 		assertNotNull(retrospectives);
 		assertTrue(retrospectives.size() > 0);
 		assertEquals("retrospective-r1", retrospectives.get(0).getName());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
+	public void shouldNotFindByUserId(){
+		final List<Retrospective> retrospectives = retrospectiveRepository.findByUserId("inf@scrumretro.com");
+		assertEquals(0, retrospectives.size());
 	}
 	
 	
