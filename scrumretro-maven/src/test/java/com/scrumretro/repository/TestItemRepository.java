@@ -2,6 +2,7 @@ package com.scrumretro.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -61,6 +62,13 @@ public class TestItemRepository extends BaseUnitTest{
 	}
 	
 	@Test
+	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
+	public void shouldNotFindByRetrospectiveId(){
+		final List<Item> items = itemRepository.findByRetrospectiveId("dqwer2wqer");
+		assertEquals(0, items.size());
+	}
+	
+	@Test
 	@UsingDataSet(locations = {"/testData/item/item-i2.json"})
 	public void shouldFindById(){
 		final Item item = itemRepository.findById("i2");
@@ -70,6 +78,13 @@ public class TestItemRepository extends BaseUnitTest{
 		assertEquals("i2", item.getId());
 	}
 	
+
+	@Test
+	@UsingDataSet(locations = {"/testData/item/item-i2.json"})
+	public void shouldNotFindById(){
+		final Item item = itemRepository.findById("i4");
+		assertNull(item);
+	}
 	
 	
 	private Item createItem(){
