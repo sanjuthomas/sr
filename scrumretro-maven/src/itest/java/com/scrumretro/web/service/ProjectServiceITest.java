@@ -1,6 +1,8 @@
 package com.scrumretro.web.service;
 
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,6 +17,8 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
@@ -24,6 +28,8 @@ import com.scrumretro.repository.ProjectRepository;
 import com.scrumretro.worker.ProjectWorker;
 
 /**
+ * Integration test cases for ProjectService. 
+ * This testcase would wire ProjectService, ProjectWorker and ProjectRepository.
  * 
  * @author Sanju Thomas
  *
@@ -32,7 +38,8 @@ import com.scrumretro.worker.ProjectWorker;
 @ContextConfiguration
 public class ProjectServiceITest {
 
-
+	private MockMvc mockMvc;
+	
 	@Autowired
 	private ApplicationContext applicationContext;
 
@@ -44,15 +51,15 @@ public class ProjectServiceITest {
 	
 	@Before
 	public void setUp(){
-		
+		this.mockMvc = MockMvcBuilders.standaloneSetup(projectService).build();
 	}
 	
 	@Test
-	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
-	public void shouldFindProjectById(){
-		System.out.println(projectService);
+	@UsingDataSet(locations = {"/testData/project/project-p2.json"})
+	public void shouldFindProjectById() throws Exception{
+		mockMvc.perform(get("/project/findById/{id}", "2fasdf123333"))
+		.andExpect(status().isOk());
 	}
-	
 	
 	
 	@Configuration
