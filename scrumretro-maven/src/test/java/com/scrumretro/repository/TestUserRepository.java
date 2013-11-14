@@ -3,6 +3,7 @@ package com.scrumretro.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -61,6 +62,13 @@ public class TestUserRepository extends BaseUnitTest{
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
+	public void shouldNotFindByUserIdAndPassword(){
+		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", EncryptionUtil.encryptPassword("test"));
+		assertNull(user);
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
 	public void shouldFindByUserId(){
 		User user = userRepository.findByUserId("info@scrumretro.com");
 		assertNotNull(user);
@@ -69,21 +77,26 @@ public class TestUserRepository extends BaseUnitTest{
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
-	public void shouldFindByEmailId(){
-		User user = userRepository.findByUserId("info@scrumretro.com");
-		assertNotNull(user);
-		assertEquals("info@scrumretro.com", user.getUserId());
+	public void shouldNotFindByUserId(){
+		User user = userRepository.findByUserId("inf@scrumretro.com");
+		assertNull(user);
 	}
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
-	public void shouldGetActiveList(){
-		List<User> list = userRepository.findActiveList();
-		assertNotNull(list);
-		assertTrue(list.size() > 0);
-		assertEquals("info@scrumretro.com", list.get(0).getUserId());
+	public void shouldFindUsersByOrganization(){
+		List<User> users = userRepository.findUsersByOrgranization("organization");
+		assertNotNull(users);
+		assertTrue(users.size() > 0);
+		assertEquals("info@scrumretro.com", users.get(0).getUserId());
 	}
 	
+	@Test
+	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
+	public void shouldNotFindUsersByOrganization(){
+		List<User> users = userRepository.findUsersByOrgranization("organidddzation");
+		assertEquals(0, users.size());
+	}
 	
 	private User createUser(){
 		final User user = new User();
