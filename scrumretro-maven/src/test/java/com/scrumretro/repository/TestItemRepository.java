@@ -25,6 +25,7 @@ import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.mongodb.Mongo;
 import com.scrumretro.enums.ItemType;
 import com.scrumretro.repository.model.Item;
+import com.scrumretro.test.BaseUnitTest;
 
 /**
  * 
