@@ -1,13 +1,11 @@
 package com.scrumretro.repository;
 
-import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
-import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.User;
@@ -37,14 +34,10 @@ import com.scrumretro.repository.model.UserDetail;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class TestProjectRepository {
+public class TestProjectRepository extends BaseUnitTest{
 
 	@Autowired
 	private ApplicationContext applicationContext;
-
-	@Rule
-	public MongoDbRule mongoDbRule = newMongoDbRule().defaultSpringMongoDb(
-			"scrumretro-test");
 
 	@Autowired
 	private ProjectRepository projectRepository;
