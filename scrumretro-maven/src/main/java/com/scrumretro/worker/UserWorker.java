@@ -18,16 +18,30 @@ public class UserWorker {
 		this.userRepository = userRepository;
 	}
 	
-	public UserResponse findByUserIdAndPassword(final String userId,final String password){
+	/**
+	 * This method shall accept userid and password and find the matching user.
+	 * 
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	public UserResponse findByUserIdAndPassword(final String userId, final String password){
 		final User user = userRepository.findByUserIdAndPassword(userId,EncryptionUtil.encryptPassword(password));
-		final UserResponse userResponse = new UserResponse();
-		BeanUtils.copyProperties(user, userResponse);
-		BeanUtils.copyProperties(user.getUserDetail(), userResponse);
-		return userResponse;
+		return createUserResponse(user);
 	}
 	
+	/**
+	 * This method shall take userid to find the matching user.
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public UserResponse findByUserId(final String userId){
 		final User user = userRepository.findByUserId(userId);
+		return createUserResponse(user);
+	}
+	
+	private UserResponse createUserResponse(final User user){
 		final UserResponse userResponse = new UserResponse();
 		BeanUtils.copyProperties(user, userResponse);
 		BeanUtils.copyProperties(user.getUserDetail(), userResponse);
