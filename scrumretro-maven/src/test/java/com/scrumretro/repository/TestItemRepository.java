@@ -119,7 +119,7 @@ public class TestItemRepository extends BaseUnitTest{
 
 		@Override
 		protected String getMappingBasePackage() {
-			return "com.scrumretro.repository.mongo";
+			return "com.scrumretro.*";
 		}
 		
 	}
