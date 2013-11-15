@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -21,17 +22,20 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.scrumretro.rest.Response;
+import com.scrumretro.test.IntegrationTest;
 
 /**
- * Integration test cases for ProjectService. 
+ * Integration test cases for ProjectService.
+ *  
  * This testcase would wire ProjectService, ProjectWorker and ProjectRepository.
  * 
  * @author Sanju Thomas
  *
  */
+@Category(IntegrationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-applicationContext.xml"})
-public class ProjectServiceITest {
+public class ProjectServiceIntegrationTest {
 
 	private MockMvc mockMvc;
 	
