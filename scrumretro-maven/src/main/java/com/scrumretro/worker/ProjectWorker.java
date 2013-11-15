@@ -29,6 +29,7 @@ public class ProjectWorker {
 		final ProjectResponse projectResponse = new ProjectResponse();
 		BeanUtils.copyProperties(project, projectResponse);
 		projectResponse.setOwnerDisplayName(project.getUser().getDisplayName());
+		projectResponse.setOrganization(project.getUser().getUserDetail().getOrganization());
 		return projectResponse;
 	}
 
