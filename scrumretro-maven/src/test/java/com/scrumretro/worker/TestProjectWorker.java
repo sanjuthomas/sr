@@ -34,7 +34,7 @@ public class TestProjectWorker {
 		initMocks(this);
 		final Project project = createProject();
 		when(mockProjectRepository.findById(any(String.class))).thenReturn(project);
-		projectWorker = new ProjectWorkerImpl();
+		projectWorker = new ProjectWorker();
 		projectWorker.setProjectRepository(mockProjectRepository);
 	}
 	
