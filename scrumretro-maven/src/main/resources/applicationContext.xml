@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.2.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.2.xsd">
 
 
-	<description>test application context configuration</description>
+        <description>test application context configuration</description>
 
-	<context:component-scan base-package="com.ourownjava.*" />
+        <context:component-scan base-package="com.ourownjava.*" />
 
-	<mongo:mongo id="mongo-test" />
+        <mongo:mongo id="mongo-test" />
 
-	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg ref="mongo-test" />
-		<constructor-arg value="scrumretro-test" />
-	</bean>
-	
-	<mongo:repositories base-package="com.scrumretro.repository" />
+        <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+                <constructor-arg ref="mongo-test" />
+                <constructor-arg value="scrumretro-test" />
+        </bean>
+        
+        <mongo:repositories base-package="com.scrumretro.repository" />
 
-	<bean id="projectService" class="com.scrumretro.web.service.ProjectService" />
+        <bean id="projectService" class="com.scrumretro.web.service.ProjectService" />
 
-	<bean id="projectWorker" class="com.scrumretro.worker.ProjectWorker" />
+        <bean id="projectWorker" class="com.scrumretro.worker.ProjectWorker" />
 
 </beans>
