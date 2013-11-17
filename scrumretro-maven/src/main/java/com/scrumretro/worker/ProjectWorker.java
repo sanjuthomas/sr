@@ -13,24 +13,15 @@ import com.scrumretro.web.model.ProjectResponse;
  * @author Sanju Thomas
  *
  */
-@Component
-public class ProjectWorker {
-	
-	@Autowired
-	private ProjectRepository projectRepository;
+public interface ProjectWorker {
 	
 	
-	public void setProjectRepository(final ProjectRepository projectRepository) {
-		this.projectRepository = projectRepository;
-	}
 	
-	public ProjectResponse findById(final String projectId){
-		final Project project = projectRepository.findById(projectId);
-		final ProjectResponse projectResponse = new ProjectResponse();
-		BeanUtils.copyProperties(project, projectResponse);
-		projectResponse.setOwnerDisplayName(project.getUser().getDisplayName());
-		projectResponse.setOrganization(project.getUser().getUserDetail().getOrganization());
-		return projectResponse;
-	}
+	public void setProjectRepository(final ProjectRepository projectRepository) ;
+		
+	
+	public ProjectResponse findById(final String projectId);
+		
 
 }
+

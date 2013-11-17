@@ -21,12 +21,18 @@
 		<bean.validation.version>1.0.0.GA</bean.validation.version>
 		<bean.validation.hibernate>4.2.0.Final</bean.validation.hibernate>
 		<find.bug.version>2.5.2</find.bug.version>
+		<aspectj.version>1.5.4</aspectj.version>
 	</properties>
 
 	<dependencies>
 
 
 		<!-- spring libraries -->
+		<dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-core</artifactId>
+	            <version>3.2.4.RELEASE</version>
+           </dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
@@ -44,6 +50,22 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.framework.version}</version>
 		</dependency>
+		  	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+		<!-- aspectj libraries -->
+		<dependency>
+	      <groupId>aspectj</groupId>
+	      <artifactId>aspectjweaver</artifactId>
+	      <version>${aspectj.version}</version>
+       </dependency>
+       <dependency>
+             <groupId>aspectj</groupId>
+             <artifactId>aspectjrt</artifactId>
+             <version>${aspectj.version}</version>
+       </dependency>
 
 		<!-- servlet, only for compile time -->
 		<dependency>
