@@ -24,6 +24,11 @@
 					<name>maven-central2</name>
 					<url>http://repo2.maven.org/maven2/</url>
 				</repository>
+				<repository>
+					<id>spring-libs-milestone</id>
+					<name>Spring Milestone Repository</name>
+					<url>http://repo.springsource.org/milestone</url>
+				</repository>
 			</repositories>
 		</profile>
 	</profiles>
