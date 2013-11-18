@@ -48,7 +48,7 @@ public class ProjectService {
 	 * @param project
 	 * @return
 	 */
-	@RequestMapping(value="project", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	public ProjectResponse save(final Project project){
 		return projectWorker.save(project);
