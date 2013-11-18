@@ -9,6 +9,11 @@
 	<profiles>
 		<profile>
 			<repositories>
+				<repository>
+					<id>spring-milestones</id>
+					<name>spring-milestones</name>
+					<url>http://repo.spring.io/milestone/</url>
+				</repository>
 				
 				<repository>
 					<id>maven-central</id>
@@ -17,9 +22,9 @@
 				</repository>
 				
 				<repository>
-					<id>maven-central1</id>
-					<name>maven-central1</name>
-					<url>http://repo1.maven.org/maven2/</url>
+					<id>org.springframework.maven.milestone</id>
+					<name>Maven Central Compatible Spring Milestone Repository</name>
+					<url>http://maven.springframework.org/milestone/</url>
 				</repository>
 				
 				<repository>
@@ -29,15 +34,9 @@
 				</repository>
 				
 				<repository>
-					<id>spring-milestones</id>
-					<name>spring-milestones</name>
-					<url>http://repo.spring.io/milestone/</url>
-				</repository>
-				
-				<repository>
-					<id>org.springframework.maven.milestone</id>
-					<name>Maven Central Compatible Spring Milestone Repository</name>
-					<url>http://maven.springframework.org/milestone/</url>
+					<id>maven-central1</id>
+					<name>maven-central1</name>
+					<url>http://repo1.maven.org/maven2/</url>
 				</repository>
 
 			</repositories>
