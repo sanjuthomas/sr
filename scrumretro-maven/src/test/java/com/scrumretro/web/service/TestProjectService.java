@@ -5,6 +5,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -12,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -46,17 +48,21 @@ public class TestProjectService {
 	@Test
 	public void shouldFindByProjectId() throws Exception{
 		mockMvc.perform(get("/project/findById/{id}", "p1"))
-		.andExpect(status().isOk())
-		.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
-		.andExpect(jsonPath("$id", is("p1")))
-		.andExpect(jsonPath("$name", is("pname")))
-		.andExpect(jsonPath("$description", is("pdescription")))
-		.andExpect(jsonPath("$organization", is("o1")))
-		.andExpect(jsonPath("$ownerDisplayName", is("lastName, firstName")));
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
+			.andExpect(jsonPath("$id", is("p1")))
+			.andExpect(jsonPath("$name", is("pname")))
+			.andExpect(jsonPath("$description", is("pdescription")))
+			.andExpect(jsonPath("$organization", is("o1")))
+			.andExpect(jsonPath("$ownerDisplayName", is("lastName, firstName")));
 	}
 	
 	@Test
-	public void shouldSaveProject(){
+	public void shouldSaveProject() throws Exception{
+		this.mockMvc.perform(post("/project/save/")
+		    .content("{'id' : 'p1'}") 
+		    .accept(MediaType.APPLICATION_JSON))
+		    .andExpect(status().isOk());
 	}
 	
 	
