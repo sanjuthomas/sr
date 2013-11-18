@@ -2,8 +2,8 @@ package com.scrumretro.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -11,11 +11,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.mongodb.Mongo;
 import com.scrumretro.repository.model.Retrospective;
 import com.scrumretro.test.BaseUnitTest;
 
@@ -25,7 +32,7 @@ import com.scrumretro.test.BaseUnitTest;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-applicationContext.xml"})
+@ContextConfiguration
 public class TestRetrospectiveRepository extends BaseUnitTest{
 	
 	@Autowired
@@ -96,6 +103,30 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 		retrospective.setUserId("info@scrumretro.com");
 		retrospective.setProjectId("5270269044ae1440f787333a");
 		return retrospective;
+	}
+	
+	
+	@Configuration
+	@EnableMongoRepositories
+	@ComponentScan(basePackageClasses = { RetrospectiveRepository.class })
+	@PropertySource("classpath:application.properties")
+	static class MongoConfiguration extends AbstractMongoConfiguration {
+
+		@Override
+		protected String getDatabaseName() {
+			return "scrumretro-test";
+		}
+
+		@Override
+		public Mongo mongo() {
+			return new Fongo("mongo-test").getMongo();
+		}
+
+		@Override
+		protected String getMappingBasePackage() {
+			return "com.scrumretro.*";
+		}
+		
 	}
 
 }
