@@ -34,13 +34,24 @@ public class TestProjectWorker {
 		initMocks(this);
 		final Project project = createProject();
 		when(mockProjectRepository.findById(any(String.class))).thenReturn(project);
+		when(mockProjectRepository.save(any(Project.class))).thenReturn(project);
 		projectWorker = new ProjectWorker();
 		projectWorker.setProjectRepository(mockProjectRepository);
 	}
 	
 	@Test
 	public void shouldFindById(){
-		ProjectResponse projectResponse = projectWorker.findById("pid");
+		final ProjectResponse projectResponse = projectWorker.findById("pid");
+		validateProjectResponse(projectResponse);
+	}
+	
+	@Test
+	public void shouldSaveProject(){
+		final ProjectResponse projectResponse = projectWorker.save(createProject());
+		validateProjectResponse(projectResponse);
+	}
+	
+	private void validateProjectResponse(final ProjectResponse projectResponse){
 		assertNotNull(projectResponse);
 		assertEquals("pid", projectResponse.getId());
 		assertEquals("pname", projectResponse.getName());
