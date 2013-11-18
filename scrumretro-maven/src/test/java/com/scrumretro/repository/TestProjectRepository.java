@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,6 @@ public class TestProjectRepository extends BaseUnitTest{
 	@Autowired
 	private ProjectRepository projectRepository;
 	
-
 	@Test
 	@ShouldMatchDataSet(location = "/testData/project/project-p1.json")
 	public void shouldSaveProject() {
@@ -52,6 +52,7 @@ public class TestProjectRepository extends BaseUnitTest{
 		assertNotNull(project);
 		assertEquals("2fasdf123333", project.getId());
 		assertEquals("p2", project.getName());
+		projectRepository.deleteAll();
 	}
 	
 	@Test
@@ -59,6 +60,7 @@ public class TestProjectRepository extends BaseUnitTest{
 	public void shouldNotFindById(){
 		final Project project = projectRepository.findById("2df123333");
 		assertNull(project);
+		projectRepository.deleteAll();
 	}
 	
 	@Test
@@ -67,6 +69,7 @@ public class TestProjectRepository extends BaseUnitTest{
 		final Project project = projectRepository.findByName("p1");
 		assertNotNull(project);
 		assertEquals("p1", project.getName());
+		projectRepository.deleteAll();
 	}
 	
 	@Test
@@ -74,6 +77,7 @@ public class TestProjectRepository extends BaseUnitTest{
 	public void shouldNotFindByName(){
 		final Project project = projectRepository.findByName("p41");
 		assertNull(project);
+		projectRepository.deleteAll();
 	}
 	
 	@Test
@@ -83,6 +87,7 @@ public class TestProjectRepository extends BaseUnitTest{
 		assertNotNull(projects);
 		assertTrue(projects.size() > 0);
 		assertEquals("p1", projects.get(0).getName());
+		projectRepository.deleteAll();
 	}
 	
 	@Test
@@ -90,6 +95,7 @@ public class TestProjectRepository extends BaseUnitTest{
 	public void shouldNotFindByUserId(){
 		final List<Project> projects = projectRepository.findByUserId("inf@scrumretro.com");
 		assertEquals(0, projects.size());
+		projectRepository.deleteAll();
 	}
 	
 
@@ -100,6 +106,7 @@ public class TestProjectRepository extends BaseUnitTest{
 		assertNotNull(projects);
 		assertTrue(projects.size() > 0);
 		assertEquals("p1", projects.get(0).getName());
+		projectRepository.deleteAll();
 	}
 	
 	private Project createProject() {

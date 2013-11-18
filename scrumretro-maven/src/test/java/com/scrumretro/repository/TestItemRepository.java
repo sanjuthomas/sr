@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,6 @@ public class TestItemRepository extends BaseUnitTest{
 	
 	@Autowired
 	private ItemRepository itemRepository;
-
 	
 	@Test
 	@ShouldMatchDataSet(location = "/testData/item/item-i1.json")
@@ -52,6 +52,7 @@ public class TestItemRepository extends BaseUnitTest{
 		assertNotNull(items);
 		assertTrue(items.size() > 0);
 		assertEquals("234dqwer2wqer", items.get(0).getRetrospectiveId());
+		itemRepository.deleteAll();
 	}
 	
 	@Test
@@ -59,6 +60,7 @@ public class TestItemRepository extends BaseUnitTest{
 	public void shouldNotFindByRetrospectiveId(){
 		final List<Item> items = itemRepository.findByRetrospectiveId("dqwer2wqer");
 		assertEquals(0, items.size());
+		itemRepository.deleteAll();
 	}
 	
 	@Test
@@ -69,6 +71,7 @@ public class TestItemRepository extends BaseUnitTest{
 		assertTrue(item.getVotedUsers().contains("info@scrumretro.com"));
 		assertTrue(item.getVotedUsers().contains("user@scrumretro.com"));
 		assertEquals("i2", item.getId());
+		itemRepository.deleteAll();
 	}
 	
 
@@ -77,6 +80,7 @@ public class TestItemRepository extends BaseUnitTest{
 	public void shouldNotFindById(){
 		final Item item = itemRepository.findById("i4");
 		assertNull(item);
+		itemRepository.deleteAll();
 	}
 	
 	
