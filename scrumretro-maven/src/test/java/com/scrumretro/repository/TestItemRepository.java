@@ -69,6 +69,22 @@ public class TestItemRepository extends BaseUnitTest{
 	}
 	
 	@Test
+	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
+	public void shouldFindByUserId(){
+		final List<Item> items = itemRepository.findByUserId("info@scrumretro.com");
+		assertNotNull(items);
+		assertTrue(items.size() > 0);
+		assertEquals("info@scrumretro.com", items.get(0).getUserId());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/item/item-i1.json"})
+	public void shouldNotFindByUserId(){
+		final List<Item> items = itemRepository.findByUserId("info@retro.com");
+		assertEquals(0, items.size());
+	}
+	
+	@Test
 	@UsingDataSet(locations = {"/testData/item/item-i2.json"})
 	public void shouldFindById(){
 		final Item item = itemRepository.findById("i2");

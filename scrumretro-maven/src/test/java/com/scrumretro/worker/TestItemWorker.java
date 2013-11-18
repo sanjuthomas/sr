@@ -80,6 +80,7 @@ public class TestItemWorker {
 		items.add(item);
 		when(itemRepository.findById(any(String.class))).thenReturn(item);
 		when(itemRepository.findByRetrospectiveId(any(String.class))).thenReturn(items);
+		when(itemRepository.findByUserId(any(String.class))).thenReturn(items);
 		itemWorker.setItemRepository(itemRepository);
 	}
 	
@@ -91,17 +92,33 @@ public class TestItemWorker {
 	}
 	
 	@Test
+	public void shouldFindByUserId(){
+		final List<ItemResponse> itemResponses = itemWorker.findByUserId("info@scrumretro.com");
+		assertNotNull(itemResponses);
+		assertEquals(1, itemResponses.size());
+		for(final ItemResponse itemResponse : itemResponses){
+			validateItemResponse(itemResponse);
+		}
+	}
+	
+	@Test
 	public void shouldFindByRetrospectiveId(){
 		final List<ItemResponse> itemResponses = itemWorker.findByRetrospectiveId("r1");
 		assertNotNull(itemResponses);
 		assertEquals(1, itemResponses.size());
-		assertEquals("i1", itemResponses.get(0).getId());
-		assertEquals("description", itemResponses.get(0).getDescription());
-		assertEquals("Stop Doing", itemResponses.get(0).getItemTypeDisplayString());
-		assertEquals("rname", itemResponses.get(0).getRetrospectiveName());
-		assertEquals("pname", itemResponses.get(0).getProjectName());
-		assertEquals("lastName, firstName", itemResponses.get(0).getOwnerDisplayName());
-		assertEquals(2, itemResponses.get(0).getVoteCount().intValue());
+		for(final ItemResponse itemResponse : itemResponses){
+			validateItemResponse(itemResponse);
+		}
+	}
+	
+	private void validateItemResponse(final ItemResponse itemResponse){
+		assertEquals("i1", itemResponse.getId());
+		assertEquals("description", itemResponse.getDescription());
+		assertEquals("Stop Doing", itemResponse.getItemTypeDisplayString());
+		assertEquals("rname", itemResponse.getRetrospectiveName());
+		assertEquals("pname", itemResponse.getProjectName());
+		assertEquals("lastName, firstName", itemResponse.getOwnerDisplayName());
+		assertEquals(2, itemResponse.getVoteCount().intValue());
 	}
 	
 	

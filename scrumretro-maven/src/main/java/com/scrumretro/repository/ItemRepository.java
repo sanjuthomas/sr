@@ -18,4 +18,6 @@ public interface ItemRepository extends PagingAndSortingRepository<Item, String>
 	@Query("{ '_id' : ?0 }")
 	Item findById(final String id);
 	
+	List<Item> findByUserId(final String userId);
+	
 }
