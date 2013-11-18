@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  */
 @Document(collection = "project")
-public class Project {
+public class Project{
 	
 	@Id
 	private String id;
