@@ -25,6 +25,5 @@ public interface ProjectRepository extends PagingAndSortingRepository<Project, S
 	@Query("{ '_id' : ?0 }")
 	Project findById(final String id);
 	
-	@Override
 	<S extends Project> S save(S project);
 }

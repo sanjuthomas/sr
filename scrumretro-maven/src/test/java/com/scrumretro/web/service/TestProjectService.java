@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.scrumretro.rest.Response;
 import com.scrumretro.web.model.ProjectResponse;
-import com.scrumretro.web.service.ProjectService;
 import com.scrumretro.worker.ProjectWorker;
 
 
@@ -45,7 +44,7 @@ public class TestProjectService {
 	}
 	
 	@Test
-	public void testFindByProjectId() throws Exception{
+	public void shouldFindByProjectId() throws Exception{
 		mockMvc.perform(get("/project/findById/{id}", "p1"))
 		.andExpect(status().isOk())
 		.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
@@ -54,6 +53,10 @@ public class TestProjectService {
 		.andExpect(jsonPath("$description", is("pdescription")))
 		.andExpect(jsonPath("$organization", is("o1")))
 		.andExpect(jsonPath("$ownerDisplayName", is("lastName, firstName")));
+	}
+	
+	@Test
+	public void shouldSaveProject(){
 	}
 	
 	
