@@ -12,9 +12,8 @@ import org.springframework.data.annotation.Version;
  * @author Sanju Thomas
  *
  */
-public class Document {
+public class BaseDocument {
 	
-
 	@Version
 	private Long version;
 	
