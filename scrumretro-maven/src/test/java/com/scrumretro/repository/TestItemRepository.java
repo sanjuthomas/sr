@@ -12,11 +12,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.mongodb.Mongo;
 import com.scrumretro.enums.ItemType;
 import com.scrumretro.repository.model.Item;
 import com.scrumretro.test.BaseUnitTest;
@@ -27,7 +34,7 @@ import com.scrumretro.test.BaseUnitTest;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-applicationContext.xml"})
+@ContextConfiguration
 public class TestItemRepository extends BaseUnitTest{
 	
 	@Autowired
@@ -92,5 +99,28 @@ public class TestItemRepository extends BaseUnitTest{
 		//item.setVotedUsers(votedUsers);
 		return  item;
 	}
+	
 
+	@Configuration
+	@EnableMongoRepositories
+	@ComponentScan(basePackageClasses = { ItemRepository.class })
+	@PropertySource("classpath:application.properties")
+	static class MongoConfiguration extends AbstractMongoConfiguration {
+
+		@Override
+		protected String getDatabaseName() {
+			return "scrumretro-test";
+		}
+
+		@Override
+		public Mongo mongo() {
+			return new Fongo("mongo-test").getMongo();
+		}
+
+		@Override
+		protected String getMappingBasePackage() {
+			return "com.scrumretro.*";
+		}
+		
+	}
 }
