@@ -80,8 +80,20 @@ public class ItemWorker {
 		return itemResponses;
 	}
 	
-	public List<Item> findByUserId(final String projectId){
-		return null;
+	/**
+	 * This method shall take a userId, find all item associated with it 
+	 * and construct the ItemResponse object for UI.
+	 * 
+	 * @param retrospectiveId
+	 * @return
+	 */
+	public List<ItemResponse> findByUserId(final String userId){
+		final List<Item> items = itemRepository.findByUserId(userId);
+		final List<ItemResponse> itemResponses = new ArrayList<ItemResponse>();
+		for(Item item : items){
+			itemResponses.add(createItemResponse(item));
+		}
+		return itemResponses;
 	}
 	
 	/**
