@@ -40,7 +40,6 @@ public class TestUserRepository extends BaseUnitTest{
 	@Test
 	@ShouldMatchDataSet(location = "/testData/user/user-u1.json")
 	public void shouldSaveUser() {
-		userRepository.deleteAll();
 		User user = createUser();
 		user.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
 		userRepository.save(user);
@@ -52,7 +51,6 @@ public class TestUserRepository extends BaseUnitTest{
 		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", EncryptionUtil.encryptPassword("password"));
 		assertNotNull(user);
 		assertEquals("info@scrumretro.com", user.getUserId());
-		userRepository.deleteAll();
 	}
 	
 	@Test
@@ -60,7 +58,6 @@ public class TestUserRepository extends BaseUnitTest{
 	public void shouldNotFindByUserIdAndPassword(){
 		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", EncryptionUtil.encryptPassword("test"));
 		assertNull(user);
-		userRepository.deleteAll();
 	}
 	
 	@Test
@@ -69,7 +66,6 @@ public class TestUserRepository extends BaseUnitTest{
 		User user = userRepository.findByUserId("info@scrumretro.com");
 		assertNotNull(user);
 		assertEquals("info@scrumretro.com", user.getUserId());
-		userRepository.deleteAll();
 	}
 	
 	@Test
@@ -77,7 +73,6 @@ public class TestUserRepository extends BaseUnitTest{
 	public void shouldNotFindByUserId(){
 		User user = userRepository.findByUserId("inf@scrumretro.com");
 		assertNull(user);
-		userRepository.deleteAll();
 	}
 	
 	@Test
@@ -87,7 +82,6 @@ public class TestUserRepository extends BaseUnitTest{
 		assertNotNull(users);
 		assertTrue(users.size() > 0);
 		assertEquals("info@scrumretro.com", users.get(0).getUserId());
-		userRepository.deleteAll();
 	}
 	
 	@Test
@@ -95,7 +89,6 @@ public class TestUserRepository extends BaseUnitTest{
 	public void shouldNotFindUsersByOrganization(){
 		List<User> users = userRepository.findUsersByOrgranization("organidddzation");
 		assertEquals(0, users.size());
-		userRepository.deleteAll();
 	}
 	
 	private User createUser(){
