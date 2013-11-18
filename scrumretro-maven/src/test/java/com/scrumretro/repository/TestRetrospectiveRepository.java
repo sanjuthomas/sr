@@ -48,6 +48,7 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 		final Retrospective retrospective = retrospectiveRepository.findById("r2");
 		assertNotNull(retrospective);
 		assertEquals("r2", retrospective.getId());
+		retrospectiveRepository.deleteAll();
 	}
 	
 	@Test
@@ -55,6 +56,7 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 	public void shouldNotFindById(){
 		final Retrospective retrospective = retrospectiveRepository.findById("r3s2");
 		assertNull(retrospective);
+		retrospectiveRepository.deleteAll();
 	}
 	
 	@Test
@@ -64,6 +66,7 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 		assertNotNull(retrospectives);
 		assertTrue(retrospectives.size() > 0);
 		assertEquals("retrospective-r1", retrospectives.get(0).getName());
+		retrospectiveRepository.deleteAll();
 	}
 	
 	@Test
@@ -71,6 +74,7 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 	public void shouldNotFindByProjectId(){
 		final List<Retrospective> retrospectives = retrospectiveRepository.findByProjectId("044ae1440f787333a");
 		assertEquals(0, retrospectives.size());
+		retrospectiveRepository.deleteAll();
 	}
 	
 	@Test
@@ -80,6 +84,7 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 		assertNotNull(retrospectives);
 		assertTrue(retrospectives.size() > 0);
 		assertEquals("retrospective-r1", retrospectives.get(0).getName());
+		retrospectiveRepository.deleteAll();
 	}
 	
 	@Test
@@ -87,6 +92,7 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 	public void shouldNotFindByUserId(){
 		final List<Retrospective> retrospectives = retrospectiveRepository.findByUserId("inf@scrumretro.com");
 		assertEquals(0, retrospectives.size());
+		retrospectiveRepository.deleteAll();
 	}
 	
 	
