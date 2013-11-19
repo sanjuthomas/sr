@@ -10,9 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.IOException;
-
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,18 +80,9 @@ public class TestProjectService {
 	@Test
 	public void shouldSaveProject() throws Exception {
 		this.mockMvc.perform(
-				post("/project/save/").content(createProjectJSON())
+				post("/project/save/").content(createProjectRequest().toString())
 						.contentType(Response.APPLICATION_JSON_UTF8))
 				.andExpect(status().isOk());
-	}
-
-	private String createProjectJSON() {
-		final ObjectMapper mapper = new ObjectMapper();
-		try {
-			return mapper.writeValueAsString(createProjectRequest());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	private ProjectResponse createProjectResponse() {

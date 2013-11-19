@@ -4,12 +4,14 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.scrumretro.rest.Request;
+
 /**
  * 
  * @author Sanju Thomas
  *
  */
-public class ProjectRequest {
+public class ProjectRequest extends Request{
 	
 	@Size(max=256)
 	private String id;
@@ -43,5 +45,10 @@ public class ProjectRequest {
 
 	public void setDescription(final String description) {
 		this.description = description;
+	}
+	
+	@Override
+	public String toString(){
+		return super.toJSON();
 	}
 }
