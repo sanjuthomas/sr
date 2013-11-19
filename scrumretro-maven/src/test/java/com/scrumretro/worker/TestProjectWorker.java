@@ -14,6 +14,7 @@ import com.scrumretro.repository.ProjectRepository;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 
 /**
@@ -47,8 +48,8 @@ public class TestProjectWorker {
 	
 	@Test
 	public void shouldSaveProject(){
-	//	final ProjectResponse projectResponse = projectWorker.save(createProject());
-	//	validateProjectResponse(projectResponse);
+		final ProjectResponse projectResponse = projectWorker.save(createProjectRequest());
+		validateProjectResponse(projectResponse);
 	}
 	
 	private void validateProjectResponse(final ProjectResponse projectResponse){
@@ -57,6 +58,14 @@ public class TestProjectWorker {
 		assertEquals("pname", projectResponse.getName());
 		assertEquals("pdescription", projectResponse.getDescription());
 		assertEquals("lastName, firstName", projectResponse.getOwnerDisplayName());
+	}
+	
+	private ProjectRequest createProjectRequest(){
+		final ProjectRequest projectRequest = new ProjectRequest();
+		projectRequest.setId("pid");
+		projectRequest.setName("pname");
+		projectRequest.setDescription("pdescription");
+		return projectRequest;
 	}
 	
 	private Project createProject(){
