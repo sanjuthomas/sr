@@ -21,6 +21,9 @@
 		<bean.validation.version>1.0.0.GA</bean.validation.version>
 		<bean.validation.hibernate>4.2.0.Final</bean.validation.hibernate>
 		<find.bug.version>2.5.2</find.bug.version>
+		<jackson.mapper.version>1.9.13</jackson.mapper.version>
+		<spring.security.version>3.1.4.RELEASE</spring.security.version>
+		<joda.time.version>2.2</joda.time.version>
 	</properties>
 
 	<dependencies>
@@ -49,19 +52,19 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>3.1.4.RELEASE</version>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.1.4.RELEASE</version>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.1.4.RELEASE</version>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<!-- servlet, only for compile time -->
@@ -91,7 +94,13 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.2</version>
+			<version>${joda.time.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.mapper.version}</version>
 		</dependency>
 
 		<dependency>
