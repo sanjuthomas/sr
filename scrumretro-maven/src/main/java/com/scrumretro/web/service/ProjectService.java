@@ -1,13 +1,16 @@
 package com.scrumretro.web.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.scrumretro.repository.model.Project;
+import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 import com.scrumretro.worker.ProjectWorker;
 
@@ -48,10 +51,10 @@ public class ProjectService {
 	 * @param project
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(value = "/project/save/", method=RequestMethod.POST)
 	@ResponseBody
-	public ProjectResponse save(final Project project){
-		return projectWorker.save(project);
+	public ProjectResponse save(@Valid @RequestBody final ProjectRequest projectRequest){
+		return projectWorker.save(projectRequest);
 	}
 	
 }
