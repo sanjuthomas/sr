@@ -10,63 +10,94 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.scrumretro.repository.model.Project;
 import com.scrumretro.rest.Response;
+import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 import com.scrumretro.worker.ProjectWorker;
-
 
 /**
  * 
  * @author Sanju Thomas
- *
+ * 
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:test-applicationContext.xml" })
 public class TestProjectService {
-	
+
+	@Autowired
+	private ApplicationContext applicationContext;
+
 	private MockMvc mockMvc;
-	
+
 	@Mock
 	private ProjectWorker projectWorker;
-	
+
+	@Autowired
 	private ProjectService projectService;
-	
+
+	@Captor
+	private ArgumentCaptor<Project> projectCaptor;
+
 	@Before
-	public void setUp(){
+	public void setUp() {
 		initMocks(this);
-		projectService = new ProjectService();
 		this.mockMvc = MockMvcBuilders.standaloneSetup(projectService).build();
-		when(projectWorker.findById(any(String.class))).thenReturn(createProjectResponse());
+		when(projectWorker.findById(any(String.class))).thenReturn(
+				createProjectResponse());
+		when(projectWorker.save(any(ProjectRequest.class))).thenReturn(
+				createProjectResponse());
 		projectService.setProjectWorker(projectWorker);
 	}
-	
+
 	@Test
-	public void shouldFindByProjectId() throws Exception{
+	public void shouldFindByProjectId() throws Exception {
 		mockMvc.perform(get("/project/findById/{id}", "p1"))
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
-			.andExpect(jsonPath("$id", is("p1")))
-			.andExpect(jsonPath("$name", is("pname")))
-			.andExpect(jsonPath("$description", is("pdescription")))
-			.andExpect(jsonPath("$organization", is("o1")))
-			.andExpect(jsonPath("$ownerDisplayName", is("lastName, firstName")));
+				.andExpect(status().isOk())
+				.andExpect(
+						content().contentType(Response.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$id", is("p1")))
+				.andExpect(jsonPath("$name", is("pname")))
+				.andExpect(jsonPath("$description", is("pdescription")))
+				.andExpect(jsonPath("$organization", is("o1")))
+				.andExpect(
+						jsonPath("$ownerDisplayName", is("lastName, firstName")));
 	}
-	
+
 	@Test
-	public void shouldSaveProject() throws Exception{
-		this.mockMvc.perform(post("/project/save/")
-		    .content("{'id' : 'p1'}") 
-		    .accept(MediaType.APPLICATION_JSON))
-		    .andExpect(status().isOk());
+	public void shouldSaveProject() throws Exception {
+		this.mockMvc.perform(
+				post("/project/save/").content(createProjectJSON())
+						.contentType(Response.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk());
 	}
-	
-	
-	private ProjectResponse createProjectResponse(){
+
+	private String createProjectJSON() {
+		final ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(createProjectRequest());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private ProjectResponse createProjectResponse() {
 		final ProjectResponse projectResponse = new ProjectResponse();
 		projectResponse.setId("p1");
 		projectResponse.setName("pname");
@@ -75,5 +106,12 @@ public class TestProjectService {
 		projectResponse.setOwnerDisplayName("lastName, firstName");
 		return projectResponse;
 	}
-	
+
+	private ProjectRequest createProjectRequest() {
+		final ProjectRequest projectRequest = new ProjectRequest();
+		projectRequest.setId("pid");
+		projectRequest.setName("pname");
+		projectRequest.setDescription("pdescription");
+		return projectRequest;
+	}
 }
