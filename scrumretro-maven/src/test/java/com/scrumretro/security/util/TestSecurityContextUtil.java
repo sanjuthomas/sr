@@ -44,7 +44,6 @@ public class TestSecurityContextUtil {
     public void getPrincipalWhenAuthenticationIsNull() {
         SecurityContext securityContextMock = mock(SecurityContext.class);
         SecurityContextHolder.setContext(securityContextMock);
-        when(SecurityContextHolder.getContext()).thenReturn(securityContextMock);
         when(securityContextMock.getAuthentication()).thenReturn(null);
         UserDetails principal = securityContextUtil.getPrincipal();
         assertNull(principal);
