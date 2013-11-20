@@ -16,7 +16,7 @@ public class RestAuthenticationFailureHandler implements AuthenticationFailureHa
     protected static final String STATUS_MESSAGE_AUTHENTICATION_FAILED = "Bad credentials";
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(final HttpServletRequest request, final HttpServletResponse response, final AuthenticationException exception) throws IOException, ServletException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, STATUS_MESSAGE_AUTHENTICATION_FAILED);
     }
 }

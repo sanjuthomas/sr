@@ -74,7 +74,7 @@ public class ItemWorker {
 	public List<ItemResponse> findByRetrospectiveId(final String retrospectiveId){
 		final List<Item> items = itemRepository.findByRetrospectiveId(retrospectiveId);
 		final List<ItemResponse> itemResponses = new ArrayList<ItemResponse>();
-		for(Item item : items){
+		for(final Item item : items){
 			itemResponses.add(createItemResponse(item));
 		}
 		return itemResponses;
@@ -90,7 +90,7 @@ public class ItemWorker {
 	public List<ItemResponse> findByUserId(final String userId){
 		final List<Item> items = itemRepository.findByUserId(userId);
 		final List<ItemResponse> itemResponses = new ArrayList<ItemResponse>();
-		for(Item item : items){
+		for(final Item item : items){
 			itemResponses.add(createItemResponse(item));
 		}
 		return itemResponses;

@@ -294,6 +294,9 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.0.1</version>
 				<configuration>
+					<rulesets>
+						<ruleset>${basedir}/pmd/rules/custom.xml</ruleset>
+					</rulesets>
 					<linkXref>true</linkXref>
 					<sourceEncoding>utf-8</sourceEncoding>
 					<minimumTokens>100</minimumTokens>
