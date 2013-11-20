@@ -24,7 +24,7 @@ public class UserResponse {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -32,7 +32,7 @@ public class UserResponse {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -40,7 +40,7 @@ public class UserResponse {
 		return organization;
 	}
 
-	public void setOrganization(String organization) {
+	public void setOrganization(final String organization) {
 		this.organization = organization;
 	}
 
@@ -48,7 +48,7 @@ public class UserResponse {
 		return displayName;
 	}
 
-	public void setDisplayName(String displayName) {
+	public void setDisplayName(final String displayName) {
 		this.displayName = displayName;
 	}
 }

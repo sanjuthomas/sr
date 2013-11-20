@@ -4,7 +4,7 @@ public class AuthorizationException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
 	
-	public AuthorizationException(String message){
+	public AuthorizationException(final String message){
 		super(message);
 	}
 }

@@ -15,10 +15,10 @@ public class SecurityContextUtil {
     public UserDetails getPrincipal() {
         UserDetails principal = null;
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null) {
-            Object currentPrincipal = authentication.getPrincipal();
+        if (null != authentication) {
+            final Object currentPrincipal = authentication.getPrincipal();
             if (currentPrincipal instanceof UserDetails) {
                 principal = (UserDetails) currentPrincipal;
             }
