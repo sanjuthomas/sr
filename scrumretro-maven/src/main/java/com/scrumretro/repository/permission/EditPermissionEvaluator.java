@@ -17,14 +17,14 @@ import com.scrumretro.repository.model.User;
 public class EditPermissionEvaluator implements PermissionEvaluator{
 
 	@Override
-	public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
+	public boolean hasPermission(final Authentication authentication, final Object targetDomainObject, final Object permission) {
 		final BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(targetDomainObject);
 		final User user = (User) beanWrapper.getPropertyValue("user");
 		return authentication.getName().equals(user.getUserId());
 	}
 
 	@Override
-	public boolean hasPermission(Authentication arg0, Serializable arg1, String arg2, Object arg3) {
+	public boolean hasPermission(final Authentication arg0, final Serializable arg1, final String arg2, final Object arg3) {
 		return false;
 	}
 }
