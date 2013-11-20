@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws ServletException, IOException {
+    public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
+                                        final Authentication authentication) throws ServletException, IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         clearAuthenticationAttributes(request);
     }
