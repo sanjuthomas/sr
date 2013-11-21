@@ -10,6 +10,8 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	<description>test application context configuration</description>
 
 	<context:component-scan base-package="com.ourownjava.*" />
+	
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 	<mongo:mongo id="mongo-test" />
 
