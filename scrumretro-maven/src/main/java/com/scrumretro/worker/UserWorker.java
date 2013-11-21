@@ -2,6 +2,7 @@ package com.scrumretro.worker;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
@@ -13,10 +14,20 @@ public class UserWorker {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	public void setbCryptPasswordEncoder(final BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
+
 	public void setUserRepository(final UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
+	
+	
+	
+	
 	
 	/**
 	 * This method shall accept userid and password and find the matching user.
