@@ -24,6 +24,7 @@
 		<jackson.mapper.version>1.9.13</jackson.mapper.version>
 		<spring.security.version>3.1.4.RELEASE</spring.security.version>
 		<joda.time.version>2.2</joda.time.version>
+		<junit.feed>1.1.5</junit.feed>
 	</properties>
 
 	<dependencies>
@@ -186,6 +187,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.databene</groupId>
+			<artifactId>feed4junit</artifactId>
+			<version>${junit.feed}</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
