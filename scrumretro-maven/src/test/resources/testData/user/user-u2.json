@@ -2,7 +2,7 @@
     "user": [
         {
             "_id": "info@scrumretro.com",
-            "password": "",
+            "password": "$2a$10$EzO6FnN.E1hFt18nI6BjfuRsQvavkeOWmC.PeUnaB54NpZDYXoGXC",
             "active": true,
             "userDetail": {
                 "firstName": "firstName",

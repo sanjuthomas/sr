@@ -6,7 +6,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
-import com.scrumretro.util.EncryptionUtil;
+import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.web.model.UserRequest;
 import com.scrumretro.web.model.UserResponse;
 
 public class UserWorker {
@@ -26,19 +27,28 @@ public class UserWorker {
 	}
 	
 	
-	
-	
-	
 	/**
-	 * This method shall accept userid and password and find the matching user.
+	 * This method shall accept a UserRequest object and save it to db.
 	 * 
-	 * @param userId
-	 * @param password
+	 * @param userRequest
 	 * @return
 	 */
-	public UserResponse findByUserIdAndPassword(final String userId, final String password){
-		final User user = userRepository.findByUserIdAndPassword(userId,EncryptionUtil.encryptPassword(password));
+	public UserResponse save(final UserRequest userRequest){
+		final User user = userRepository.save(createUser(userRequest));
 		return createUserResponse(user);
+	}
+	
+	private User createUser(final UserRequest userRequest){
+		final User user  = new User();
+		user.setActive(false);
+		user.setUserId(userRequest.getUserId());
+		user.setPassword(bCryptPasswordEncoder.encode(userRequest.getPassword()));
+		final UserDetail userDetail = new UserDetail();
+		userDetail.setFirstName(userRequest.getFirstName());
+		userDetail.setLastName(userRequest.getLastName());
+		userDetail.setOrganization(userRequest.getOrganization());
+		user.setUserDetail(userDetail);
+		return user;
 	}
 	
 	/**
