@@ -2,11 +2,12 @@ package com.scrumretro.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -26,7 +28,6 @@ import com.mongodb.Mongo;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
 import com.scrumretro.test.BaseUnitTest;
-import com.scrumretro.util.EncryptionUtil;
 
 /**
  * 
@@ -43,49 +44,49 @@ public class TestUserRepository extends BaseUnitTest{
 	@Autowired
 	private UserRepository userRepository;
 	
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Before
+	public void setUp(){
+		bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	}
 	
 	@Test
 	@ShouldMatchDataSet(location = "/testData/user/user-u1.json")
 	public void shouldSaveUser() {
-		User user = createUser();
-		user.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
+		final User user = createUser();
+		user.setPassword("");
 		userRepository.save(user);
 	}
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
-	public void shouldFindByUserIdAndPassword(){
-		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", EncryptionUtil.encryptPassword("password"));
-		assertNotNull(user);
-		assertEquals("info@scrumretro.com", user.getUserId());
-	}
-	
-	@Test
-	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
-	public void shouldNotFindByUserIdAndPassword(){
-		User user = userRepository.findByUserIdAndPassword("info@scrumretro.com", EncryptionUtil.encryptPassword("test"));
-		assertNull(user);
-	}
-	
-	@Test
-	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
 	public void shouldFindByUserId(){
-		User user = userRepository.findByUserId("info@scrumretro.com");
+		final User user = userRepository.findByUserId("info@scrumretro.com");
 		assertNotNull(user);
 		assertEquals("info@scrumretro.com", user.getUserId());
+	}
+	
+	@Test
+	@UsingDataSet(locations = {"/testData/user/user-u2.json"})
+	public void shouldMatchPassword(){
+		final User user = userRepository.findByUserId("info@scrumretro.com");
+		assertNotNull(user);
+		assertEquals("info@scrumretro.com", user.getUserId());
+		assertTrue(bCryptPasswordEncoder.matches("password", user.getPassword()));
 	}
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
 	public void shouldNotFindByUserId(){
-		User user = userRepository.findByUserId("inf@scrumretro.com");
+		final User user = userRepository.findByUserId("inf@scrumretro.com");
 		assertNull(user);
 	}
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
 	public void shouldFindUsersByOrganization(){
-		List<User> users = userRepository.findUsersByOrgranization("organization");
+		final List<User> users = userRepository.findUsersByOrgranization("organization");
 		assertNotNull(users);
 		assertTrue(users.size() > 0);
 		assertEquals("info@scrumretro.com", users.get(0).getUserId());
@@ -94,7 +95,7 @@ public class TestUserRepository extends BaseUnitTest{
 	@Test
 	@UsingDataSet(locations = {"/testData/user/user-u1.json"})
 	public void shouldNotFindUsersByOrganization(){
-		List<User> users = userRepository.findUsersByOrgranization("organidddzation");
+		final List<User> users = userRepository.findUsersByOrgranization("organidddzation");
 		assertEquals(0, users.size());
 	}
 	
@@ -131,7 +132,5 @@ public class TestUserRepository extends BaseUnitTest{
 		protected String getMappingBasePackage() {
 			return "com.scrumretro.*";
 		}
-		
 	}
-
 }
