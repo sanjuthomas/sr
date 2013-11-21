@@ -2,6 +2,7 @@ package com.scrumretro.web.model;
 
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.scrumretro.rest.Request;
@@ -14,23 +15,23 @@ import com.scrumretro.rest.Request;
  */
 public class UserRequest extends Request{
 	
-	@NotEmpty
-	@Size(max=16)
+	@NotEmpty()
+	@Email()
 	private String userId;
 	
-	@NotEmpty
-	@Size(max=16)
+	@NotEmpty()
+	@Size(min=4, max=16)
 	private String password;
 	
-	@NotEmpty
+	@NotEmpty()
 	@Size(max=32)
 	private String firstName;
 	
-	@NotEmpty
+	@NotEmpty()
 	@Size(max=32)
 	private String lastName;
 	
-	@NotEmpty
+	@NotEmpty()
 	@Size(max=64)
 	private String organization;
 
