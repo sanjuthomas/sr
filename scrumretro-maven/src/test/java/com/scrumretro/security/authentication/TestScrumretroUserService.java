@@ -21,7 +21,7 @@ import com.scrumretro.repository.model.UserDetail;
 
 public class TestScrumretroUserService {
 
-	ScrumRetroUserService scrumretroUserService;
+	ScrumRetroUserDetailsService scrumretroUserService;
 	
 	@Mock
 	private UserRepository mockUserRepository;
@@ -32,7 +32,7 @@ public class TestScrumretroUserService {
 		initMocks(this);
 		final User user = createUser();
 		when(mockUserRepository.findByUserId(any(String.class))).thenReturn(user);
-		scrumretroUserService = new ScrumRetroUserService();
+		scrumretroUserService = new ScrumRetroUserDetailsService();
 		scrumretroUserService.setUserRepository(mockUserRepository);
 	}
 	
