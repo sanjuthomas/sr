@@ -1,6 +1,6 @@
 package com.scrumretro.web.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -32,10 +32,10 @@ public class TestUserRequest {
 	}
 
 	@Test
-	public void shouldValidateInvalidEntries(@Source("src/test/resources/testData/userRequest/invalid.csv") UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> validtionResults = validator
+	public void shouldValidateInvalidEntries(@Source("src/test/resources/testData/userRequest/invalidUsers.csv") UserRequest userRequest) {
+		final Set<ConstraintViolation<UserRequest>> violations = validator
 				.validate(userRequest);
-		assertEquals(5, validtionResults.size());
+		assertTrue(violations.size() > 1);
 	}
 
 }

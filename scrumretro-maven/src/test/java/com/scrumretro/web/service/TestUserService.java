@@ -21,8 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
-import com.scrumretro.security.authentication.ScrumretroUserService;
-import com.scrumretro.worker.UserWorker;
+import com.scrumretro.security.authentication.ScrumRetroUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-applicationContext.xml","classpath:test-applicationSecurity.xml" })
@@ -32,7 +31,7 @@ public class TestUserService {
 	private ApplicationContext applicationContext;
 	
 	@Autowired
-	private ScrumretroUserService scrumretroUserService;
+	private ScrumRetroUserService scrumretroUserService;
 	
 	@Mock
 	private UserRepository mockUserRepository;
@@ -42,8 +41,8 @@ public class TestUserService {
 	@Autowired
 	private UserService userService;
 	
-	 @Autowired
-     private FilterChainProxy springSecurityFilterChain;
+	@Autowired
+    private FilterChainProxy springSecurityFilterChain;
 	
 	@Before
 	public void setUp() {
