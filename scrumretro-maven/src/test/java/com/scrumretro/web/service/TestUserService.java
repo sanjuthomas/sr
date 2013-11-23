@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
-import com.scrumretro.security.authentication.ScrumRetroUserService;
+import com.scrumretro.security.authentication.ScrumRetroUserDetailsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-applicationContext.xml","classpath:test-applicationSecurity.xml" })
@@ -31,7 +31,7 @@ public class TestUserService {
 	private ApplicationContext applicationContext;
 	
 	@Autowired
-	private ScrumRetroUserService scrumretroUserService;
+	private ScrumRetroUserDetailsService scrumretroUserService;
 	
 	@Mock
 	private UserRepository mockUserRepository;

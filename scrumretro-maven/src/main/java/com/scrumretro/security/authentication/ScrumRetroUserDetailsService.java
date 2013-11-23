@@ -18,7 +18,7 @@ import com.scrumretro.repository.model.User;
  * @author Ragil
  *
  */
-public class ScrumRetroUserService implements UserDetailsService{
+public class ScrumRetroUserDetailsService implements UserDetailsService{
 
 	@Autowired
 	private UserRepository userRepository;
