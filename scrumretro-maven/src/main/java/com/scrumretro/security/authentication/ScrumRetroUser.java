@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-public class ScrumretroUser extends User {
+public class ScrumRetroUser extends User {
 
 	/**
 	 * 
@@ -14,15 +14,14 @@ public class ScrumretroUser extends User {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ScrumretroUser(String username, String password, String firstName,
-			String lastName, String organization,
-			Collection<? extends GrantedAuthority> authorities) {
+	public ScrumRetroUser(final String username, final String password,
+			final String firstName, final String lastName,
+			final String organization,
+			final Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, true, true, true, true, authorities);
-
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.organization = organization;
-
 	}
 
 	private String firstName;
@@ -33,7 +32,7 @@ public class ScrumretroUser extends User {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -41,7 +40,7 @@ public class ScrumretroUser extends User {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -49,7 +48,7 @@ public class ScrumretroUser extends User {
 		return organization;
 	}
 
-	public void setOrganization(String organization) {
+	public void setOrganization(final String organization) {
 		this.organization = organization;
 	}
 

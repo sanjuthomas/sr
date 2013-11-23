@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.scrumretro.security.authentication.ScrumretroUser;
+import com.scrumretro.security.authentication.ScrumRetroUser;
 import com.scrumretro.web.model.UserResponse;
 import com.scrumretro.worker.UserWorker;
 
@@ -26,14 +26,9 @@ public class UserService {
 	@Autowired
 	private UserWorker userWorker;
 
-	public UserWorker getUserWorker() {
-		return userWorker;
-	}
-
-	public void setUserWorker(UserWorker userWorker) {
+	public void setUserWorker(final UserWorker userWorker) {
 		this.userWorker = userWorker;
 	}
-	
 	/**
 	 * This service shall return the current user details
 	 * in json format.
@@ -43,7 +38,7 @@ public class UserService {
 	@RequestMapping(value = "/user/currentUser", method = RequestMethod.GET)
 	@ResponseBody
 	public UserResponse currentUser(final Authentication authentication) {
-		 final ScrumretroUser currentUser =  (ScrumretroUser)authentication.getPrincipal();
+		 final ScrumRetroUser currentUser =  (ScrumRetroUser)authentication.getPrincipal();
 		 final UserResponse userResponse = new UserResponse();
 		 BeanUtils.copyProperties(currentUser, userResponse);
 		 return userResponse;
