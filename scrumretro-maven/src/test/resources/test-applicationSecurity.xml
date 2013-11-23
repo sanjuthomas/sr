@@ -32,8 +32,7 @@
 		class="com.scrumretro.security.authentication.RestAuthenticationEntryPoint" />
 
 	<!-- Configures a custom login filter bean -->
-	<bean id="loginFilter"
-		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+	<bean id="loginFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="authenticationFailureHandler" ref="restAuthenticationFailureHandler" />
 		<property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
@@ -43,28 +42,19 @@
 		<property name="postOnly" value="true" />
 	</bean>
 
-	<!-- Configures a custom authentication success handler that returns HTTP 
-		status code 200 -->
-	<bean id="restAuthenticationSuccessHandler"
-		class="com.scrumretro.security.authentication.RestAuthenticationSuccessHandler" />
+	<!-- Configures a custom authentication success handler that returns HTTP status code 200 -->
+	<bean id="restAuthenticationSuccessHandler" class="com.scrumretro.security.authentication.RestAuthenticationSuccessHandler" />
 
-	<!-- Configures a custom authentication failure handler that returns HTTP 
-		status code 401 -->
-	<bean id="restAuthenticationFailureHandler"
-		class="com.scrumretro.security.authentication.RestAuthenticationFailureHandler" />
+	<!-- Configures a custom authentication failure handler that returns HTTP status code 401 -->
+	<bean id="restAuthenticationFailureHandler" class="com.scrumretro.security.authentication.RestAuthenticationFailureHandler" />
 
-	<!-- Configures a custom logout success handler that returns HTTP status 
-		code 200 -->
-	<bean id="restLogoutSuccessHandler"
-		class="com.scrumretro.security.authentication.RestLogoutSuccessHandler" />
+	<!-- Configures a custom logout success handler that returns HTTP status code 200 -->
+	<bean id="restLogoutSuccessHandler" class="com.scrumretro.security.authentication.RestLogoutSuccessHandler" />
 
-	<bean id="scrumRetroUserService"
-		class="com.scrumretro.security.authentication.ScrumRetroUserService" />
-	<!-- Configures in-memory implementation of the UserDetailsService implementation -->
+	<bean id="scrumRetroUserDetailsService" class="com.scrumretro.security.authentication.ScrumRetroUserDetailsService" />
+	
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider
-			user-service-ref="scrumRetroUserService">
-		</security:authentication-provider>
+		<security:authentication-provider user-service-ref="scrumRetroUserDetailsService"/>		
 	</security:authentication-manager>
 
 </beans>
