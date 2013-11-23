@@ -21,7 +21,7 @@ import com.scrumretro.repository.model.UserDetail;
 
 public class TestScrumretroUserService {
 
-	ScrumretroUserService scrumretroUserService;
+	ScrumRetroUserService scrumretroUserService;
 	
 	@Mock
 	private UserRepository mockUserRepository;
@@ -32,13 +32,13 @@ public class TestScrumretroUserService {
 		initMocks(this);
 		final User user = createUser();
 		when(mockUserRepository.findByUserId(any(String.class))).thenReturn(user);
-		scrumretroUserService = new ScrumretroUserService();
+		scrumretroUserService = new ScrumRetroUserService();
 		scrumretroUserService.setUserRepository(mockUserRepository);
 	}
 	
 	@Test
 	public void shouldLoadUserByUsername(){
-		final ScrumretroUser scrumretroUser = (ScrumretroUser)scrumretroUserService.loadUserByUsername("info@scrumretro.com");
+		final ScrumRetroUser scrumretroUser = (ScrumRetroUser)scrumretroUserService.loadUserByUsername("info@scrumretro.com");
 		assertNotNull(scrumretroUser);
 		assertEquals("info@scrumretro.com", scrumretroUser.getUsername());
 		assertEquals("password", scrumretroUser.getPassword());

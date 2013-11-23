@@ -13,27 +13,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
 
-
-
-public class ScrumretroUserService implements UserDetailsService{
+/**
+ * 
+ * @author Ragil
+ *
+ */
+public class ScrumRetroUserService implements UserDetailsService{
 
 	@Autowired
 	private UserRepository userRepository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username)
+	public UserDetails loadUserByUsername(final String username)
 			throws UsernameNotFoundException {
 		final User user = userRepository.findByUserId(username);
 		final Collection<GrantedAuthority> gaCol = new ArrayList<GrantedAuthority>();
 		final SimpleGrantedAuthority ga = new SimpleGrantedAuthority("ROLE_USER");
 		gaCol.add(ga);
-		final ScrumretroUser scrumretroUser = new ScrumretroUser(user.getUserId(),user.getPassword(),user.getUserDetail().getFirstName(),user.getUserDetail().getLastName(),
+		final ScrumRetroUser scrumretroUser = new ScrumRetroUser(user.getUserId(),user.getPassword(),user.getUserDetail().getFirstName(),user.getUserDetail().getLastName(),
 				user.getUserDetail().getOrganization(),gaCol);
 		return scrumretroUser;
 	}
 
 	
-	public void setUserRepository(UserRepository userRepository) {
+	public void setUserRepository(final UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 }

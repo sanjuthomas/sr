@@ -15,7 +15,6 @@ import com.scrumretro.rest.Request;
  */
 public class UserRequest extends Request{
 	
-	@NotEmpty()
 	@Email()
 	private String userId;
 	
