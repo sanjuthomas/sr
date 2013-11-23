@@ -25,5 +25,9 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	<bean id="projectService" class="com.scrumretro.web.service.ProjectService" />
 
 	<bean id="projectWorker" class="com.scrumretro.worker.ProjectWorker" />
+	
+	<bean id="userService" class="com.scrumretro.web.service.UserService" />
+	
+	<bean id="userWorker" class="com.scrumretro.worker.UserWorker" />
 
 </beans>
