@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- Disable security on static resources -->
+	<security:http pattern="/static/**" security="none" />
+
+	<!-- Enable Spring Security -->
+	<security:http entry-point-ref="restAuthenticationEntryPoint"
+		use-expressions="true">
+		<!-- Configures the security rules of our REST API -->
+		<security:intercept-url pattern="/login"
+			access="permitAll()" />
+		<security:intercept-url pattern="/logout"
+			access="permitAll()" />
+		<security:intercept-url pattern="/**"
+			access="hasRole('ROLE_USER')" />
+
+		<!-- Adds the custom login filter to Spring Security filter chain -->
+		<security:custom-filter ref="loginFilter"
+			position="FORM_LOGIN_FILTER" />
+		<!-- Adds a logout filter to Spring Security filter chain -->
+		<security:logout logout-url="/logout" delete-cookies="true"
+			invalidate-session="true" success-handler-ref="restLogoutSuccessHandler" />
+	</security:http>
+
+	<!-- Configures the authentication entry point that returns HTTP status 
+		code 401 -->
+	<bean id="restAuthenticationEntryPoint"
+		class="com.scrumretro.security.authentication.RestAuthenticationEntryPoint" />
+
+	<!-- Configures a custom login filter bean -->
+	<bean id="loginFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="authenticationFailureHandler" ref="restAuthenticationFailureHandler" />
+		<property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
+		<property name="filterProcessesUrl" value="/login" />
+		<property name="usernameParameter" value="username" />
+		<property name="passwordParameter" value="password" />
+		<property name="postOnly" value="true" />
+	</bean>
+
+	<!-- Configures a custom authentication success handler that returns HTTP 
+		status code 200 -->
+	<bean id="restAuthenticationSuccessHandler"
+		class="com.scrumretro.security.authentication.RestAuthenticationSuccessHandler" />
+
+	<!-- Configures a custom authentication failure handler that returns HTTP 
+		status code 401 -->
+	<bean id="restAuthenticationFailureHandler"
+		class="com.scrumretro.security.authentication.RestAuthenticationFailureHandler" />
+
+	<!-- Configures a custom logout success handler that returns HTTP status 
+		code 200 -->
+	<bean id="restLogoutSuccessHandler"
+		class="com.scrumretro.security.authentication.RestLogoutSuccessHandler" />
+
+	<bean id="userDetailsService"
+		class="com.scrumretro.security.authentication.ScrumretroUserService" />
+	<!-- Configures in-memory implementation of the UserDetailsService implementation -->
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="userDetailsService">
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<!--<bean id="daoAuthenticationProvider" class="org.springframework.security.providers.dao.DaoAuthenticationProvider"> 
+		<property name="userDetailsService" ref="userDetailsService" /> </bean> <bean 
+		id="authenticationManager" class="org.springframework.security.providers.ProviderManager"> 
+		<property name="providers"> <list> <ref local="daoAuthenticationProvider" 
+		/> <ref local="anonymousAuthenticationProvider" /> <ref local="rememberMeAuthenticationProvider" 
+		/> 
+</list>
+</property>
+</bean>
+	-->
+
+
+</beans>
