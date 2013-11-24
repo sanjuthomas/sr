@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.scrumretro.repository.ProjectRepository;
+import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Project;
+import com.scrumretro.repository.model.User;
 import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 
@@ -20,11 +22,18 @@ public class ProjectWorker{
 	@Autowired
 	private ProjectRepository projectRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	
 	public void setProjectRepository(final ProjectRepository projectRepository) {
 		this.projectRepository = projectRepository;
 	}
 	
+	public void setUserRepository(final UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
 	/**
 	 * This method shall take project id and find it from db.
 	 * 
@@ -60,8 +69,9 @@ public class ProjectWorker{
 	private ProjectResponse createProjectResponse(final Project project){
 		final ProjectResponse projectResponse = new ProjectResponse();
 		BeanUtils.copyProperties(project, projectResponse);
-		projectResponse.setOwnerDisplayName(project.getUser().getDisplayName());
-		projectResponse.setOrganization(project.getUser().getUserDetail().getOrganization());
+		final User user = userRepository.findByUserId(project.getOwner());
+		projectResponse.setOwnerDisplayName(user.getDisplayName());
+		projectResponse.setOrganization(user.getUserDetail().getOrganization());
 		return projectResponse;
 	}
 }

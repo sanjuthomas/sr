@@ -154,8 +154,7 @@ public class TestItemWorker {
 		project.setId("p1");
 		project.setDescription("description");
 		project.setName("pname");
-		final User user = createUser();
-		project.setUser(user);
+		project.setOwner("testuser@scrumretro.com");
 		return project;
 	}
 	
