@@ -7,7 +7,9 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,21 +45,25 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 	@Mock
 	private UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken;
 	
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+
+	
 	@Before
 	public void setUp(){
 		initMocks(this);
 		scrumRetroUserDetailsAuthenticationProvider.setUserRepository(mockUserRepository);
 		scrumRetroUserDetailsAuthenticationProvider.setbCryptPasswordEncoder(mockBCryptPasswordEncoder);
-		final User user = createUser();
 		when(usernamePasswordAuthenticationToken.getPrincipal()).thenReturn(new Object());
 		when(usernamePasswordAuthenticationToken.getName()).thenReturn("info@scrumretro.com");
 		when(usernamePasswordAuthenticationToken.getCredentials()).thenReturn("password");
+		final User user = createUser();
 		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(user);
 		when(mockBCryptPasswordEncoder.matches("password", "password")).thenReturn(true);
 	}
 	
 	@Test
-	public void shouldAuthenticate(){		
+	public void shouldAuthenticate(){	
 		final Authentication authentication = scrumRetroUserDetailsAuthenticationProvider.
 				authenticate(usernamePasswordAuthenticationToken);
 		assertNotNull(authentication);
@@ -74,8 +80,24 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 				iterator().next().getAuthority());
 	}
 	
-	public void shouldNotAuthenticate(){
-		
+	@Test
+	public void shouldFireRuntimeException(){
+		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenThrow(new RuntimeException());		
+		try {
+			scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		} catch (final Exception e) {
+			assertEquals("Unknown error occurred while finding the user info@scrumretro.com", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void shouldFireUsernameNotFoundException(){
+		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenThrow(new RuntimeException());
+		try {
+			scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		} catch (final Exception e) {
+			assertEquals("Unknown error occurred while finding the user info@scrumretro.com", e.getMessage());
+		}
 	}
 	
 	private User createUser(){
