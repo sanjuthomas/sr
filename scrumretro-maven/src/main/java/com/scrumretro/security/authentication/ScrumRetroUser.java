@@ -15,10 +15,10 @@ public class ScrumRetroUser extends User {
 	private static final long serialVersionUID = 1L;
 
 	public ScrumRetroUser(final String username, final String password,
-			final String firstName, final String lastName,
+			final Boolean enabled, final String firstName, final String lastName,
 			final String organization,
 			final Collection<? extends GrantedAuthority> authorities) {
-		super(username, password, true, true, true, true, authorities);
+		super(username, password, enabled, true, true, true, authorities);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.organization = organization;
