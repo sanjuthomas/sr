@@ -67,7 +67,7 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 		final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
 		grantedAuthorities.add(simpleGrantedAuthority);
 		
-		return new ScrumRetroUser(user.getUserId(), authentication.getCredentials().toString(),
+		return new ScrumRetroUser(user.getUserId(), user.getPassword(),
 				user.getActive(), user.getUserDetail().getFirstName(), user.getUserDetail().getLastName(), 
 				user.getUserDetail().getOrganization(), grantedAuthorities);
 	}
