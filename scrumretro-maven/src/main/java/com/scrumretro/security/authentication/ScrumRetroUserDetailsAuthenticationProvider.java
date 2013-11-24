@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -20,8 +21,8 @@ import com.scrumretro.repository.model.User;
  * Custom UserDetailsAuthenticationProvider for ScrumRetro.com. 
  * This UserDetailsAuthenticationProvider connect to mongodb and do authentication.
  * 
- * If you want to replace the default authentication provider you may write another 
- * authentication provider like an LDAP authentication provider.
+ * If you want to replace the UserDetailsAuthenticationProvider  authentication provider 
+ * you may write another authentication provider like an LDAP authentication provider.
  * 
  * @author Sanju Thomas
  *
@@ -46,6 +47,17 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 	protected void additionalAuthenticationChecks(final UserDetails userDetails, 
 			final UsernamePasswordAuthenticationToken authentication)throws AuthenticationException {
 		
+		if (null == authentication.getCredentials()) {
+			logger.debug("No password is provided for "+userDetails.getUsername());
+			throw new BadCredentialsException("No password is provided for "+userDetails.getUsername());
+		}
+		
+		if(!bCryptPasswordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())){
+			 logger.debug("Authentication failed for user "+userDetails.getUsername());
+			 throw new BadCredentialsException("Incorrect password is provided for "+userDetails.getUsername());
+		}
+		
+		logger.info("Authentication successfull for user "+userDetails.getUsername());
 	}
 
 	@Override
@@ -56,13 +68,16 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 		try{		
 			user = userRepository.findByUserId(username);
 		}catch(Exception e){
-			throw new RuntimeException("Unknown error occurred while accessing finding the user "+username);
+			logger.error(e);
+			throw new RuntimeException("Unknown error occurred while finding the user "+username, e);
 		}
 		
 		if(null == user){
+			logger.debug(user + "is not found in the scrumretro.com");
 			throw new UsernameNotFoundException(username + "is not registered with scrumretro.com");
 		}
 		
+		logger.info(username + " is found in scrumretro.com");
 		final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
 		grantedAuthorities.add(simpleGrantedAuthority);
