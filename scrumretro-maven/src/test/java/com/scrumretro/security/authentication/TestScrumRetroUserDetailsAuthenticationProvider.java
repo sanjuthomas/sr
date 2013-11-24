@@ -3,6 +3,8 @@ package com.scrumretro.security.authentication;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.endsWith;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -13,6 +15,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -82,22 +85,18 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 	
 	@Test
 	public void shouldFireRuntimeException(){
+		expectedException.expect(RuntimeException.class);
+		expectedException.expectMessage(startsWith("Unknown error occurred while finding the user"));
 		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenThrow(new RuntimeException());		
-		try {
-			scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
-		} catch (final Exception e) {
-			assertEquals("Unknown error occurred while finding the user info@scrumretro.com", e.getMessage());
-		}
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
 	}
 	
-	@Test
+	@Test()
 	public void shouldFireUsernameNotFoundException(){
-		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenThrow(new RuntimeException());
-		try {
-			scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
-		} catch (final Exception e) {
-			assertEquals("Unknown error occurred while finding the user info@scrumretro.com", e.getMessage());
-		}
+		expectedException.expect(BadCredentialsException.class);
+		expectedException.expectMessage(endsWith("Bad credentials"));
+		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(null);		
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
 	}
 	
 	private User createUser(){
