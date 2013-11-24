@@ -1,16 +1,31 @@
 package com.scrumretro.security.authentication;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.scrumretro.repository.UserRepository;
+import com.scrumretro.repository.model.User;
+import com.scrumretro.repository.model.UserDetail;
 
 /**
  * 
  * @author Sanju Thomas
  *
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:test-applicationContext.xml" })
 public class TestScrumRetroUserDetailsAuthenticationProvider {
 	
 	@Autowired
@@ -22,11 +37,43 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 	@Mock
 	private BCryptPasswordEncoder mockBCryptPasswordEncoder;
 	
-	public void shouldAuthenticate(){
-		
+	@Mock
+	private UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken;
+	
+	@Before
+	public void setUp(){
+		initMocks(this);
+		scrumRetroUserDetailsAuthenticationProvider.setUserRepository(mockUserRepository);
+		scrumRetroUserDetailsAuthenticationProvider.setbCryptPasswordEncoder(mockBCryptPasswordEncoder);
+		final User user = createUser();
+		when(usernamePasswordAuthenticationToken.getPrincipal()).thenReturn(new Object());
+		when(usernamePasswordAuthenticationToken.getName()).thenReturn("info@scrumretro.com");
+		when(usernamePasswordAuthenticationToken.getCredentials()).thenReturn("password");
+		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(user);
+		when(mockBCryptPasswordEncoder.matches("password", "password")).thenReturn(true);
+	}
+	
+	@Test
+	public void shouldAuthenticate(){		
+		final Authentication authentication = scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		assertNotNull(authentication);
+		assertEquals("info@scrumretro.com", authentication.getName());
 	}
 	
 	public void shouldNotAuthenticate(){
 		
+	}
+	
+	private User createUser(){
+		final User user = new User();
+		user.setUserId("info@scrumretro.com");
+		user.setPassword("password");
+		user.setActive(true);
+		final UserDetail userDetail = new UserDetail();
+		userDetail.setFirstName("firstName");
+		userDetail.setLastName("lastName");
+		userDetail.setOrganization("organization");
+		user.setUserDetail(userDetail);
+		return user;
 	}
 }
