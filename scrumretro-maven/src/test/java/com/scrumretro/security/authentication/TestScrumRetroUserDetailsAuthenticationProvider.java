@@ -1,10 +1,10 @@
 package com.scrumretro.security.authentication;
 
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.hamcrest.Matchers.startsWith;
-import static org.hamcrest.Matchers.endsWith;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,8 +61,7 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		when(usernamePasswordAuthenticationToken.getPrincipal()).thenReturn(new Object());
 		when(usernamePasswordAuthenticationToken.getName()).thenReturn("info@scrumretro.com");
 		when(usernamePasswordAuthenticationToken.getCredentials()).thenReturn("password");
-		final User user = createUser();
-		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(user);
+		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(createUser(true));
 		when(mockBCryptPasswordEncoder.matches("password", "password")).thenReturn(true);
 	}
 	
@@ -115,11 +115,21 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
 	}
 	
-	private User createUser(){
+	
+	@Test
+	public void shouldFireDisabledException(){
+		expectedException.expect(DisabledException.class);
+		expectedException.expectMessage(endsWith("User is disabled"));
+		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(createUser(false));
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+	}
+	
+	
+	private User createUser(final Boolean isActive){
 		final User user = new User();
 		user.setUserId("info@scrumretro.com");
 		user.setPassword("password");
-		user.setActive(true);
+		user.setActive(isActive);
 		final UserDetail userDetail = new UserDetail();
 		userDetail.setFirstName("firstName");
 		userDetail.setLastName("lastName");

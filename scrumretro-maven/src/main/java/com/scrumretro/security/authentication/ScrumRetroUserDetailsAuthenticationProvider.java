@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.scrumretro.enums.ScrumRetroRoles;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
 
@@ -79,7 +80,7 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 		
 		logger.info(username + " is found in scrumretro.com");
 		final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
+		final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(ScrumRetroRoles.ROLE_USER.getKey());
 		grantedAuthorities.add(simpleGrantedAuthority);
 		
 		return new ScrumRetroUser(user.getUserId(), user.getPassword(),
