@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
 |Service  |URI                                    |parameter  |parameter type |
 -------------------------------------------------------------------------------
-|findById |http://scrumretro.com/project/findById |id         |String 	      |
+|findById |http://scrumretro.com/project/findById | id        |String |
 -------------------------------------------------------------------------------
 
 Sample Response :
@@ -16,5 +16,33 @@ Sample Response :
 	"ownerDisplayName" : "lastName, firstName"
 }
 
+
+
+-------------------------------------------------------------------------------------------------------
+|Service  |URI                                    |parameter              |parameter type             |
+-------------------------------------------------------------------------------------------------------
+|findById |http://scrumretro.com/project/save     | <<see below>>         |<<see below>>	      |
+-------------------------------------------------------------------------------------------------------
+
+
+Sample Request :
+
+{
+	"id" : "p1",
+	"name" : "pname",
+	"description" : "pdescription"
+}
+
+
+
+Sample Response :
+
+{
+	"id" : "p1",
+	"name" : "pname",
+	"description" : "pdescription",
+	"organization" : "organization",
+	"ownerDisplayName" : "lastName, firstName"
+}
 
 
