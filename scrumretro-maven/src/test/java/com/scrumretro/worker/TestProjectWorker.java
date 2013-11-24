@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import com.scrumretro.repository.ProjectRepository;
+import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
@@ -29,6 +30,9 @@ public class TestProjectWorker {
 	@Mock
 	private ProjectRepository mockProjectRepository;
 	
+	@Mock
+	private UserRepository mockUserRepository;
+	
 	
 	@Before
 	public void setUp(){
@@ -36,8 +40,10 @@ public class TestProjectWorker {
 		final Project project = createProject();
 		when(mockProjectRepository.findById(any(String.class))).thenReturn(project);
 		when(mockProjectRepository.save(any(Project.class))).thenReturn(project);
+		when(mockUserRepository.findByUserId(any(String.class))).thenReturn(createUser());
 		projectWorker = new ProjectWorker();
 		projectWorker.setProjectRepository(mockProjectRepository);
+		projectWorker.setUserRepository(mockUserRepository);
 	}
 	
 	@Test
@@ -73,7 +79,7 @@ public class TestProjectWorker {
 		project.setId("pid");
 		project.setName("pname");
 		project.setDescription("pdescription");
-		project.setUser(createUser());
+		project.setOwner("testuser@scrumretro.com");
 		return project;
 	}
 	
@@ -81,6 +87,7 @@ public class TestProjectWorker {
 		final User user = new User();
 		user.setUserId("info@scrumretro.com");
 		user.setPassword("password");
+		user.setActive(true);
 		final UserDetail userDetail = new UserDetail();
 		userDetail.setFirstName("firstName");
 		userDetail.setLastName("lastName");

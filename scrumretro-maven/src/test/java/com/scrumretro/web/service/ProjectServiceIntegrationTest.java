@@ -54,7 +54,7 @@ public class ProjectServiceIntegrationTest {
 	}
 	
 	@Test
-	@UsingDataSet(locations = {"/testData/project/project-p2.json"})
+	@UsingDataSet(locations = {"/testData/project/project-p2.json", "/testData/user/user-u3.json"})
 	public void shouldFindProjectById() throws Exception{
 		mockMvc.perform(get("/project/findById/{id}", "2fasdf123333"))
 		.andExpect(status().isOk())

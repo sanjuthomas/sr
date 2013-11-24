@@ -1,0 +1,14 @@
+{
+    "user": [
+        {
+            "_id": "testuser@scrumretro.com",
+            "password": "",
+            "active": true,
+            "userDetail": {
+                "firstName": "firstName",
+                "lastName": "lastName",
+                "organization": "organization"
+            }
+        }
+    ]
+}
