@@ -1,6 +1,9 @@
 package com.scrumretro.security.authentication;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -15,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.scrumretro.enums.ScrumRetroRoles;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
@@ -58,6 +62,15 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		final Authentication authentication = scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
 		assertNotNull(authentication);
 		assertEquals("info@scrumretro.com", authentication.getName());
+		assertEquals("password", authentication.getCredentials().toString());
+		final ScrumRetroUser scrumRetroUser =(ScrumRetroUser) authentication.getPrincipal();
+		assertEquals("firstName", scrumRetroUser.getFirstName());
+		assertEquals("lastName", scrumRetroUser.getLastName());
+		assertEquals("organization", scrumRetroUser.getOrganization());
+		assertEquals("password", scrumRetroUser.getPassword());
+		assertEquals("info@scrumretro.com", scrumRetroUser.getUsername());
+		assertFalse(scrumRetroUser.getAuthorities().isEmpty());
+		assertEquals(ScrumRetroRoles.ROLE_USER.getKey(), scrumRetroUser.getAuthorities().iterator().next().getAuthority());
 	}
 	
 	public void shouldNotAuthenticate(){
