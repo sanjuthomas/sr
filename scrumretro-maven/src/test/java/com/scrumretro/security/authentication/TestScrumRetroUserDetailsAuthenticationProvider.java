@@ -92,10 +92,26 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 	}
 	
 	@Test()
-	public void shouldFireUsernameNotFoundException(){
+	public void shouldFireBadCredentialsException(){
 		expectedException.expect(BadCredentialsException.class);
 		expectedException.expectMessage(endsWith("Bad credentials"));
 		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(null);		
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+	}
+	
+	@Test
+	public void shouldFireBadCredentialsExceptionWhenCredentialIsNull(){
+		expectedException.expect(BadCredentialsException.class);
+		expectedException.expectMessage(startsWith("No password is provided for user"));
+		when(usernamePasswordAuthenticationToken.getCredentials()).thenReturn(null);
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+	}
+	
+	@Test
+	public void shouldFireBadCredentialsExceptionWhenPasswordDoesntMatch(){
+		expectedException.expect(BadCredentialsException.class);
+		expectedException.expectMessage(startsWith("Incorrect password is provided for user"));
+		when(mockBCryptPasswordEncoder.matches("password", "password")).thenReturn(false);
 		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
 	}
 	
