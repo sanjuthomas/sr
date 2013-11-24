@@ -67,7 +67,7 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 		User user = null; 
 		try{		
 			user = userRepository.findByUserId(username);
-		}catch(Exception e){
+		}catch(final Exception e){
 			logger.error(e);
 			throw new RuntimeException("Unknown error occurred while finding the user "+username, e);
 		}
