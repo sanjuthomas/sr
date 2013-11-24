@@ -48,13 +48,13 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 			final UsernamePasswordAuthenticationToken authentication)throws AuthenticationException {
 		
 		if (null == authentication.getCredentials()) {
-			logger.debug("No password is provided for "+userDetails.getUsername());
-			throw new BadCredentialsException("No password is provided for "+userDetails.getUsername());
+			logger.debug("No password is provided for user "+userDetails.getUsername());
+			throw new BadCredentialsException("No password is provided for user "+userDetails.getUsername());
 		}
 		
 		if(!bCryptPasswordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())){
 			 logger.debug("Authentication failed for user "+userDetails.getUsername());
-			 throw new BadCredentialsException("Incorrect password is provided for "+userDetails.getUsername());
+			 throw new BadCredentialsException("Incorrect password is provided for user "+userDetails.getUsername());
 		}
 		
 		logger.info("Authentication successfull for user "+userDetails.getUsername());
@@ -68,7 +68,7 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 		try{		
 			user = userRepository.findByUserId(username);
 		}catch(final Exception e){
-			logger.error(e);
+			logger.error("Unknown error occurred while finding the user "+username, e);
 			throw new RuntimeException("Unknown error occurred while finding the user "+username, e);
 		}
 		
