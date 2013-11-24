@@ -30,7 +30,8 @@ public class ScrumRetroUserDetailsService implements UserDetailsService{
 		final Collection<GrantedAuthority> gaCol = new ArrayList<GrantedAuthority>();
 		final SimpleGrantedAuthority ga = new SimpleGrantedAuthority("ROLE_USER");
 		gaCol.add(ga);
-		final ScrumRetroUser scrumretroUser = new ScrumRetroUser(user.getUserId(),user.getPassword(),user.getUserDetail().getFirstName(),user.getUserDetail().getLastName(),
+		final ScrumRetroUser scrumretroUser = new ScrumRetroUser(user.getUserId(),user.getPassword(),
+				user.getActive(), user.getUserDetail().getFirstName(),user.getUserDetail().getLastName(),
 				user.getUserDetail().getOrganization(),gaCol);
 		return scrumretroUser;
 	}
