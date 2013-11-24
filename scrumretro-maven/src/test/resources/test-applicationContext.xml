@@ -30,4 +30,6 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean id="userWorker" class="com.scrumretro.worker.UserWorker" />
 
+    <bean id="scrumRetroUserDetailsAuthenticationProvider" class="com.scrumretro.security.authentication.ScrumRetroUserDetailsAuthenticationProvider" />
+	
 </beans>

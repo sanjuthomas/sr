@@ -21,7 +21,7 @@ import com.scrumretro.repository.model.UserDetail;
 
 public class TestScrumretroUserService {
 
-	ScrumRetroUserDetailsService scrumretroUserService;
+	private ScrumRetroUserDetailsService scrumretroUserService;
 	
 	@Mock
 	private UserRepository mockUserRepository;
