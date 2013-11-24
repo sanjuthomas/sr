@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -24,8 +25,6 @@ import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.mongodb.Mongo;
 import com.scrumretro.repository.model.Project;
-import com.scrumretro.repository.model.User;
-import com.scrumretro.repository.model.UserDetail;
 import com.scrumretro.test.BaseUnitTest;
 
 /**
@@ -85,8 +84,8 @@ public class TestProjectRepository extends BaseUnitTest{
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
-	public void shouldFindByUserId(){
-		final List<Project> projects = projectRepository.findByUserId("info@scrumretro.com");
+	public void shouldFindByOwner(){
+		final List<Project> projects = projectRepository.findByOwner("testuser@scrumretro.com");
 		assertNotNull(projects);
 		assertTrue(projects.size() > 0);
 		assertEquals("p1", projects.get(0).getName());
@@ -94,41 +93,24 @@ public class TestProjectRepository extends BaseUnitTest{
 	
 	@Test
 	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
-	public void shouldNotFindByUserId(){
-		final List<Project> projects = projectRepository.findByUserId("inf@scrumretro.com");
+	public void shouldNotFindByOwner(){
+		final List<Project> projects = projectRepository.findByOwner("info@scrumretro.com");
 		assertEquals(0, projects.size());
-	}
-	
-
-	@Test
-	@UsingDataSet(locations = {"/testData/project/project-p1.json"})
-	public void shouldFindByUser(){
-		final List<Project> projects = projectRepository.findByUser(createUser());
-		assertNotNull(projects);
-		assertTrue(projects.size() > 0);
-		assertEquals("p1", projects.get(0).getName());
 	}
 	
 	private Project createProject() {
 		final Project project = new Project();
 		project.setName("p1");
 		project.setDescription("This is a test project called p1");
-		final User user = createUser();
-		project.setUser(user);
+		project.setOwner("testuser@scrumretro.com");
+		final List<String> members = new ArrayList<String>();
+		members.add("one@scrumretro.com");
+		members.add("two@scrumretro.com");
+		members.add("three@scrumretro.com");
+		//project.setMembers(members);
 		return project;
 	}
 	
-	private User createUser(){
-		final User user = new User();
-		user.setUserId("info@scrumretro.com");
-		final UserDetail userDetail = new UserDetail();
-		userDetail.setFirstName("firstName");
-		userDetail.setLastName("lastName");
-		userDetail.setOrganization("organization");
-		user.setUserDetail(userDetail);
-		return user;
-	}
-
 	@Configuration
 	@EnableMongoRepositories
 	@ComponentScan(basePackageClasses = { ProjectRepository.class })

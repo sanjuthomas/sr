@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.scrumretro.repository.model.Project;
-import com.scrumretro.repository.model.User;
 
 /**
  * 
@@ -17,10 +16,7 @@ public interface ProjectRepository extends PagingAndSortingRepository<Project, S
 
 	Project findByName(final String name);
 	
-	List<Project> findByUser(final User user);
-	
-	@Query("{ 'user._id' : ?0 }")
-    List<Project> findByUserId(final String userId);
+	List<Project> findByOwner(final String userId);
 	
 	@Query("{ '_id' : ?0 }")
 	Project findById(final String id);

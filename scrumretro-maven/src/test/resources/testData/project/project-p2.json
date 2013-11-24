@@ -4,14 +4,8 @@
             "_id" : "2fasdf123333",
             "name": "p2",
             "description": "This is a test project called p2",
-            "user": {
-                "_id": "info@scrumretro.com",
-                "userDetail": {
-                    "firstName": "firstName",
-                    "lastName": "lastName",
-                    "organization": "organization"
-                }
-            }
+          	"owner" : "testuser@scrumretro.com",
+          	"members" : ["one@scurmretro.com", "two@scrumretro.com", "three@scrumretro.com"] 
         }
     ]
 }
