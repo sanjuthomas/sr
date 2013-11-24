@@ -74,7 +74,7 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 		}
 		
 		if(null == user){
-			logger.debug(user + "is not found in the scrumretro.com");
+			logger.debug(username + "is not found in the scrumretro.com");
 			throw new UsernameNotFoundException(username + "is not registered with scrumretro.com");
 		}
 		
