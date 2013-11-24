@@ -1,7 +1,6 @@
 package com.scrumretro.security.authentication;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
@@ -59,7 +58,8 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 	
 	@Test
 	public void shouldAuthenticate(){		
-		final Authentication authentication = scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		final Authentication authentication = scrumRetroUserDetailsAuthenticationProvider.
+				authenticate(usernamePasswordAuthenticationToken);
 		assertNotNull(authentication);
 		assertEquals("info@scrumretro.com", authentication.getName());
 		assertEquals("password", authentication.getCredentials().toString());
@@ -70,7 +70,8 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		assertEquals("password", scrumRetroUser.getPassword());
 		assertEquals("info@scrumretro.com", scrumRetroUser.getUsername());
 		assertFalse(scrumRetroUser.getAuthorities().isEmpty());
-		assertEquals(ScrumRetroRoles.ROLE_USER.getKey(), scrumRetroUser.getAuthorities().iterator().next().getAuthority());
+		assertEquals(ScrumRetroRoles.ROLE_USER.getKey(), scrumRetroUser.getAuthorities().
+				iterator().next().getAuthority());
 	}
 	
 	public void shouldNotAuthenticate(){
