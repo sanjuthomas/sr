@@ -1,5 +1,7 @@
 package com.scrumretro.repository.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,7 +20,9 @@ public class Project{
 	
 	private String description;
 	
-	private User user;
+	private String owner;
+	
+	private List<String> members;
 	
 	public String getId() {
 		return id;
@@ -44,12 +48,20 @@ public class Project{
 		this.description = description;
 	}
 
-	public User getUser() {
-		return user;
+	public String getOwner() {
+		return owner;
 	}
 
-	public void setUser(final User user) {
-		this.user = user;
+	public void setOwner(final String owner) {
+		this.owner = owner;
+	}
+
+	public List<String> getMembers() {
+		return members;
+	}
+
+	public void setMembers(final List<String> members) {
+		this.members = members;
 	}
 
 	@Override

@@ -4,23 +4,35 @@ import java.io.Serializable;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
-import com.scrumretro.repository.model.User;
+import com.scrumretro.repository.ProjectRepository;
+import com.scrumretro.repository.model.Project;
 
 /**
  * 
  * @author Sanju Thomas
  *
  */
+@Component
 public class EditPermissionEvaluator implements PermissionEvaluator{
+	
+	@Autowired
+	private ProjectRepository projectRepository;
+	
+	public void setProjectRepository(final ProjectRepository projectRepository) {
+		this.projectRepository = projectRepository;
+	}
 
 	@Override
 	public boolean hasPermission(final Authentication authentication, final Object targetDomainObject, final Object permission) {
 		final BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(targetDomainObject);
-		final User user = (User) beanWrapper.getPropertyValue("user");
-		return authentication.getName().equals(user.getUserId());
+		final String projectId = (String) beanWrapper.getPropertyValue("id");
+		final Project project = (Project) projectRepository.findById(projectId);
+		return authentication.getName().equals(project.getOwner());
 	}
 
 	@Override
