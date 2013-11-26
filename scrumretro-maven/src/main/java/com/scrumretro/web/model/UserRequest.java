@@ -15,22 +15,23 @@ import com.scrumretro.rest.Request;
  */
 public class UserRequest extends Request{
 	
+	@NotEmpty(message ="userId may not be empty!")
 	@Email()
 	private String userId;
 	
-	@NotEmpty()
+	@NotEmpty(message ="password may not be empty!")
 	@Size(min=4, max=16)
 	private String password;
 	
-	@NotEmpty()
+	@NotEmpty(message ="firstName may not be empty!")
 	@Size(max=32)
 	private String firstName;
 	
-	@NotEmpty()
+	@NotEmpty(message ="lastName may not be empty!")
 	@Size(max=32)
 	private String lastName;
 	
-	@NotEmpty()
+	@NotEmpty(message ="organization may not be empty!")
 	@Size(max=64)
 	private String organization;
 
@@ -73,7 +74,6 @@ public class UserRequest extends Request{
 	public void setOrganization(final String organization) {
 		this.organization = organization;
 	}
-	
 	
 	public String toString(){
 		return super.toJSON();
