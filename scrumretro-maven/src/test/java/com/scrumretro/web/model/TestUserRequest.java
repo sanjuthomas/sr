@@ -32,10 +32,10 @@ public class TestUserRequest {
 	}
 
 	@Test
-	public void shouldValidateInvalidEntries(@Source("src/test/resources/testData/userRequest/invalidUsers.csv") final UserRequest userRequest) {
+	public void shouldValidateInvalidEntries(@Source("src/test/resources/testData/userRequest/emptyRequest.csv") final UserRequest userRequest) {
 		final Set<ConstraintViolation<UserRequest>> violations = validator
 				.validate(userRequest);
-		assertEquals(5, violations.size());
+		assertEquals(6, violations.size());
 	}
 	
 
@@ -57,7 +57,29 @@ public class TestUserRequest {
 	public void shouldValidatePassword(@Source("src/test/resources/testData/userRequest/invalidPassword.csv") final UserRequest userRequest) {
 		final Set<ConstraintViolation<UserRequest>> violations = validator
 				.validate(userRequest);
-		assertEquals(2, violations.size());
+		assertEquals(1, violations.size());
+	}
+	
+	@Test
+	public void shouldValidateFirstName(@Source("src/test/resources/testData/userRequest/invalidFirstName.csv") final UserRequest userRequest) {
+		final Set<ConstraintViolation<UserRequest>> violations = validator
+				.validate(userRequest);
+		assertEquals(1, violations.size());
+	}
+	
+
+	@Test
+	public void shouldValidateLastName(@Source("src/test/resources/testData/userRequest/invalidLastName.csv") final UserRequest userRequest) {
+		final Set<ConstraintViolation<UserRequest>> violations = validator
+				.validate(userRequest);
+		assertEquals(1, violations.size());
+	}
+	
+	@Test
+	public void shouldValidateOrganization(@Source("src/test/resources/testData/userRequest/invalidOrganization.csv") final UserRequest userRequest) {
+		final Set<ConstraintViolation<UserRequest>> violations = validator
+				.validate(userRequest);
+		assertEquals(1, violations.size());
 	}
 
 	
