@@ -51,11 +51,12 @@
 	<!-- Configures a custom logout success handler that returns HTTP status code 200 -->
 	<bean id="restLogoutSuccessHandler" class="com.scrumretro.security.authentication.RestLogoutSuccessHandler" />
 
-	<bean id="scrumRetroUserDetailsService" class="com.scrumretro.security.authentication.ScrumRetroUserDetailsService" />
-	
-	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider user-service-ref="scrumRetroUserDetailsService"/>		
-	</security:authentication-manager>
+	<bean id="scrumRetroUserDetailsAuthenticationProvider"
+		class="com.scrumretro.security.authentication.ScrumRetroUserDetailsAuthenticationProvider" />	
+		
+    <security:authentication-manager alias="authenticationManager">
+               <security:authentication-provider ref="scrumRetroUserDetailsAuthenticationProvider"/>
+    </security:authentication-manager>
 	
 
 </beans>
