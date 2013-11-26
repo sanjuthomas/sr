@@ -47,7 +47,7 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 	private BCryptPasswordEncoder mockBCryptPasswordEncoder;
 	
 	@Mock
-	private UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken;
+	private UsernamePasswordAuthenticationToken mockUsernamePasswordAuthenticationToken;
 	
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
@@ -58,9 +58,9 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		initMocks(this);
 		scrumRetroUserDetailsAuthenticationProvider.setUserRepository(mockUserRepository);
 		scrumRetroUserDetailsAuthenticationProvider.setbCryptPasswordEncoder(mockBCryptPasswordEncoder);
-		when(usernamePasswordAuthenticationToken.getPrincipal()).thenReturn(new Object());
-		when(usernamePasswordAuthenticationToken.getName()).thenReturn("info@scrumretro.com");
-		when(usernamePasswordAuthenticationToken.getCredentials()).thenReturn("password");
+		when(mockUsernamePasswordAuthenticationToken.getPrincipal()).thenReturn(new Object());
+		when(mockUsernamePasswordAuthenticationToken.getName()).thenReturn("info@scrumretro.com");
+		when(mockUsernamePasswordAuthenticationToken.getCredentials()).thenReturn("password");
 		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(createUser(true));
 		when(mockBCryptPasswordEncoder.matches("password", "password")).thenReturn(true);
 	}
@@ -68,7 +68,7 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 	@Test
 	public void shouldAuthenticate(){	
 		final Authentication authentication = scrumRetroUserDetailsAuthenticationProvider.
-				authenticate(usernamePasswordAuthenticationToken);
+				authenticate(mockUsernamePasswordAuthenticationToken);
 		assertNotNull(authentication);
 		assertEquals("info@scrumretro.com", authentication.getName());
 		assertEquals("password", authentication.getCredentials().toString());
@@ -88,7 +88,7 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		expectedException.expect(RuntimeException.class);
 		expectedException.expectMessage(startsWith("Unknown error occurred while finding the user"));
 		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenThrow(new RuntimeException());		
-		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(mockUsernamePasswordAuthenticationToken);
 	}
 	
 	@Test()
@@ -96,15 +96,15 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		expectedException.expect(BadCredentialsException.class);
 		expectedException.expectMessage(endsWith("Bad credentials"));
 		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(null);		
-		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(mockUsernamePasswordAuthenticationToken);
 	}
 	
 	@Test
 	public void shouldFireBadCredentialsExceptionWhenCredentialIsNull(){
 		expectedException.expect(BadCredentialsException.class);
 		expectedException.expectMessage(startsWith("No password is provided for user"));
-		when(usernamePasswordAuthenticationToken.getCredentials()).thenReturn(null);
-		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		when(mockUsernamePasswordAuthenticationToken.getCredentials()).thenReturn(null);
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(mockUsernamePasswordAuthenticationToken);
 	}
 	
 	@Test
@@ -112,7 +112,7 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		expectedException.expect(BadCredentialsException.class);
 		expectedException.expectMessage(startsWith("Incorrect password is provided for user"));
 		when(mockBCryptPasswordEncoder.matches("password", "password")).thenReturn(false);
-		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(mockUsernamePasswordAuthenticationToken);
 	}
 	
 	
@@ -121,7 +121,7 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		expectedException.expect(DisabledException.class);
 		expectedException.expectMessage(endsWith("User is disabled"));
 		when(mockUserRepository.findByUserId("info@scrumretro.com")).thenReturn(createUser(false));
-		scrumRetroUserDetailsAuthenticationProvider.authenticate(usernamePasswordAuthenticationToken);
+		scrumRetroUserDetailsAuthenticationProvider.authenticate(mockUsernamePasswordAuthenticationToken);
 	}
 	
 	
