@@ -22,12 +22,14 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 
 	<mongo:repositories base-package="com.scrumretro.repository" />
 
-	<bean id="projectService" class="com.scrumretro.web.service.ProjectService" />
+	<bean class="com.scrumretro.web.service.ProjectService" />
 
-	<bean id="projectWorker" class="com.scrumretro.worker.ProjectWorker" />
+	<bean class="com.scrumretro.worker.ProjectWorker" />
 	
-	<bean id="userService" class="com.scrumretro.web.service.UserService" />
+	<bean class="com.scrumretro.web.service.UserService" />
 	
-	<bean id="userWorker" class="com.scrumretro.worker.UserWorker" />
+	<bean class="com.scrumretro.worker.UserWorker" />
+	
+	<bean class="org.springframework.mock.web.MockServletContext"/>
 	
 </beans>

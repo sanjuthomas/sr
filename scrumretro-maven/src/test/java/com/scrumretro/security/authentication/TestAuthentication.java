@@ -29,6 +29,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.scrumretro.web.service.UserService;
 
+/**
+ * 
+ * @author Ragil
+ *
+ */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-applicationContext.xml","classpath:test-applicationSecurity.xml" })
 public class TestAuthentication {
@@ -45,7 +51,7 @@ public class TestAuthentication {
 	private UserService userService;
 	
 	@Autowired
-    private FilterChainProxy springSecurityFilterChain;
+    private FilterChainProxy filterChainProxy;
 	
 	@Before
 	public void setUp() {
@@ -61,14 +67,14 @@ public class TestAuthentication {
 			     return mockAuthentication;
 			 }});
 		
-		for(final SecurityFilterChain securityFilterChain : springSecurityFilterChain.getFilterChains()){
+		for(final SecurityFilterChain securityFilterChain : filterChainProxy.getFilterChains()){
 			for(final Filter filter : securityFilterChain.getFilters()){
 				if(filter instanceof UsernamePasswordAuthenticationFilter){
 					((UsernamePasswordAuthenticationFilter)filter).setAuthenticationManager(mockAuthenticationManager);
 				}
 			}
 		}
-		this.mockMvc = MockMvcBuilders.standaloneSetup(userService).addFilter(this.springSecurityFilterChain).build();
+		this.mockMvc = MockMvcBuilders.standaloneSetup(userService).addFilter(this.filterChainProxy).build();
 	}
 	
 	@Test
