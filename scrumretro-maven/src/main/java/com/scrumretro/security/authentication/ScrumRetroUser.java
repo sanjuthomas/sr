@@ -1,17 +1,22 @@
 package com.scrumretro.security.authentication;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+/**
+ * 
+ * @author Ragil
+ * 
+ */
 public class ScrumRetroUser extends User {
+	
+	public static ScrumRetroUser UNKNOWN = new ScrumRetroUser("UNKNOWN", "UNKNOWN", false, 
+			"UNKNOWN", "UNKNOWN", "UNKNOWN", new ArrayList< SimpleGrantedAuthority>());
 
-	/**
-	 * 
-	 * @author Ragil
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ScrumRetroUser(final String username, final String password,
