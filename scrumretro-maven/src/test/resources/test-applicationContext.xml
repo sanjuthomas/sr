@@ -30,6 +30,4 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean class="com.scrumretro.worker.UserWorker" />
 	
-	<bean class="org.springframework.mock.web.MockServletContext"/>
-	
 </beans>
