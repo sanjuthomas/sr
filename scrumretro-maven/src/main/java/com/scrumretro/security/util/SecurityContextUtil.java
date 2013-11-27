@@ -5,6 +5,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.scrumretro.security.authentication.ScrumRetroUser;
+
 /**
  * @author Ragil 
  */
@@ -12,18 +14,22 @@ import org.springframework.stereotype.Component;
 public class SecurityContextUtil {
     
 
-    public UserDetails getPrincipal() {
-        UserDetails principal = null;
-
+	/**
+	 * This method shall return the current user profile. If SecurityContext doesn't have a user
+	 * then an UNKNOWN user would be returned to client. 
+	 * 
+	 * @return
+	 */
+    public ScrumRetroUser getUserProfile() {
+    	
+    	ScrumRetroUser scrumRetroUser = null;
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         if (null != authentication) {
             final Object currentPrincipal = authentication.getPrincipal();
             if (currentPrincipal instanceof UserDetails) {
-                principal = (UserDetails) currentPrincipal;
+            	scrumRetroUser = (ScrumRetroUser) currentPrincipal;
             }
         }
-
-        return principal;
+        return null != scrumRetroUser ? scrumRetroUser : ScrumRetroUser.UNKNOWN; 
     }
 }
