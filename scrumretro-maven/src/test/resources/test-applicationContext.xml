@@ -11,23 +11,41 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 
 	<context:component-scan base-package="com.ourownjava.*" />
 	
-	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
+	<!-- mongo configuration -->
+	
 	<mongo:mongo id="mongo-test" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo-test" />
 		<constructor-arg value="scrumretro-test" />
 	</bean>
-
+	
 	<mongo:repositories base-package="com.scrumretro.repository" />
+	
+	<mongo:auditing auditor-aware-ref="scrumRetroAuditor" />
+	
+	<bean id="scrumRetroAuditor" class="com.scrumretro.repository.audit.ScrumRetroAuditor"/>
+	
+	
+	<!-- service/controller classes -->
 
 	<bean class="com.scrumretro.web.service.ProjectService" />
-
-	<bean class="com.scrumretro.worker.ProjectWorker" />
 	
 	<bean class="com.scrumretro.web.service.UserService" />
 	
+
+	<!-- worker classes -->
+
+	<bean class="com.scrumretro.worker.ProjectWorker" />
+	
 	<bean class="com.scrumretro.worker.UserWorker" />
+	
+	
+	<!-- authentication/authorization -->
+	
+	<bean class="com.scrumretro.security.util.SecurityContextUtil" />
+	
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
 	
 </beans>

@@ -1,63 +1,59 @@
 package com.scrumretro.security.util;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
+import static org.mockito.MockitoAnnotations.initMocks;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.scrumretro.security.authentication.ScrumRetroUser;
 
 /**
  * @author Ragil 
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:test-applicationContext.xml" })
 public class TestSecurityContextUtil {
 
+	@Autowired
     private SecurityContextUtil securityContextUtil;
+	
+	@Mock
+	private SecurityContext mockSecurityContext;
+	
+	@Mock
+	private Authentication mockAuthentication;
+	
+	@Mock
+	private ScrumRetroUser mockScrumRetroUser;
 
     @Before
     public void setUp() {
-        securityContextUtil = new SecurityContextUtil();
+    	initMocks(this);
+    	when(mockAuthentication.getPrincipal()).thenReturn(mockScrumRetroUser);
+    	when(mockSecurityContext.getAuthentication()).thenReturn(mockAuthentication);
+    	SecurityContextHolder.setContext(mockSecurityContext);
     }
 
+    
     @Test
-    public void getPrincipal() {
-        SecurityContext securityContextMock = mock(SecurityContext.class);
-        Authentication authenticationMock = mock(Authentication.class);
-        SecurityContextHolder.setContext(securityContextMock);
-        when(securityContextMock.getAuthentication()).thenReturn(authenticationMock);
-        UserDetails expectedPrincipal = new User("info@scrumretro.com", "password", new ArrayList<GrantedAuthority>());
-        when(authenticationMock.getPrincipal()).thenReturn(expectedPrincipal);
-        UserDetails actualPrincipal = securityContextUtil.getPrincipal();
-        assertEquals(expectedPrincipal, actualPrincipal);
+    public void shouldReturnCurrentUserProfile(){
+    	assertEquals(mockScrumRetroUser, securityContextUtil.getUserProfile());
     }
-
+    
     @Test
-    public void getPrincipalWhenAuthenticationIsNull() {
-        SecurityContext securityContextMock = mock(SecurityContext.class);
-        SecurityContextHolder.setContext(securityContextMock);
-        when(securityContextMock.getAuthentication()).thenReturn(null);
-        UserDetails principal = securityContextUtil.getPrincipal();
-        assertNull(principal);
+    public void shouldReturnUnknownUserProfile(){
+    	SecurityContextHolder.clearContext();
+    	assertEquals(ScrumRetroUser.UNKNOWN, securityContextUtil.getUserProfile());
     }
-
-    @Test
-    public void getPrincipalWhenAuthenticationDoesNotImplementUserDetails() {
-    	SecurityContext securityContextMock = mock(SecurityContext.class);
-        Authentication authenticationMock = mock(Authentication.class);
-        SecurityContextHolder.setContext(securityContextMock);
-        when(securityContextMock.getAuthentication()).thenReturn(authenticationMock);
-        Object obj = new Object();
-        when(authenticationMock.getPrincipal()).thenReturn(obj);
-        UserDetails principal = securityContextUtil.getPrincipal();
-        assertNull(principal);
-    }
+  
 }
