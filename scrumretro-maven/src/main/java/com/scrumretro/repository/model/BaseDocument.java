@@ -8,6 +8,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
 /**
+ * This is the Base Document for all documents in ScrumRetro.com
+ * Since documents are stored in the json format keys also consume some 
+ * hard disk space. To reduce the size of the JSON we are using short 
+ * code for all the audit trail fields. Since all the fields are annotated 
+ * readability is not an issue here.
  * 
  * @author Sanju Thomas
  *
@@ -15,58 +20,57 @@ import org.springframework.data.annotation.Version;
 public class BaseDocument {
 	
 	@Version
-	private Long version;
+	private Long v;
 	
 	@CreatedDate
-    private DateTime created;
+    private DateTime cd;
 	
     @LastModifiedDate
-    private DateTime lastModified;
+    private DateTime lmd;
     
     @CreatedBy
-    private String createdBy;
+    private String cb;
      
     @LastModifiedBy
-    private String lastModifiedBy;
+    private String lmb;
 
-	public Long getVersion() {
-		return version;
+	public Long getV() {
+		return v;
 	}
 
-	public void setVersion(final Long version) {
-		this.version = version;
+	public void setV(final Long v) {
+		this.v = v;
 	}
 
-	public DateTime getCreated() {
-		return created;
+	public DateTime getCd() {
+		return cd;
 	}
 
-	public void setCreated(final DateTime created) {
-		this.created = created;
+	public void setCd(final DateTime cd) {
+		this.cd = cd;
 	}
 
-	public DateTime getLastModified() {
-		return lastModified;
+	public DateTime getLmd() {
+		return lmd;
 	}
 
-	public void setLastModified(final DateTime lastModified) {
-		this.lastModified = lastModified;
+	public void setLmd(final DateTime lmd) {
+		this.lmd = lmd;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getCb() {
+		return cb;
 	}
 
-	public void setCreatedBy(final String createdBy) {
-		this.createdBy = createdBy;
+	public void setCb(final String cb) {
+		this.cb = cb;
 	}
 
-	public String getLastModifiedBy() {
-		return lastModifiedBy;
+	public String getLmb() {
+		return lmb;
 	}
 
-	public void setLastModifiedBy(final String lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
+	public void setLmb(final String lmb) {
+		this.lmb = lmb;
 	}
-    
 }
