@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.User;
  */
 public class ScrumRetroUser extends User {
 	
-	public static ScrumRetroUser UNKNOWN = new ScrumRetroUser("UNKNOWN", "UNKNOWN", false, 
+	public static final ScrumRetroUser UNKNOWN = new ScrumRetroUser("UNKNOWN", "UNKNOWN", false, 
 			"UNKNOWN", "UNKNOWN", "UNKNOWN", new ArrayList< SimpleGrantedAuthority>());
 
 	private static final long serialVersionUID = 1L;
@@ -55,6 +55,16 @@ public class ScrumRetroUser extends User {
 
 	public void setOrganization(final String organization) {
 		this.organization = organization;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
 	}
 
 }
