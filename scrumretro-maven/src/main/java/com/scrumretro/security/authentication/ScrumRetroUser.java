@@ -14,8 +14,10 @@ import org.springframework.security.core.userdetails.User;
  */
 public class ScrumRetroUser extends User {
 	
-	public static final ScrumRetroUser UNKNOWN = new ScrumRetroUser("UNKNOWN", "UNKNOWN", false, 
-			"UNKNOWN", "UNKNOWN", "UNKNOWN", new ArrayList< SimpleGrantedAuthority>());
+	private static final String UNKNOWN = "UNKNOWN";
+	
+	public static final ScrumRetroUser UNKNOWN_USER = new ScrumRetroUser(UNKNOWN, UNKNOWN, false, 
+			UNKNOWN, UNKNOWN, UNKNOWN, new ArrayList< SimpleGrantedAuthority>());
 
 	private static final long serialVersionUID = 1L;
 
