@@ -30,6 +30,6 @@ public class SecurityContextUtil {
             	scrumRetroUser = (ScrumRetroUser) currentPrincipal;
             }
         }
-        return null == scrumRetroUser ?  ScrumRetroUser.UNKNOWN : scrumRetroUser; 
+        return null == scrumRetroUser ?  ScrumRetroUser.UNKNOWN_USER : scrumRetroUser; 
     }
 }
