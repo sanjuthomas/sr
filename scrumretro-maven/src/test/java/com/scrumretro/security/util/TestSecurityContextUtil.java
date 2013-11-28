@@ -53,7 +53,7 @@ public class TestSecurityContextUtil {
     @Test
     public void shouldReturnUnknownUserProfile(){
     	SecurityContextHolder.clearContext();
-    	assertEquals(ScrumRetroUser.UNKNOWN, securityContextUtil.getUserProfile());
+    	assertEquals(ScrumRetroUser.UNKNOWN_USER, securityContextUtil.getUserProfile());
     }
   
 }
