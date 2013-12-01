@@ -5,7 +5,6 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
 
 /**
  * This is the Base Document for all documents in ScrumRetro.com
@@ -19,9 +18,6 @@ import org.springframework.data.annotation.Version;
  */
 public class BaseDocument {
 	
-	@Version
-	private Long v;
-	
 	@CreatedDate
     private DateTime cd;
 	
@@ -34,13 +30,6 @@ public class BaseDocument {
     @LastModifiedBy
     private String lmb;
 
-	public Long getV() {
-		return v;
-	}
-
-	public void setV(final Long v) {
-		this.v = v;
-	}
 
 	public DateTime getCd() {
 		return cd;

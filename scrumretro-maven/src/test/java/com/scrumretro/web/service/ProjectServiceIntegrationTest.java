@@ -3,6 +3,7 @@ package com.scrumretro.web.service;
 import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,6 +24,7 @@ import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.scrumretro.rest.Response;
 import com.scrumretro.test.IntegrationTest;
+import com.scrumretro.web.model.ProjectRequest;
 
 /**
  * Integration test cases for ProjectService.
@@ -65,4 +67,20 @@ public class ProjectServiceIntegrationTest {
 		.andExpect(jsonPath("$organization", is("organization")))
 		.andExpect(jsonPath("$ownerDisplayName", is("lastName, firstName")));
 	}
+	
+	@Test
+	public void shouldSaveProject() throws Exception{
+		this.mockMvc.perform(
+				post("/project/save/").content(createProjectRequest().toString())
+						.contentType(Response.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk());
+	}
+	
+	private ProjectRequest createProjectRequest() {
+		final ProjectRequest projectRequest = new ProjectRequest();
+		projectRequest.setName("pname");
+		projectRequest.setDescription("pdescription");
+		return projectRequest;
+	}
+	
 }
