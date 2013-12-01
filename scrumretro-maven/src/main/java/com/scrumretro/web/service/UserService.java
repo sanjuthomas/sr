@@ -1,15 +1,19 @@
 package com.scrumretro.web.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scrumretro.security.authentication.ScrumRetroUser;
+import com.scrumretro.web.model.UserRequest;
 import com.scrumretro.web.model.UserResponse;
 import com.scrumretro.worker.UserWorker;
 
@@ -54,5 +58,18 @@ public class UserService {
 	@ResponseBody
 	public UserResponse findByUserId(@PathVariable("id") final String id) {
 		return userWorker.findByUserId(id);
+	}
+	
+	/**
+	 * This service shall take user json as request and save the given user.
+	 * This method shall return UserResponse in json format.
+	 * 
+	 * @param userRequest
+	 * @return
+	 */
+	@RequestMapping(value = "/user/newuser/", method=RequestMethod.POST)
+	@ResponseBody
+	public UserResponse save(@Valid @RequestBody final UserRequest userRequest){
+		return userWorker.save(userRequest);
 	}
 }
