@@ -63,6 +63,7 @@ public class ProjectWorker{
 	private Project createProject(final ProjectRequest projectRequest){
 		final Project project = new Project();
 		BeanUtils.copyProperties(projectRequest, project);
+		project.setOwner("testuser@scrumretro.com"); // grab it from authentication object when it's available.
 		return project;
 	}
 	

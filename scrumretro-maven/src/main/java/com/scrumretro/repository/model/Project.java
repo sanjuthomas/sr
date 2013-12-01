@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  */
 @Document(collection = "project")
-public class Project{
+public class Project extends BaseDocument{
 	
 	@Id
 	private String id;
