@@ -1,0 +1,87 @@
+package com.scrumretro.web.service;
+
+import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
+import com.scrumretro.rest.Response;
+import com.scrumretro.test.IntegrationTest;
+import com.scrumretro.web.model.UserRequest;
+
+/**
+ * Integration test cases for UserService.
+ *  
+ * This testcase would wire UserService, UserWorker and UserRepository.
+ * 
+ * @author Ragil
+ *
+ */
+@Category(IntegrationTest.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:test-applicationContext.xml","classpath:test-applicationWebContext.xml" })
+@WebAppConfiguration
+public class UserServiceIntegrationTest {
+
+    private MockMvc mockMvc;
+	
+	@Autowired
+	private ApplicationContext applicationContext;
+
+	@Rule
+	public MongoDbRule mongoDbRule = newMongoDbRule().defaultSpringMongoDb("scrumretro-test");
+
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+    private WebApplicationContext webApplicationContext;
+	
+	@Before
+	public void setUp(){
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+	}
+	
+	@Test
+	public void shouldSave() throws Exception{
+		this.mockMvc.perform(
+				post("/user/newuser/").content(createUserRequest().toString())
+						.contentType(Response.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk()).andExpect(
+						content().contentType(Response.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$userId", is("ragilc@scrumretro.com")))
+				.andExpect(jsonPath("$firstName", is("Ragil")))
+				.andExpect(jsonPath("$lastName", is("Chandran")))
+				.andExpect(jsonPath("$organization", is("organization")));
+		
+	}
+	
+	private UserRequest createUserRequest() {
+		final UserRequest userRequest = new UserRequest();
+		userRequest.setUserId("ragilc@scrumretro.com");
+		userRequest.setFirstName("Ragil");
+		userRequest.setLastName("Chandran");
+		userRequest.setPassword("password");
+		userRequest.setConfirmPassword("password");
+		userRequest.setOrganization("organization");
+		return userRequest;
+	}
+	
+}
