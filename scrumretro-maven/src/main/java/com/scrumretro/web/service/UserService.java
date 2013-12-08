@@ -45,6 +45,7 @@ public class UserService {
 		 final ScrumRetroUser currentUser =  (ScrumRetroUser)authentication.getPrincipal();
 		 final UserResponse userResponse = new UserResponse();
 		 BeanUtils.copyProperties(currentUser, userResponse);
+		 userResponse.setUserId(currentUser.getUsername());
 		 return userResponse;
 	}
 	/**

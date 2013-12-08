@@ -45,7 +45,11 @@ public class UserResponse {
 	}
 
 	public String getDisplayName() {
-		return displayName;
+		final StringBuilder builder = new StringBuilder();
+		builder.append(this.getLastName());
+		builder.append(", ");
+		builder.append(this.getFirstName());
+		return builder.toString();
 	}
 
 	public void setDisplayName(final String displayName) {
