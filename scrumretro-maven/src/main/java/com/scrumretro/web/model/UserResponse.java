@@ -10,8 +10,6 @@ public class UserResponse {
 	
 	private String organization;
 	
-	private String displayName;
-
 	public String getUserId() {
 		return userId;
 	}
@@ -50,9 +48,5 @@ public class UserResponse {
 		builder.append(", ");
 		builder.append(this.getFirstName());
 		return builder.toString();
-	}
-
-	public void setDisplayName(final String displayName) {
-		this.displayName = displayName;
 	}
 }

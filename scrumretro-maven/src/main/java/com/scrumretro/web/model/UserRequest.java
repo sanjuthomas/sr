@@ -57,7 +57,7 @@ public class UserRequest extends Request{
 		return confirmPassword;
 	}
 
-	public void setConfirmPassword(String confirmPassword) {
+	public void setConfirmPassword(final String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
 
