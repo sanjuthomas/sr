@@ -2,7 +2,6 @@ package com.scrumretro.security.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.scrumretro.security.authentication.ScrumRetroUser;
@@ -22,14 +21,11 @@ public class SecurityContextUtil {
 	 */
     public ScrumRetroUser getUserProfile() {
     	
-    	ScrumRetroUser scrumRetroUser = null;
+    	ScrumRetroUser scrumRetroUser = ScrumRetroUser.UNKNOWN_USER;
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (null != authentication) {
-            final Object currentPrincipal = authentication.getPrincipal();
-            if (currentPrincipal instanceof UserDetails) {
-            	scrumRetroUser = (ScrumRetroUser) currentPrincipal;
-            }
+        	scrumRetroUser = (ScrumRetroUser) authentication.getPrincipal();
         }
-        return null == scrumRetroUser ?  ScrumRetroUser.UNKNOWN_USER : scrumRetroUser; 
+        return scrumRetroUser;
     }
 }
