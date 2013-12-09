@@ -31,32 +31,20 @@ public class ScrumRetroUser extends User {
 		this.organization = organization;
 	}
 
-	private String firstName;
-	private String lastName;
-	private String organization;
+	final private String firstName;
+	final private String lastName;
+	final private String organization;
 
 	public String getFirstName() {
 		return firstName;
-	}
-
-	public void setFirstName(final String firstName) {
-		this.firstName = firstName;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(final String lastName) {
-		this.lastName = lastName;
-	}
-
 	public String getOrganization() {
 		return organization;
-	}
-
-	public void setOrganization(final String organization) {
-		this.organization = organization;
 	}
 
 	@Override
@@ -65,7 +53,7 @@ public class ScrumRetroUser extends User {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		return super.equals(obj);
 	}
 
