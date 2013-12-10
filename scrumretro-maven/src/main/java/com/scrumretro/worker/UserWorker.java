@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
-import com.scrumretro.web.model.UserRequest;
+import com.scrumretro.web.model.UserRegistrationRequest;
 import com.scrumretro.web.model.UserResponse;
 
 public class UserWorker {
@@ -33,12 +33,12 @@ public class UserWorker {
 	 * @param userRequest
 	 * @return
 	 */
-	public UserResponse save(final UserRequest userRequest){
+	public UserResponse save(final UserRegistrationRequest userRequest){
 		final User user = userRepository.save(createUser(userRequest));
 		return createUserResponse(user);
 	}
 	
-	private User createUser(final UserRequest userRequest){
+	private User createUser(final UserRegistrationRequest userRequest){
 		final User user  = new User();
 		user.setActive(false);
 		user.setUserId(userRequest.getUserId());

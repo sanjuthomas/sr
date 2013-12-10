@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
-import com.scrumretro.web.model.UserRequest;
+import com.scrumretro.web.model.UserRegistrationRequest;
 import com.scrumretro.web.model.UserResponse;
 
 public class TestUserWorker {
@@ -52,8 +52,8 @@ public class TestUserWorker {
 		assertEquals("lastName, firstName", userResponse.getDisplayName());
 	}
 	
-	private UserRequest createUserRequest(){
-		final UserRequest userRequest = new UserRequest();
+	private UserRegistrationRequest createUserRequest(){
+		final UserRegistrationRequest userRequest = new UserRegistrationRequest();
 		userRequest.setUserId("sanju.thomas@ge.com");
 		userRequest.setPassword(bCryptPasswordEncoder.encode("safe"));
 		return userRequest;
