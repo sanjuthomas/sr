@@ -8,17 +8,22 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 /**
  * 
  * @author Sanju Thomas
- *
+ * 
  */
 
-@Target({TYPE})
+@Target({ TYPE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = ConfirmationPasswordValidator.class)
 @Documented
 public @interface ValidateConfirmationPassword {
+	String message() default "{confirmation password shall be same as of the password}";
 
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }
