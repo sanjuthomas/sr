@@ -3,6 +3,8 @@ package com.scrumretro.web.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.scrumretro.web.model.UserRequest;
 
 /**
@@ -14,15 +16,10 @@ public class ConfirmationPasswordValidator implements ConstraintValidator<Valida
 
 	@Override
 	public void initialize(ValidateConfirmationPassword constraintAnnotation) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public boolean isValid(UserRequest value, ConstraintValidatorContext context) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isValid(UserRequest userRequest, ConstraintValidatorContext context) {
+		return StringUtils.equals(userRequest.getConfirmPassword(), userRequest.getPassword());
 	}
-
-
 }
