@@ -6,7 +6,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.scrumretro.web.model.UserRequest;
+import com.scrumretro.web.model.UserRegistrationRequest;
 
 /**
  * 
@@ -24,7 +24,7 @@ public class TestConfirmationPasswordValidator {
 	
 	@Test
 	public void shouldValidateConfirmationPassword(){
-		final UserRequest userRequest = new UserRequest();
+		final UserRegistrationRequest userRequest = new UserRegistrationRequest();
 		userRequest.setPassword("password");
 		userRequest.setConfirmPassword("password");
 		assertTrue(confirmationPasswordValidator.isValid(userRequest, null));
@@ -32,7 +32,7 @@ public class TestConfirmationPasswordValidator {
 	
 	@Test
 	public void shouldNotValidateConfirmationPassword(){
-		final UserRequest userRequest = new UserRequest();
+		final UserRegistrationRequest userRequest = new UserRegistrationRequest();
 		userRequest.setPassword("password");
 		userRequest.setConfirmPassword("pa55word");
 		assertFalse(confirmationPasswordValidator.isValid(userRequest, null));
