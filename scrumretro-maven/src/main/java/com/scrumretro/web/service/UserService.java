@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scrumretro.security.authentication.ScrumRetroUser;
-import com.scrumretro.web.model.UserRequest;
+import com.scrumretro.web.model.UserRegistrationRequest;
 import com.scrumretro.web.model.UserResponse;
 import com.scrumretro.worker.UserWorker;
 
@@ -39,7 +39,7 @@ public class UserService {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/user/currentUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/userProfile", method = RequestMethod.GET)
 	@ResponseBody
 	public UserResponse currentUser(final Authentication authentication) {
 		 final ScrumRetroUser currentUser =  (ScrumRetroUser)authentication.getPrincipal();
@@ -68,9 +68,9 @@ public class UserService {
 	 * @param userRequest
 	 * @return
 	 */
-	@RequestMapping(value = "/user/newuser/", method=RequestMethod.POST)
+	@RequestMapping(value = "/user/register/", method=RequestMethod.POST)
 	@ResponseBody
-	public UserResponse save(@Valid @RequestBody final UserRequest userRequest){
+	public UserResponse register(@Valid @RequestBody final UserRegistrationRequest userRequest){
 		return userWorker.save(userRequest);
 	}
 }
