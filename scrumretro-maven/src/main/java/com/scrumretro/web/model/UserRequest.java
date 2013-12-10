@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.scrumretro.rest.Request;
+import com.scrumretro.web.validation.ValidateConfirmationPassword;
 
 /**
  * User Registration Request Object.
@@ -13,6 +14,7 @@ import com.scrumretro.rest.Request;
  * @author Sanju Thomas
  *
  */
+@ValidateConfirmationPassword
 public class UserRequest extends Request{
 	
 	@NotEmpty(message ="userId may not be empty!")
@@ -23,6 +25,8 @@ public class UserRequest extends Request{
 	@Size(min=4, max=16)
 	private String password;
 	
+	@NotEmpty(message ="confirm password may not be empty!")
+	@Size(min=4, max=16)	
 	private String confirmPassword;
 	
 	@NotEmpty(message ="firstName may not be empty!")
