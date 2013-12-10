@@ -1,6 +1,13 @@
 package com.scrumretro.web.model;
 
-public class UserResponse {
+import com.scrumretro.rest.Response;
+
+/**
+ * 
+ * @author Ragil
+ *
+ */
+public class UserResponse extends Response{
 
 	private String userId;
 	
