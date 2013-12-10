@@ -24,7 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.scrumretro.rest.Response;
 import com.scrumretro.test.IntegrationTest;
-import com.scrumretro.web.model.UserRequest;
+import com.scrumretro.web.model.UserRegistrationRequest;
 
 /**
  * Integration test cases for UserService.
@@ -60,9 +60,9 @@ public class UserServiceIntegrationTest {
 	}
 	
 	@Test
-	public void shouldSave() throws Exception{
+	public void shouldRegister() throws Exception{
 		this.mockMvc.perform(
-				post("/user/newuser/").content(createUserRequest().toString())
+				post("/user/register/").content(createUserRequest().toString())
 						.contentType(Response.APPLICATION_JSON_UTF8))
 				.andExpect(status().isOk()).andExpect(
 						content().contentType(Response.APPLICATION_JSON_UTF8))
@@ -73,8 +73,8 @@ public class UserServiceIntegrationTest {
 		
 	}
 	
-	private UserRequest createUserRequest() {
-		final UserRequest userRequest = new UserRequest();
+	private UserRegistrationRequest createUserRequest() {
+		final UserRegistrationRequest userRequest = new UserRegistrationRequest();
 		userRequest.setUserId("ragilc@scrumretro.com");
 		userRequest.setFirstName("Ragil");
 		userRequest.setLastName("Chandran");

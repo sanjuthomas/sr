@@ -15,7 +15,7 @@ import com.scrumretro.web.validation.ValidateConfirmationPassword;
  *
  */
 @ValidateConfirmationPassword
-public class UserRequest extends Request{
+public class UserRegistrationRequest extends Request{
 	
 	@NotEmpty(message ="userId may not be empty!")
 	@Email()

@@ -32,52 +32,52 @@ public class TestUserRequest {
 	}
 
 	@Test
-	public void shouldValidateInvalidEntries(@Source("src/test/resources/testData/userRequest/emptyRequest.csv") final UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> violations = validator
+	public void shouldValidateInvalidEntries(@Source("src/test/resources/testData/userRequest/emptyRequest.csv") final UserRegistrationRequest userRequest) {
+		final Set<ConstraintViolation<UserRegistrationRequest>> violations = validator
 				.validate(userRequest);
 		assertEquals(8, violations.size());
 	}
 	
 
 	@Test
-	public void shouldAcceptValidEntries(@Source("src/test/resources/testData/userRequest/validUsers.csv") final UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> violations = validator
+	public void shouldAcceptValidEntries(@Source("src/test/resources/testData/userRequest/validUsers.csv") final UserRegistrationRequest userRequest) {
+		final Set<ConstraintViolation<UserRegistrationRequest>> violations = validator
 				.validate(userRequest);
 		assertEquals(0, violations.size());
 	}
 	
 	@Test
-	public void shouldValidateInvalidEmailIds(@Source("src/test/resources/testData/userRequest/invalidEmail.csv") final UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> violations = validator
+	public void shouldValidateInvalidEmailIds(@Source("src/test/resources/testData/userRequest/invalidEmail.csv") final UserRegistrationRequest userRequest) {
+		final Set<ConstraintViolation<UserRegistrationRequest>> violations = validator
 				.validate(userRequest);
 		assertEquals(1, violations.size());
 	}
 	
 	@Test
-	public void shouldValidatePassword(@Source("src/test/resources/testData/userRequest/invalidPassword.csv") final UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> violations = validator
+	public void shouldValidatePassword(@Source("src/test/resources/testData/userRequest/invalidPassword.csv") final UserRegistrationRequest userRequest) {
+		final Set<ConstraintViolation<UserRegistrationRequest>> violations = validator
 				.validate(userRequest);
 		assertEquals(2, violations.size());
 	}
 	
 	@Test
-	public void shouldValidateFirstName(@Source("src/test/resources/testData/userRequest/invalidFirstName.csv") final UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> violations = validator
+	public void shouldValidateFirstName(@Source("src/test/resources/testData/userRequest/invalidFirstName.csv") final UserRegistrationRequest userRequest) {
+		final Set<ConstraintViolation<UserRegistrationRequest>> violations = validator
 				.validate(userRequest);
 		assertEquals(1, violations.size());
 	}
 	
 
 	@Test
-	public void shouldValidateLastName(@Source("src/test/resources/testData/userRequest/invalidLastName.csv") final UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> violations = validator
+	public void shouldValidateLastName(@Source("src/test/resources/testData/userRequest/invalidLastName.csv") final UserRegistrationRequest userRequest) {
+		final Set<ConstraintViolation<UserRegistrationRequest>> violations = validator
 				.validate(userRequest);
 		assertEquals(1, violations.size());
 	}
 	
 	@Test
-	public void shouldValidateOrganization(@Source("src/test/resources/testData/userRequest/invalidOrganization.csv") final UserRequest userRequest) {
-		final Set<ConstraintViolation<UserRequest>> violations = validator
+	public void shouldValidateOrganization(@Source("src/test/resources/testData/userRequest/invalidOrganization.csv") final UserRegistrationRequest userRequest) {
+		final Set<ConstraintViolation<UserRegistrationRequest>> violations = validator
 				.validate(userRequest);
 		assertEquals(1, violations.size());
 	}
