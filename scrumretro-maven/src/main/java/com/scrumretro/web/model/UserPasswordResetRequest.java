@@ -1,19 +1,32 @@
 package com.scrumretro.web.model;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.scrumretro.rest.Request;
+import com.scrumretro.web.validation.ValidateConfirmationPassword;
 
 /**
  * 
  * @author Sanju Thomas
  *
  */
+
+@ValidateConfirmationPassword
 public class UserPasswordResetRequest extends Request{
 	
+	@NotEmpty(message ="password may not be empty!")
+	@Size(min=4, max=16)
 	private String oldPassword;
 	
+	@NotEmpty(message ="newPassword may not be empty!")
+	@Size(min=4, max=16)
 	private String newPassword;
 	
-	private String newConfirmationPassword;
+	@NotEmpty(message ="newConfirmPassword may not be empty!")
+	@Size(min=4, max=16)
+	private String newconfirmPassword;
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -31,12 +44,11 @@ public class UserPasswordResetRequest extends Request{
 		this.newPassword = newPassword;
 	}
 
-	public String getNewConfirmationPassword() {
-		return newConfirmationPassword;
+	public String getNewconfirmPassword() {
+		return newconfirmPassword;
 	}
 
-	public void setNewConfirmationPassword(final String newConfirmationPassword) {
-		this.newConfirmationPassword = newConfirmationPassword;
+	public void setNewconfirmPassword(final String newconfirmPassword) {
+		this.newconfirmPassword = newconfirmPassword;
 	}
-	
 }
