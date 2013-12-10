@@ -1,2 +1,2 @@
-userId,password,firstName,lastName,organization
-,,,,,
+userId,password,confirmPassword,firstName,lastName,organization
+,,,,,,
