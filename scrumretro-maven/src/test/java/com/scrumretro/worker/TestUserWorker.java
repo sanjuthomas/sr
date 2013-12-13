@@ -11,7 +11,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.scrumretro.enums.EmailType;
+import com.scrumretro.repository.EmailRepository;
 import com.scrumretro.repository.UserRepository;
+import com.scrumretro.repository.model.Email;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
 import com.scrumretro.web.model.UserRegistrationRequest;
@@ -23,6 +26,9 @@ public class TestUserWorker {
 	
 	@Mock
 	private UserRepository mockUserRepository;
+	
+	@Mock
+	private EmailRepository mockEmailRepository;
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -37,6 +43,8 @@ public class TestUserWorker {
 		userWorker = new UserWorker();
 		userWorker.setUserRepository(mockUserRepository);
 		userWorker.setbCryptPasswordEncoder(bCryptPasswordEncoder);
+		when(mockEmailRepository.findById(any(String.class))).thenReturn(createEmail());
+		userWorker.setEmailRepository(mockEmailRepository);
 	}
 	
 	@Test
@@ -64,6 +72,11 @@ public class TestUserWorker {
 		validateUserResponse(userWorker.findByUserId("info@scrumretro.com"));
 	}
 	
+	@Test
+	public void shouldActivateUser(){
+		assertEquals(true, userWorker.activate("100567YTH985"));
+	}
+	
 	private User createUser(){
 		final User user = new User();
 		user.setUserId("info@scrumretro.com");
@@ -75,5 +88,14 @@ public class TestUserWorker {
 		userDetail.setOrganization("organization");
 		user.setUserDetail(userDetail);
 		return user;
+	}
+	
+	private Email createEmail(){
+		final Email email = new Email();
+		email.setEmailType(EmailType.USER_REGISTRATION);
+		email.setToAddress("newuser@scrumretro.com");
+		email.setId("100567YTH985");
+		return email;
+		
 	}
 }
