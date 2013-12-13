@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
@@ -36,7 +38,8 @@ import com.scrumretro.web.model.ProjectRequest;
  */
 @Category(IntegrationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-applicationContext.xml"})
+@ContextConfiguration(locations = { "classpath:test-applicationContext.xml","classpath:test-applicationWebContext.xml" })
+@WebAppConfiguration
 public class ProjectServiceIntegrationTest {
 
 	private MockMvc mockMvc;
@@ -50,9 +53,12 @@ public class ProjectServiceIntegrationTest {
 	@Autowired
 	private ProjectService projectService;
 	
+	@Autowired
+    private WebApplicationContext webApplicationContext;
+	
 	@Before
 	public void setUp(){
-		this.mockMvc = MockMvcBuilders.standaloneSetup(projectService).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 	
 	@Test
