@@ -1,0 +1,10 @@
+{
+    "email": [
+        {
+            "_id": "100567YTH985",
+            "emailType":"USER_REGISTRATION",
+            "emailSubject": "Successfully Registered in scrumretro",
+            "toAddress" : "newuser@scrumretro.com"
+        }
+    ]
+}

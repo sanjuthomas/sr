@@ -4,9 +4,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.scrumretro.enums.EmailType;
+import com.scrumretro.repository.EmailRepository;
 import com.scrumretro.repository.UserRepository;
+import com.scrumretro.repository.model.Email;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.util.UIDGenerator;
 import com.scrumretro.web.model.UserRegistrationRequest;
 import com.scrumretro.web.model.UserResponse;
 
@@ -14,6 +18,9 @@ public class UserWorker {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private EmailRepository emailRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -26,6 +33,9 @@ public class UserWorker {
 		this.userRepository = userRepository;
 	}
 	
+	public void setEmailRepository(EmailRepository emailRepository) {
+		this.emailRepository = emailRepository;
+	}
 	
 	/**
 	 * This method shall accept a UserRequest object and save it to db.
@@ -35,6 +45,10 @@ public class UserWorker {
 	 */
 	public UserResponse save(final UserRegistrationRequest userRequest){
 		final User user = userRepository.save(createUser(userRequest));
+		Email email = new Email();
+		email.setEmailType(EmailType.USER_REGISTRATION);
+		email.setId(new UIDGenerator().getValue());
+		email.setToAddress(user.getUserId());
 		return createUserResponse(user);
 	}
 	
@@ -60,6 +74,20 @@ public class UserWorker {
 	public UserResponse findByUserId(final String userId){
 		final User user = userRepository.findByUserId(userId);
 		return createUserResponse(user);
+	}
+	
+	/**
+	 * This method shall accept a uId and activate user.
+	 * 
+	 * @param uId
+	 * @return
+	 */
+	public boolean activate(final String uId){
+		final Email email = emailRepository.findById(uId);
+		User user = userRepository.findByUserId(email.getToAddress());
+		user.setActive(true);
+		user = userRepository.save(user);
+		return user.getActive();
 	}
 	
 	private UserResponse createUserResponse(final User user){
