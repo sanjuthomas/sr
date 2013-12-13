@@ -82,7 +82,13 @@ public class TestProjectService {
 		this.mockMvc.perform(
 				post("/project/save/").content(createProjectRequest().toString())
 						.contentType(Response.APPLICATION_JSON_UTF8))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$id", is("p1")))
+				.andExpect(jsonPath("$name", is("pname")))
+				.andExpect(jsonPath("$description", is("pdescription")))
+				.andExpect(jsonPath("$organization", is("o1")))
+				.andExpect(
+						jsonPath("$ownerDisplayName", is("lastName, firstName")));
 	}
 
 	private ProjectResponse createProjectResponse() {
