@@ -41,7 +41,7 @@ public class UserService {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/user/userProfile", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/userProfile/", method = RequestMethod.GET)
 	@ResponseBody
 	public UserResponse currentUser(final Authentication authentication) {
 		 final ScrumRetroUser currentUser =  (ScrumRetroUser)authentication.getPrincipal();
