@@ -1,5 +1,6 @@
 package com.scrumretro.web.service;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class TestUserService {
 	private UserService userService;
 	
 	
+	@Test
+	public void shouldFindByUserId(){
+		
+	}
 	
 		
 }
