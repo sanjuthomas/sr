@@ -1,1 +1,22 @@
-asdfsdf
+#Contract for User Service.
+
+-------------------------------------------------------------------------------
+|Service |URI |parameter |parameter type |
+-------------------------------------------------------------------------------
+|userProfile |http://scrumretro.com/user/userProfile|none|none|
+-------------------------------------------------------------------------------
+Sample Request :
+{}
+
+
+Sample Response :
+
+{
+    "userId" : "inf@scrumretro.com",
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "organization" : "organization"
+}
+
+
+
