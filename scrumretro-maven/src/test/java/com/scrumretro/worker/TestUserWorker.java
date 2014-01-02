@@ -17,6 +17,7 @@ import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Email;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.web.model.UserPasswordResetRequest;
 import com.scrumretro.web.model.UserRegistrationRequest;
 import com.scrumretro.web.model.UserResponse;
 
@@ -52,6 +53,16 @@ public class TestUserWorker {
 		validateUserResponse(userWorker.save(createUserRequest()));
 	}
 	
+	@Test
+	public void shouldRestPassword() throws Exception{
+		final UserPasswordResetRequest userPasswordResetRequest = new UserPasswordResetRequest();
+		userPasswordResetRequest.setOldPassword("password");
+		userPasswordResetRequest.setNewPassword("newPassword");
+		userPasswordResetRequest.setNewconfirmPassword("newPassword");
+		validateUserResponse(userWorker.resetPassword(userPasswordResetRequest, "info@scrumretro.com"));
+	}
+	
+	
 	private void validateUserResponse(final UserResponse userResponse){
 		assertNotNull(userResponse);
 		assertEquals("info@scrumretro.com", userResponse.getUserId());
@@ -63,7 +74,7 @@ public class TestUserWorker {
 	private UserRegistrationRequest createUserRequest(){
 		final UserRegistrationRequest userRequest = new UserRegistrationRequest();
 		userRequest.setUserId("sanju.thomas@ge.com");
-		userRequest.setPassword(bCryptPasswordEncoder.encode("safe"));
+		userRequest.setPassword("safe");
 		return userRequest;
 	}
 	
@@ -80,7 +91,7 @@ public class TestUserWorker {
 	private User createUser(){
 		final User user = new User();
 		user.setUserId("info@scrumretro.com");
-		user.setPassword("password");
+		user.setPassword(bCryptPasswordEncoder.encode("password"));
 		user.setActive(true);
 		final UserDetail userDetail = new UserDetail();
 		userDetail.setFirstName("firstName");
@@ -96,6 +107,5 @@ public class TestUserWorker {
 		email.setToAddress("newuser@scrumretro.com");
 		email.setId("100567YTH985");
 		return email;
-		
 	}
 }
