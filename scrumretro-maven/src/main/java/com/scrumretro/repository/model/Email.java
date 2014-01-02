@@ -25,7 +25,7 @@ public class Email {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(final String id) {
 		this.id = id;
 	}
 
@@ -33,7 +33,7 @@ public class Email {
 		return emailType;
 	}
 
-	public void setEmailType(EmailType emailType) {
+	public void setEmailType(final EmailType emailType) {
 		this.emailType = emailType;
 		this.emailSubject = emailType.getSubject();
 	}
@@ -43,7 +43,7 @@ public class Email {
 		
 	}
 
-	public void setEmailSubject(String emailSubject) {
+	public void setEmailSubject(final String emailSubject) {
 		this.emailSubject = emailSubject;
 	}
 
@@ -51,7 +51,7 @@ public class Email {
 		return toAddress;
 	}
 
-	public void setToAddress(String toAddress) {
+	public void setToAddress(final String toAddress) {
 		this.toAddress = toAddress;
 	}
 }

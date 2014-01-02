@@ -12,7 +12,7 @@
 		<spring.data.mongo.version>1.2.2.RELEASE</spring.data.mongo.version>
 		<junit.version>4.8.1</junit.version>
 		<nosqlunit.version>0.7.7</nosqlunit.version>
-		<servlet.version>2.5</servlet.version>
+		<servlet.version>3.0</servlet.version>
 		<mongodb.java.driver.version>2.11.0</mongodb.java.driver.version>
 		<pitest.version>0.30</pitest.version>
 		<mockito.version>1.9.5</mockito.version>
@@ -70,12 +70,11 @@
 
 		<!-- servlet, only for compile time -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>${servlet.version}</version>
-			<scope>provided</scope>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet</artifactId>
+			<version>3.0</version>
+			<scope>test</scope>
 		</dependency>
-
 
 		<!-- mongo java driver -->
 		<dependency>
