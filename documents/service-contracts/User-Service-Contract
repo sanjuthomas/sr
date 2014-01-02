@@ -1,9 +1,9 @@
 #Contract for User Service.
 
 -------------------------------------------------------------------------------
-|Service |URI |parameter |parameter type |
+|Service|URI|
 -------------------------------------------------------------------------------
-|userProfile |http://scrumretro.com/user/userProfile|none|none|
+|userProfile |http://scrumretro.com/user/userProfile
 -------------------------------------------------------------------------------
 Sample Request :
 {}
@@ -19,4 +19,67 @@ Sample Response :
 }
 
 
+--------------------------------------------------------------------------------
+|Serivce|URI|
+--------------------------------------------------------------------------------
+|register | http://scrumretro.com/user/register
+--------------------------------------------------------------------------------
 
+Sample Request : 
+
+{
+    "userId" : "infor@scrumretro.com",
+    "password" : "password",
+    "confirmPassword" : "password",
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "organization" : "organization"
+}
+
+Sample Response : 
+
+{
+    "userId" : "inf@scrumretro.com",
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "organization" : "organization"
+}
+
+
+--------------------------------------------------------------------------------
+|Serivce|URI|
+--------------------------------------------------------------------------------
+|register | http://scrumretro.com/login
+--------------------------------------------------------------------------------
+
+Sample Request : 
+
+{
+"username" : "info@scrumretro.com",
+"password" : "password"
+}
+
+Sample Response : 
+
+{
+
+//I think it just 200 OK, I would ask Ragil to fill this.
+}
+
+
+--------------------------------------------------------------------------------
+|Serivce|URI|
+--------------------------------------------------------------------------------
+|register | http://scrumretro.com/logout
+--------------------------------------------------------------------------------
+Sample Requst : 
+{
+
+}
+
+Sample Response :
+
+{
+//I think it just 200 OK, I would ask Ragil to fill this.
+
+}
