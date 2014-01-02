@@ -1,0 +1,4 @@
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/globals.js"></script>
+<script src="js/int/srAjax.js"></script>

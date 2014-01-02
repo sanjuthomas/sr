@@ -1,0 +1,252 @@
+.no-display {
+	display: none;
+}
+
+a,a:focus,a:hover,a:active {
+	outline: 0 none !important;
+}
+
+.radio-inline,.radio-inline+.radio-inline,.checkbox-inline,.checkbox-inline+.checkbox-inline
+	{
+	margin: 5px 10px 10px 0 !important;
+}
+
+.btn {
+	transition: all 0.3s ease 0s !important;
+}
+
+.btn-bricky {
+	background-color: #C83A2A;
+	border-color: #B33426;
+	color: #FFFFFF;
+}
+
+.pull-right {
+	float: right;
+}
+
+body.home .main-home {
+	margin-top: 60px;
+}
+
+body.home .logo {
+	padding: 20px;
+	text-align: center;
+}
+
+.logo {
+	font-weight: bold;
+	font-size: 30px;
+	margin-left: 0;
+	padding: 14px 10px 12px;
+}
+
+body.home .box-login,body.home .box-forgot,body.home .box-register {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 5px;
+	box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.32);
+	overflow: hidden;
+	padding: 15px;
+}
+
+span.input-icon,span.input-help {
+	display: block;
+	position: relative;
+}
+
+.input-icon>input {
+	padding-left: 25px;
+	padding-right: 6px;
+}
+
+textarea,input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"]
+	{
+	background-color: #FFFFFF;
+	border: 1px solid #D5D5D5;
+	border-radius: 0 !important;
+	box-shadow: none;
+	color: #858585;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1.2;
+	padding: 5px 4px;
+	transition-duration: 0.1s;
+}
+
+.input-icon>[class *="fa-"],.input-icon>[class *="clip-"] {
+	bottom: 0;
+	color: #909090;
+	display: inline-block;
+	font-size: 14px;
+	left: 5px;
+	line-height: 35px;
+	padding: 0 3px;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+}
+
+body.home .form-actions:before,body.home .form-actions:after {
+	content: "";
+	display: table;
+	line-height: 0;
+}
+
+body.home .form-actions:after {
+	clear: both;
+}
+
+body.home .form-actions:before,body.home .form-actions:after {
+	content: "";
+	display: table;
+	line-height: 0;
+}
+
+body.home .form-actions {
+	display: block;
+	margin-top: 15px;
+	padding-top: 10px;
+}
+
+body.home input.password {
+	padding-right: 130px;
+}
+
+.input-icon>input {
+	padding-left: 25px;
+	padding-right: 6px;
+}
+
+textarea,input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"]
+	{
+	background-color: #FFFFFF;
+	border: 1px solid #D5D5D5;
+	border-radius: 0 !important;
+	box-shadow: none;
+	color: #858585;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1.2;
+	padding: 5px 4px;
+	transition-duration: 0.1s;
+}
+
+body.home a.forgot {
+	color: #909090;
+	font-size: 12px;
+	position: absolute;
+	right: 10px;
+	text-shadow: 1px 1px 1px #FFFFFF;
+	top: 9px;
+}
+
+a,a:focus,a:hover,a:active {
+	outline: 0 none !important;
+}
+
+body.home label {
+	color: #7F7F7F;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+.radio-inline,.radio-inline+.radio-inline,.checkbox-inline,.checkbox-inline+.checkbox-inline
+	{
+	margin: 5px 10px 10px 0 !important;
+}
+
+.icheckbox_minimal-grey {
+	background-position: 0 0;
+}
+
+.icheckbox_minimal-grey,.iradio_minimal-grey {
+	background: url("grey.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: medium none;
+	cursor: pointer;
+	display: block;
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	width: 18px;
+}
+
+[class ^="icheckbox_"],[class *="icheckbox_"],[class ^="iradio_"],[class
+	*="iradio_"] {
+	float: left !important;
+	margin: 0 5px 0 -20px !important;
+}
+
+[class ^="icheckbox_"],[class *="icheckbox_"],[class ^="iradio_"],[class
+	*="iradio_"] {
+	float: left !important;
+	margin: 0 5px 0 -20px !important;
+}
+
+body.home .new-account {
+	border-top: 1px dotted #EEEEEE;
+	display: block;
+	margin-top: 15px;
+	padding-top: 10px;
+}
+
+body.home .box-forgot,body.home .box-register {
+	display: none;
+}
+
+body.home .box-login,body.home .box-forgot,body.home .box-register {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 5px;
+	box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.32);
+	overflow: hidden;
+	padding: 15px;
+}
+
+body.home .box-forgot,body.home .box-register {
+	display: none;
+}
+
+body.home .box-register .box-login,body.home .box-forgot {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 5px;
+	box-shadow: -30px 30px 50px rgba(0, 0, 0, 0.32);
+	overflow: hidden;
+	padding: 5px 15px 15px;
+}
+
+body.home .copyright {
+	font-size: 11px;
+	margin: 0 auto;
+	padding: 10px 10px 0;
+	text-align: center;
+}
+
+body.home label {
+	color: #7F7F7F;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+.navbar-brand{
+	font-weight: bold;
+	font-size: 22px;	
+}
+
+.footer {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	margin-bottom: 5px;
+}
+
+.footer hr{
+	height: 0;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	margin-bottom: 5px;
+	border-top: 1px solid #D5D5D5;
+}
+.footer span{
+	margin-left: 5px;
+	margin-right: 5px;
+}
