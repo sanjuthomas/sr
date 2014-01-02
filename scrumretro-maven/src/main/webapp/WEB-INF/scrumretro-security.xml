@@ -4,22 +4,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<!-- Disable security on static resources -->
-	<security:http pattern="/resources/**" security="none" />
+	<!-- Disable security on static resources 
+	<security:http pattern="/resources/**" security="none" />-->
 
 	<!-- Enable Spring Security -->
-	<security:http entry-point-ref="restAuthenticationEntryPoint"
+	<security:http pattern="/sr/**" entry-point-ref="restAuthenticationEntryPoint"
 		use-expressions="true">
 		<!-- Configures the security rules of our REST API -->
-		<security:intercept-url pattern="/login"
+		<security:intercept-url pattern="/sr/login"
 			access="permitAll()" />
-		<security:intercept-url pattern="/user/newuser/"
+		<security:intercept-url pattern="/sr/user/newuser/"
 			access="permitAll()" />	
-		<security:intercept-url pattern="/user/activate/*"
+		<security:intercept-url pattern="/sr/user/activate/*"
 			access="permitAll()" />		
-		<security:intercept-url pattern="/logout"
+		<security:intercept-url pattern="/sr/logout"
 			access="permitAll()" />
-		<security:intercept-url pattern="/**"
+		<security:intercept-url pattern="/sr/**"
 			access="hasRole('ROLE_USER')" />
 
 		<!-- Adds the custom login filter to Spring Security filter chain -->
