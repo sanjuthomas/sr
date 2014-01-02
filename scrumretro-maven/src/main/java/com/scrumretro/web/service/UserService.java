@@ -41,7 +41,7 @@ public class UserService {
 	 */
 	@RequestMapping(value = "/user/userProfile/", method = RequestMethod.GET)
 	@ResponseBody
-	public UserResponse currentUser(final Authentication authentication) {
+	public UserResponse userprofile(final Authentication authentication) {
 		final ScrumRetroUser currentUser = (ScrumRetroUser) authentication.getPrincipal();
 		final UserResponse userResponse = new UserResponse();
 		BeanUtils.copyProperties(currentUser, userResponse);
@@ -61,7 +61,7 @@ public class UserService {
 	public UserResponse findByUserId(@PathVariable("id") final String id) {
 		return userWorker.findByUserId(id);
 	}
-
+	
 	/**
 	 * This service shall take user json as request and save the given user.
 	 * This method shall return UserResponse in json format.
