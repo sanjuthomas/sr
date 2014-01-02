@@ -76,7 +76,6 @@ public class TestUserService {
 				.andExpect(jsonPath("$userId", is("info@scumretro.com")));
 	}
 	
-	
 	private UserResponse createUserResponse(){
 		final UserResponse userResponse = new UserResponse();
 		userResponse.setFirstName("firstName");

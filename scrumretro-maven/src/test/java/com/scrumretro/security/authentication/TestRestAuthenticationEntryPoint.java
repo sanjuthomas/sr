@@ -14,6 +14,11 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.AuthenticationException;
 
+/**
+ * 
+ * @author Ragil
+ *
+ */
 public class TestRestAuthenticationEntryPoint {
 
 	private RestAuthenticationEntryPoint authenticationEntryPoint;

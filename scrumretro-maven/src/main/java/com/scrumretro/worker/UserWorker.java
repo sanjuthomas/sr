@@ -2,18 +2,23 @@ package com.scrumretro.worker;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.scrumretro.enums.EmailType;
 import com.scrumretro.repository.EmailRepository;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Email;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
-import com.scrumretro.util.UIDGenerator;
+import com.scrumretro.web.model.UserPasswordResetRequest;
 import com.scrumretro.web.model.UserRegistrationRequest;
 import com.scrumretro.web.model.UserResponse;
 
+/**
+ * 
+ * @author Ragil
+ *
+ */
 public class UserWorker {
 
 	@Autowired
@@ -38,17 +43,30 @@ public class UserWorker {
 	}
 	
 	/**
-	 * This method shall accept a UserRequest object and save it to db.
+	 * This method shall accept a {@link UserRegistrationRequest} object and save it to db.
 	 * 
 	 * @param userRequest
 	 * @return
 	 */
 	public UserResponse save(final UserRegistrationRequest userRequest){
 		final User user = userRepository.save(createUser(userRequest));
-		Email email = new Email();
-		email.setEmailType(EmailType.USER_REGISTRATION);
-		email.setId(new UIDGenerator().getValue());
-		email.setToAddress(user.getUserId());
+		return createUserResponse(user);
+	}
+	
+	/**
+	 * This method shall accept {@link UserPasswordResetRequest} and see if 
+	 * 
+	 * @param userPasswordResetRequest
+	 * @return
+	 */
+	public UserResponse resetPassword(final UserPasswordResetRequest userPasswordResetRequest, final String userId){
+		
+		final User user = userRepository.findByUserId(userId);
+		if(!bCryptPasswordEncoder.matches(userPasswordResetRequest.getOldPassword(), user.getPassword())){
+			throw new BadCredentialsException("Incorrect password is provided for user "+userId);
+		}
+		user.setPassword(bCryptPasswordEncoder.encode(userPasswordResetRequest.getNewPassword()));
+		userRepository.save(user);
 		return createUserResponse(user);
 	}
 	

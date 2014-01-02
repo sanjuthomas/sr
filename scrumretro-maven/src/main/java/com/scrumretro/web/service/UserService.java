@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.scrumretro.rest.Response;
 import com.scrumretro.security.authentication.ScrumRetroUser;
 import com.scrumretro.web.model.UserPasswordResetRequest;
 import com.scrumretro.web.model.UserRegistrationRequest;
@@ -20,8 +19,7 @@ import com.scrumretro.web.model.UserResponse;
 import com.scrumretro.worker.UserWorker;
 
 /**
- * This class encapsulate all the service methods associate with User
- * document.
+ * This class encapsulate all the service methods associate with User document.
  * 
  * @author Ragil
  * 
@@ -35,21 +33,22 @@ public class UserService {
 	public void setUserWorker(final UserWorker userWorker) {
 		this.userWorker = userWorker;
 	}
+
 	/**
-	 * This service shall return the current user details
-	 * in json format.
+	 * This service shall return the current user details in json format.
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/user/userProfile/", method = RequestMethod.GET)
 	@ResponseBody
 	public UserResponse currentUser(final Authentication authentication) {
-		 final ScrumRetroUser currentUser =  (ScrumRetroUser)authentication.getPrincipal();
-		 final UserResponse userResponse = new UserResponse();
-		 BeanUtils.copyProperties(currentUser, userResponse);
-		 userResponse.setUserId(currentUser.getUsername());
-		 return userResponse;
+		final ScrumRetroUser currentUser = (ScrumRetroUser) authentication.getPrincipal();
+		final UserResponse userResponse = new UserResponse();
+		BeanUtils.copyProperties(currentUser, userResponse);
+		userResponse.setUserId(currentUser.getUsername());
+		return userResponse;
 	}
+
 	/**
 	 * This service shall take user id request parameter and return the
 	 * UserResponse in json format.
@@ -62,7 +61,7 @@ public class UserService {
 	public UserResponse findByUserId(@PathVariable("id") final String id) {
 		return userWorker.findByUserId(id);
 	}
-	
+
 	/**
 	 * This service shall take user json as request and save the given user.
 	 * This method shall return UserResponse in json format.
@@ -70,24 +69,24 @@ public class UserService {
 	 * @param userRegistrationRequest
 	 * @return
 	 */
-	@RequestMapping(value = "/user/register/", method=RequestMethod.POST)
+	@RequestMapping(value = "/user/register/", method = RequestMethod.POST)
 	@ResponseBody
-	public UserResponse register(@Valid @RequestBody final UserRegistrationRequest userRegistrationRequest){
+	public UserResponse register(@Valid @RequestBody final UserRegistrationRequest userRegistrationRequest) {
 		return userWorker.save(userRegistrationRequest);
 	}
-	
+
 	/**
-	 * This service shall take the password reset request and send back 
+	 * This service shall take the password reset request and send back
 	 * 
 	 * @param userPasswordResetRequest
 	 * @return
 	 */
-	@RequestMapping(value = "/user/resetPassword/", method=RequestMethod.POST)
+	@RequestMapping(value = "/user/resetPassword/", method = RequestMethod.POST)
 	@ResponseBody
-	public Response resetPassword(@Valid @RequestBody final UserPasswordResetRequest userPasswordResetRequest){
-		
-		return null;
+	public UserResponse resetPassword(@Valid @RequestBody final UserPasswordResetRequest userPasswordResetRequest,
+			final Authentication authentication) {
+		final ScrumRetroUser currentUser = (ScrumRetroUser) authentication.getPrincipal();
+		return userWorker.resetPassword(userPasswordResetRequest, currentUser.getUsername());
 	}
-	
-	
+
 }
