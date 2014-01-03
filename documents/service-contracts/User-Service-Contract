@@ -1,17 +1,24 @@
 #Contract for User Service.
-
+All response shall have "status"="success/failed/error"
+"status"="failed" shall have "failedMessage"
+"status"="error" shall have "errorCode" and "errorMessage"
 -------------------------------------------------------------------------------
 |Service|URI|
 -------------------------------------------------------------------------------
-|userProfile |http://scrumretro.com/user/userProfile
+|userProfile |http://scrumretro.com/sr/user/userProfile
+-------------------------------------------------------------------------------
+Method: GET
 -------------------------------------------------------------------------------
 Sample Request :
-{}
+{
+    "userId":"inf@scrumretro.com"
+}
 
 
 Sample Response :
 
 {
+    "status" : "success",
     "userId" : "inf@scrumretro.com",
     "firstName" : "firstName",
     "lastName" : "lastName",
@@ -19,11 +26,24 @@ Sample Response :
 }
 
 
+{
+    "status" : "failed",
+    "failedMessage" : "User does not exist.",
+}
+
+{
+    "status" : "error",
+    "errorCode" : "100",
+    "errorMessage" : "System error. Please report to support@scrumretro.com",
+}
+
 --------------------------------------------------------------------------------
 |Serivce|URI|
 --------------------------------------------------------------------------------
-|register | http://scrumretro.com/user/register
+|register | http://scrumretro.com/sr/user/register
 --------------------------------------------------------------------------------
+Method: POST
+-------------------------------------------------------------------------------
 
 Sample Request : 
 
@@ -39,18 +59,29 @@ Sample Request :
 Sample Response : 
 
 {
-    "userId" : "inf@scrumretro.com",
-    "firstName" : "firstName",
-    "lastName" : "lastName",
-    "organization" : "organization"
+    "status" : "success"
 }
+
+{
+    "status" : "failed",
+    "failedMessage" : "User already exist.",
+}
+
+{
+    "status" : "error",
+    "errorCode" : "100",
+    "errorMessage" : "System error. Please report to support@scrumretro.com",
+}
+
 
 
 --------------------------------------------------------------------------------
 |Serivce|URI|
 --------------------------------------------------------------------------------
-|register | http://scrumretro.com/login
+|login | http://scrumretro.com/sr/login
 --------------------------------------------------------------------------------
+Method: POST
+-------------------------------------------------------------------------------
 
 Sample Request : 
 
@@ -62,24 +93,36 @@ Sample Request :
 Sample Response : 
 
 {
+    "status" : "success"
 
-//I think it just 200 OK, I would ask Ragil to fill this.
 }
 
+{
+    "status" : "failed",
+    "failedMessage" : "Email not verified.",
+}
+{
+    "status" : "error",
+    "errorCode" : "100",
+    "errorMessage" : "System error. Please report to support@scrumretro.com",
+}
 
 --------------------------------------------------------------------------------
 |Serivce|URI|
 --------------------------------------------------------------------------------
-|register | http://scrumretro.com/logout
+|logout | http://scrumretro.com/logout
 --------------------------------------------------------------------------------
+Method: GET
+-------------------------------------------------------------------------------
 Sample Requst : 
 {
 
 }
 
-Sample Response :
+Sample Response : 
 
 {
-//I think it just 200 OK, I would ask Ragil to fill this.
+    "status" : "success"
 
 }
+
