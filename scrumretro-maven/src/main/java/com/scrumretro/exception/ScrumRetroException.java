@@ -1,19 +1,23 @@
 package com.scrumretro.exception;
 
-public class ScrumRetroException extends RuntimeException{
-
-    private static final long serialVersionUID = 1L;
+public class ScrumRetroException extends Exception{
 	
-	public ScrumRetroException() {
-		super();
-	}
-	public ScrumRetroException(String message) {
+    private static final long serialVersionUID = 1L;
+    
+    private Integer errorCode;
+    
+    public ScrumRetroException(){}
+	
+	public ScrumRetroException(final Integer errorCode, String message) {
 		super(message);
+		this.errorCode = errorCode;
 	}
-	public ScrumRetroException(Throwable cause) {
-		super(cause);
+
+	public Integer getErrorCode() {
+		return errorCode;
 	}
-	public ScrumRetroException(String message, Throwable cause) {
-		super(message, cause);
+
+	public void setErrorCode(final Integer errorCode) {
+		this.errorCode = errorCode;
 	}
 }

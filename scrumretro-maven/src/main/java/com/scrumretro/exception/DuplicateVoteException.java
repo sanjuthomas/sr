@@ -1,23 +1,22 @@
 package com.scrumretro.exception;
 
+import com.scrumretro.enums.ResponseStatus;
+
 /**
  * 
  * @author Sanju Thomas
  * 
  */
-public class DuplicateVoteException extends Exception{
-	
+public class DuplicateVoteException extends ScrumRetroException{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Integer errorCode;
+	public DuplicateVoteException(){
+		this(ResponseStatus.DUPLICATE_VOTE.getCode(), ResponseStatus.DUPLICATE_VOTE.getReasonPhrase());
+	}
 	
 	public DuplicateVoteException(final Integer errorCode, final String message){
-		super(message);
-		this.errorCode = errorCode;
+		super(errorCode, message);
 	}
 
-	public Integer getErrorCode() {
-		return errorCode;
-	}
 }
