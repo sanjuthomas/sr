@@ -1,6 +1,6 @@
 package com.scrumretro.exception;
 
-public class InvalidPathException extends ScrumRetroException {
+public class InvalidPathException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
@@ -10,17 +10,14 @@ public class InvalidPathException extends ScrumRetroException {
 
 	public InvalidPathException(String message) {
 		super(message);
-
 	}
 
 	public InvalidPathException(Throwable cause) {
 		super(cause);
-
 	}
 
 	public InvalidPathException(String message, Throwable cause) {
 		super(message, cause);
-
 	}
 
 }
