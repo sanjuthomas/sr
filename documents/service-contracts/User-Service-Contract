@@ -33,7 +33,7 @@ Sample Response :
 
 {
     "status" : "error",
-    "errorCode" : "100",
+    "errorCode" : "1903",
     "errorMessage" : "System error. Please report to support@scrumretro.com",
 }
 
@@ -69,7 +69,7 @@ Sample Response :
 
 {
     "status" : "error",
-    "errorCode" : "100",
+    "errorCode" : "1900",
     "errorMessage" : "System error. Please report to support@scrumretro.com",
 }
 
