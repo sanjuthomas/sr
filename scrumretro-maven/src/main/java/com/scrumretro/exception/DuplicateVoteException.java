@@ -1,14 +1,23 @@
 package com.scrumretro.exception;
 
+/**
+ * 
+ * @author Sanju Thomas
+ * 
+ */
 public class DuplicateVoteException extends Exception{
-
-	/**
-	 * 
-	 */
+	
+	
 	private static final long serialVersionUID = 1L;
 	
-	public DuplicateVoteException(final String message){
+	private Integer errorCode;
+	
+	public DuplicateVoteException(final Integer errorCode, final String message){
 		super(message);
+		this.errorCode = errorCode;
 	}
 
+	public Integer getErrorCode() {
+		return errorCode;
+	}
 }

@@ -1,10 +1,23 @@
 package com.scrumretro.exception;
 
-public class AuthorizationException extends RuntimeException{
+/**
+ * 
+ * @author Sanju Thomas
+ *
+ */
+public class AuthorizationException extends Exception{
 
     private static final long serialVersionUID = 1L;
+    
+    private Integer errorCode;
 	
-	public AuthorizationException(final String message){
+	public AuthorizationException(final Integer errorCode, final String message){
 		super(message);
+		this.errorCode = errorCode;
 	}
+
+	public Integer getErrorCode() {
+		return errorCode;
+	}
+	
 }
