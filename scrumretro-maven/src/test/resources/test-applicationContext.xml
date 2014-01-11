@@ -42,6 +42,8 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean class="com.scrumretro.worker.UserWorker" />
 	
+	<bean class="com.scrumretro.worker.ItemWorker" />
+	
 	
 	<!-- authentication/authorization -->
 	

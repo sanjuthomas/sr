@@ -1,6 +1,5 @@
 package com.scrumretro.web.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,22 +40,18 @@ public class ItemService extends Service{
 	@RequestMapping(value = "/item/findById/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ItemResponse findById(@PathVariable("id") final String id){
-		final ItemResponse itemResponse = new ItemResponse();
-		return itemResponse;
+		return itemWorker.findById(id);
 	}
-	
 	
 	/**
 	 * This method shall find items for given project id.
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/item/findByProjectId/{projectId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/item/findByRetrospectiveId/{retrospectiveId}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ItemResponse> findByProjectId(@PathVariable("projectId") final String projectId){
-		final List<ItemResponse> items = new ArrayList<ItemResponse>();
-		
-		return items;
+	public List<ItemResponse> findByRetrospectiveId(@PathVariable("retrospectiveId") final String retrospectiveId){
+		return itemWorker.findByRetrospectiveId(retrospectiveId);
 	}
 
 }
