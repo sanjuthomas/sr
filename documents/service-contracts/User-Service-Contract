@@ -28,12 +28,13 @@ Sample Response :
 
 {
     "status" : "failed",
+    "errorCode" : "1903"
     "failedMessage" : "User does not exist.",
 }
 
 {
     "status" : "error",
-    "errorCode" : "1903",
+    "errorCode" : "1900",
     "errorMessage" : "System error. Please report to support@scrumretro.com",
 }
 
