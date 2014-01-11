@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.scrumretro.rest.Service;
 import com.scrumretro.security.authentication.ScrumRetroUser;
 import com.scrumretro.web.model.UserPasswordResetRequest;
 import com.scrumretro.web.model.UserRegistrationRequest;
@@ -25,7 +26,7 @@ import com.scrumretro.worker.UserWorker;
  * 
  */
 @Controller
-public class UserService {
+public class UserService extends Service{
 
 	@Autowired
 	private UserWorker userWorker;
