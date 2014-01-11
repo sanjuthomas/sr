@@ -1,11 +1,16 @@
 package com.scrumretro.web.service;
 
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,13 +55,31 @@ public class TestItemService {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(itemService).build();
 		this.itemService.setItemWorker(itemWorker);
 		when(itemWorker.findById(any(String.class))).thenReturn(createItemResponse());
+		final List<ItemResponse> items = new ArrayList<ItemResponse>();
+		items.add(createItemResponse());
+		when(itemWorker.findByRetrospectiveId(any(String.class))).thenReturn(items);
 	}
 	
 	@Test
 	public void shouldFindById() throws Exception{
 		mockMvc.perform(get("/item/findById/{id}", "i1"))
 		.andExpect(status().isOk())
-		.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8));
+		.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
+		.andExpect(jsonPath("$id", is("i1")))
+		.andExpect(jsonPath("$description", is("description")))
+		.andExpect(jsonPath("$projectName", is("projectName")))
+		.andExpect(jsonPath("$retrospectiveName", is("retrospectiveName")));
+	}
+	
+	@Test
+	public void shouldFindByRetrospectiveId() throws Exception{
+		mockMvc.perform(get("/item/findByRetrospectiveId/{retrospectiveId}", "r1"))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
+		.andExpect(jsonPath("$[0].id", is("i1")))
+		.andExpect(jsonPath("$[0].description", is("description")))
+		.andExpect(jsonPath("$[0].projectName", is("projectName")))
+		.andExpect(jsonPath("$[0].retrospectiveName", is("retrospectiveName")));
 	}
 	
 	private ItemResponse createItemResponse(){
