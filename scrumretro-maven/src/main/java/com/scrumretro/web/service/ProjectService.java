@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.scrumretro.rest.Service;
 import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 import com.scrumretro.worker.ProjectWorker;
@@ -22,7 +23,7 @@ import com.scrumretro.worker.ProjectWorker;
  * 
  */
 @Controller
-public class ProjectService {
+public class ProjectService extends Service{
 
 	@Autowired
 	private ProjectWorker projectWorker;
