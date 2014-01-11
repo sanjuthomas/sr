@@ -33,6 +33,8 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean class="com.scrumretro.web.service.UserService" />
 	
+	<bean class="com.scrumretro.web.service.ItemService" />
+	
 
 	<!-- worker classes -->
 
