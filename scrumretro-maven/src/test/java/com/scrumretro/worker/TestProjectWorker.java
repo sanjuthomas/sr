@@ -15,6 +15,8 @@ import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.security.authentication.ScrumRetroUser;
+import com.scrumretro.security.util.SecurityContextUtil;
 import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 
@@ -33,6 +35,12 @@ public class TestProjectWorker {
 	@Mock
 	private UserRepository mockUserRepository;
 	
+	@Mock 
+	private SecurityContextUtil mockSecurityContextUtil;
+	
+	@Mock
+	private ScrumRetroUser mockScrumRetroUser;
+	
 	
 	@Before
 	public void setUp(){
@@ -41,9 +49,12 @@ public class TestProjectWorker {
 		when(mockProjectRepository.findById(any(String.class))).thenReturn(project);
 		when(mockProjectRepository.save(any(Project.class))).thenReturn(project);
 		when(mockUserRepository.findByUserId(any(String.class))).thenReturn(createUser());
+		when(mockScrumRetroUser.getUsername()).thenReturn("info@scrumretro.com");
+		when(mockSecurityContextUtil.getUserProfile()).thenReturn(mockScrumRetroUser);
 		projectWorker = new ProjectWorker();
 		projectWorker.setProjectRepository(mockProjectRepository);
 		projectWorker.setUserRepository(mockUserRepository);
+		projectWorker.setSecurityContextUtil(mockSecurityContextUtil);
 	}
 	
 	@Test

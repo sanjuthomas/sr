@@ -1,5 +1,8 @@
 package com.scrumretro.worker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,6 +11,7 @@ import com.scrumretro.repository.ProjectRepository;
 import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.User;
+import com.scrumretro.security.util.SecurityContextUtil;
 import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 
@@ -25,7 +29,13 @@ public class ProjectWorker{
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private SecurityContextUtil securityContextUtil;
 	
+	public void setSecurityContextUtil(final SecurityContextUtil securityContextUtil) {
+		this.securityContextUtil = securityContextUtil;
+	}
+
 	public void setProjectRepository(final ProjectRepository projectRepository) {
 		this.projectRepository = projectRepository;
 	}
@@ -45,11 +55,6 @@ public class ProjectWorker{
 	}
 
 	/**
-	 * 	@Todo we have to wire the security context. possibly passed in from controller.
-	 *  controller should be kept clean, the only job of controller shall be used only for delegate.
-	 *  see the possibility of using HandlerMethodArgumentResolver, this can be done only 
-	 *  after the authentication is done.
-	 * 
 	 * This method shall take a project object and save it to db.
 	 * 
 	 * @param project
@@ -59,11 +64,25 @@ public class ProjectWorker{
 		return createProjectResponse(projectRepository.save(createProject(projectRequest)));
 	}
 	
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public List<ProjectResponse> findByUserId(String username) {
+		final List<Project> projects = projectRepository.findByOwner(username);
+		final List<ProjectResponse> projectResponses = new ArrayList<ProjectResponse>();
+		for(final Project project : projects){
+			projectResponses.add(createProjectResponse(project));
+		}
+		return projectResponses;
+	}
+	
 	
 	private Project createProject(final ProjectRequest projectRequest){
 		final Project project = new Project();
 		BeanUtils.copyProperties(projectRequest, project);
-		project.setOwner("testuser@scrumretro.com"); // grab it from authentication object when it's available.
+		project.setOwner(securityContextUtil.getUserProfile().getUsername()); 
 		return project;
 	}
 	

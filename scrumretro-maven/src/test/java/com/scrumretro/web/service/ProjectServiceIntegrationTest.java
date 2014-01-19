@@ -56,8 +56,9 @@ public class ProjectServiceIntegrationTest {
 	@Autowired
     private WebApplicationContext webApplicationContext;
 	
+	
 	@Before
-	public void setUp(){
+	public void setUp() throws Exception{
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 	
@@ -75,11 +76,17 @@ public class ProjectServiceIntegrationTest {
 	}
 	
 	@Test
+	@UsingDataSet(locations = {"/testData/user/user-unknow.json"})
 	public void shouldSaveProject() throws Exception{
 		this.mockMvc.perform(
 				post("/project/save/").content(createProjectRequest().toString())
 						.contentType(Response.APPLICATION_JSON_UTF8))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(Response.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$name", is("pname")))
+				.andExpect(jsonPath("$description", is("pdescription")))
+				.andExpect(jsonPath("$organization", is("organization")))
+				.andExpect(jsonPath("$ownerDisplayName", is("lastName, firstName")));
 	}
 	
 	private ProjectRequest createProjectRequest() {
