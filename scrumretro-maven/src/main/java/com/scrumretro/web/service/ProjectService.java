@@ -1,8 +1,11 @@
 package com.scrumretro.web.service;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scrumretro.rest.Service;
+import com.scrumretro.security.authentication.ScrumRetroUser;
 import com.scrumretro.web.model.ProjectRequest;
 import com.scrumretro.web.model.ProjectResponse;
 import com.scrumretro.worker.ProjectWorker;
@@ -56,6 +60,12 @@ public class ProjectService extends Service{
 	@ResponseBody
 	public ProjectResponse save(@Valid @RequestBody final ProjectRequest projectRequest){
 		return projectWorker.save(projectRequest);
+	}
+	
+	
+	public List<ProjectResponse> getMyProjects(final Authentication authentication){
+		final ScrumRetroUser currentUser = (ScrumRetroUser) authentication.getPrincipal();
+		return projectWorker.findByUserId(currentUser.getUsername());
 	}
 	
 }
