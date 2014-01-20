@@ -28,6 +28,16 @@ public class Item {
 	
 	private ItemType itemType;
 	
+	private Boolean active;
+	
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(final Boolean active) {
+		this.active = active;
+	}
 
 	public ItemType getItemType() {
 		return itemType;

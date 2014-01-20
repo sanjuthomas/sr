@@ -80,27 +80,9 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 		assertEquals(0, retrospectives.size());
 	}
 	
-	@Test
-	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
-	public void shouldFindByUserId(){
-		final List<Retrospective> retrospectives = retrospectiveRepository.findByUserId("info@scrumretro.com");
-		assertNotNull(retrospectives);
-		assertTrue(retrospectives.size() > 0);
-		assertEquals("retrospective-r1", retrospectives.get(0).getName());
-	}
-	
-	@Test
-	@UsingDataSet(locations = {"/testData/retrospective/retrospective-r1.json"})
-	public void shouldNotFindByUserId(){
-		final List<Retrospective> retrospectives = retrospectiveRepository.findByUserId("inf@scrumretro.com");
-		assertEquals(0, retrospectives.size());
-	}
-	
-	
 	private Retrospective createRetrospective(){
 		final Retrospective retrospective = new Retrospective();
 		retrospective.setName("retrospective-r1");
-		retrospective.setUserId("info@scrumretro.com");
 		retrospective.setProjectId("5270269044ae1440f787333a");
 		return retrospective;
 	}
