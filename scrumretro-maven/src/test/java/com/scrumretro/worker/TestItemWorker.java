@@ -23,6 +23,9 @@ import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.Retrospective;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
+import com.scrumretro.security.authentication.ScrumRetroUser;
+import com.scrumretro.security.util.SecurityContextUtil;
+import com.scrumretro.web.model.ItemRequest;
 import com.scrumretro.web.model.ItemResponse;
 
 /**
@@ -35,16 +38,22 @@ public class TestItemWorker {
 	private ItemWorker itemWorker;
 	
 	@Mock
-	private ItemRepository itemRepository;
+	private ItemRepository mockItemRepository;
 	
 	@Mock
-	private UserRepository userRepository;
+	private UserRepository mockUserRepository;
 	
 	@Mock
-	private RetrospectiveRepository retrospectiveRepository;
+	private RetrospectiveRepository mockRetrospectiveRepository;
 	
 	@Mock
-	private ProjectRepository projectRepository;
+	private ProjectRepository mockProjectRepository;
+	
+	@Mock
+	private SecurityContextUtil mockSecurityContextUtil;
+	
+	@Mock
+	private ScrumRetroUser scrumRetroUser;
 	
 	@Before
 	public void setUp(){
@@ -54,34 +63,58 @@ public class TestItemWorker {
 		setUpMockRetrospectiveRepository(itemWorker);
 		setUpMockUserRepository(itemWorker);
 		setUpMockProjectRepository(itemWorker);
+		setupMockSecurityContextUtil(itemWorker);
+	}
+	
+	private void setupMockSecurityContextUtil(final ItemWorker itemWorker){
+		when(scrumRetroUser.getUsername()).thenReturn("info@scrumretro.com");
+		when(mockSecurityContextUtil.getUserProfile()).thenReturn(scrumRetroUser);
+		itemWorker.setSecurityContextUtil(mockSecurityContextUtil);
 	}
 	
 	private void setUpMockProjectRepository(final ItemWorker itemWorker){
 		final Project project = createProject();
-		when(projectRepository.findById(any(String.class))).thenReturn(project);
-		itemWorker.setProjectRepository(projectRepository);
+		when(mockProjectRepository.findById(any(String.class))).thenReturn(project);
+		itemWorker.setProjectRepository(mockProjectRepository);
 	}
 	
 	private void setUpMockRetrospectiveRepository(final ItemWorker itemWorker){
 		final Retrospective retrospective = createRetrospective();
-		when(retrospectiveRepository.findById(any(String.class))).thenReturn(retrospective);
-		itemWorker.setRetrospectiveRepository(retrospectiveRepository);
+		when(mockRetrospectiveRepository.findById(any(String.class))).thenReturn(retrospective);
+		itemWorker.setRetrospectiveRepository(mockRetrospectiveRepository);
 	}
 	
 	private void setUpMockUserRepository(final ItemWorker itemWorker){
 		final User user = createUser();
-		when(userRepository.findByUserId(any(String.class))).thenReturn(user);
-		itemWorker.setUserRepository(userRepository);
+		when(mockUserRepository.findByUserId(any(String.class))).thenReturn(user);
+		itemWorker.setUserRepository(mockUserRepository);
 	}
 	
 	private void setUpMockItemRepository(final ItemWorker itemWorker){
 		final Item item = createItem();
 		final List<Item> items = new ArrayList<Item>();
 		items.add(item);
-		when(itemRepository.findById(any(String.class))).thenReturn(item);
-		when(itemRepository.findByRetrospectiveId(any(String.class))).thenReturn(items);
-		when(itemRepository.findByUserId(any(String.class))).thenReturn(items);
-		itemWorker.setItemRepository(itemRepository);
+		when(mockItemRepository.findById(any(String.class))).thenReturn(item);
+		when(mockItemRepository.save(any(Item.class))).thenReturn(item);
+		when(mockItemRepository.findByRetrospectiveId(any(String.class))).thenReturn(items);
+		when(mockItemRepository.findByUserId(any(String.class))).thenReturn(items);
+		itemWorker.setItemRepository(mockItemRepository);
+	}
+	
+	@Test
+	public void shouldSaveItem(){
+		final ItemResponse itemResponse = itemWorker.save(createItemRequest());
+		assertEquals("pname", itemResponse.getProjectName());
+		assertEquals("rname", itemResponse.getRetrospectiveName());
+		assertEquals("Stop Doing", itemResponse.getItemTypeDisplayString());
+	}
+	
+	private ItemRequest createItemRequest(){
+		final ItemRequest itemRequest = new ItemRequest();
+		itemRequest.setItemType(ItemType.START_DOING);
+		itemRequest.setDescription("description");
+		itemRequest.setRetrospectiveId("r1");
+		return itemRequest;
 	}
 	
 	@Test
@@ -163,7 +196,6 @@ public class TestItemWorker {
 		retrospective.setId("r1");
 		retrospective.setName("rname");
 		retrospective.setProjectId("p1");
-		retrospective.setUserId("info@scrumretro.com");
 		return retrospective;
 	}
 

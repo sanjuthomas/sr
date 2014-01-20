@@ -14,8 +14,6 @@ public interface RetrospectiveRepository extends PagingAndSortingRepository<Retr
 
 	List<Retrospective> findByProjectId(final String projectId);
 
-	List<Retrospective> findByUserId(final String userId);
-	
 	Retrospective findById(final String id);
 
 }
