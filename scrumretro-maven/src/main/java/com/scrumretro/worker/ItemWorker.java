@@ -14,6 +14,8 @@ import com.scrumretro.repository.model.Item;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.Retrospective;
 import com.scrumretro.repository.model.User;
+import com.scrumretro.security.util.SecurityContextUtil;
+import com.scrumretro.web.model.ItemRequest;
 import com.scrumretro.web.model.ItemResponse;
 
 /**
@@ -35,7 +37,13 @@ public class ItemWorker {
 	@Autowired
 	private ProjectRepository projectRepository;
 	
+	@Autowired
+	private SecurityContextUtil securityContextUtil;
 	
+	public void setSecurityContextUtil(final SecurityContextUtil securityContextUtil) {
+		this.securityContextUtil = securityContextUtil;
+	}
+
 	public void setRetrospectiveRepository(
 			final RetrospectiveRepository retrospectiveRepository) {
 		this.retrospectiveRepository = retrospectiveRepository;
@@ -51,6 +59,18 @@ public class ItemWorker {
 	
 	public void setProjectRepository(final ProjectRepository projectRepository) {
 		this.projectRepository = projectRepository;
+	}
+	
+	/**
+	 * This method shall take an item and save it in the mongodb repository.
+	 * 
+	 * @param itemRequest
+	 */
+	public ItemResponse save(final ItemRequest itemRequest){
+		final Item item = new Item();
+		BeanUtils.copyProperties(itemRequest, item);
+		item.setUserId(securityContextUtil.getUserProfile().getUsername());
+		return createItemResponse(itemRepository.save(item));
 	}
 
 	/**
