@@ -1,6 +1,12 @@
 package com.scrumretro.web.service;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.scrumretro.rest.Service;
+import com.scrumretro.web.model.RetrospectiveResponse;
 import com.scrumretro.worker.RetrospectiveWorker;
 
 /**
@@ -16,4 +22,18 @@ public class RetrospectiveService extends Service{
 		this.retrospectiveWorker = retrospectiveWorker;
 	}
 
+	/**
+	 * This method shall find the Retrospective and c
+	 * 
+	 * @param id
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/retrospective/findById/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public RetrospectiveResponse findById(@PathVariable("id") final String id){
+		return retrospectiveWorker.findById(id);
+	}
+	
+	
 }
