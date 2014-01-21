@@ -35,6 +35,8 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean class="com.scrumretro.web.service.ItemService" />
 	
+	<bean class="com.scrumretro.web.service.RetrospectiveService" />
+	
 
 	<!-- worker classes -->
 
