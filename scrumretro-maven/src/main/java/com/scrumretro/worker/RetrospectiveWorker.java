@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.scrumretro.repository.RetrospectiveRepository;
 import com.scrumretro.repository.model.Retrospective;
+import com.scrumretro.web.model.RetrospectiveRequest;
 import com.scrumretro.web.model.RetrospectiveResponse;
 
 /**
@@ -34,6 +35,18 @@ public class RetrospectiveWorker {
 	 */
 	public RetrospectiveResponse findById(final String id){
 		return createRetrospectiveResponse(retrospectiveRepository.findById(id));
+	}
+	
+	/**
+	 * This method shall take RetrospectiveRequest and save it into mongodb.
+	 * 
+	 * @param retrospectiveRequest
+	 * @return
+	 */
+	public RetrospectiveResponse save(final RetrospectiveRequest retrospectiveRequest){
+		final Retrospective retrospective = new Retrospective();
+		BeanUtils.copyProperties(retrospectiveRequest, retrospective);
+		return createRetrospectiveResponse(retrospectiveRepository.save(retrospective));
 	}
 	
 	private RetrospectiveResponse createRetrospectiveResponse(final Retrospective retrospective){
