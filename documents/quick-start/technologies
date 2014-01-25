@@ -1,0 +1,8 @@
+This document contains tools and librarires used in scrumretro.com
+
+
+java version 7
+tomcat version 7
+mongo db version 2.49
+
+other libraries : refer pom.xml
