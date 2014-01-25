@@ -14,6 +14,8 @@ public class RetrospectiveResponse extends Response{
 	private String name;
 	
 	private String projectId;
+	
+	private String projectName;
 
 	public String getId() {
 		return id;
@@ -37,6 +39,14 @@ public class RetrospectiveResponse extends Response{
 
 	public void setProjectId(final String projectId) {
 		this.projectId = projectId;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(final String projectName) {
+		this.projectName = projectName;
 	}
 	
 }
