@@ -12,6 +12,10 @@ public class ItemResponse extends Response{
 	
 	private String id;
 	
+	private String repositoryId;
+	
+	private String projectId;
+	
 	private String description;
 	
 	private String ownerDisplayName;
@@ -33,6 +37,22 @@ public class ItemResponse extends Response{
 
 	public void setId(final String id) {
 		this.id = id;
+	}
+	
+	public String getRepositoryId() {
+		return repositoryId;
+	}
+
+	public void setRepositoryId(final String repositoryId) {
+		this.repositoryId = repositoryId;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(final String projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getDescription() {
