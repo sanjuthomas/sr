@@ -63,6 +63,8 @@ public class ProjectService extends Service{
 	}
 	
 	
+	@RequestMapping(value = "/project/myProjects/}", method = RequestMethod.GET)
+	@ResponseBody
 	public List<ProjectResponse> getMyProjects(final Authentication authentication){
 		final ScrumRetroUser currentUser = (ScrumRetroUser) authentication.getPrincipal();
 		return projectWorker.findByUserId(currentUser.getUsername());
