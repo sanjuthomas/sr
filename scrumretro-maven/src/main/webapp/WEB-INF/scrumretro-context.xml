@@ -7,7 +7,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.2.xsd">
 
 
-	<description>test application context configuration</description>
+	<description>application context configuration</description>
     
 	<context:component-scan base-package="com.scrumretro.*" />
 	
@@ -27,11 +27,25 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	<bean id="scrumRetroAuditor" class="com.scrumretro.repository.audit.ScrumRetroAuditor"/>
 	
 	
+	<!-- service classes -->
+	
+	<bean class="com.scrumretro.web.service.ProjectService" />
+	
+	<bean class="com.scrumretro.web.service.UserService" />
+	
+	<bean class="com.scrumretro.web.service.ItemService" />
+	
+	<bean class="com.scrumretro.web.service.RetrospectiveService" />
+	
 	<!-- worker classes -->
-
+	
 	<bean class="com.scrumretro.worker.ProjectWorker" />
 	
-	<bean class="com.scrumretro.worker.UserWorker" /> 
+	<bean class="com.scrumretro.worker.UserWorker" />
+	
+	<bean class="com.scrumretro.worker.ItemWorker" />
+	
+	<bean class="com.scrumretro.worker.RetrospectiveWorker" />
 	
 	
 	<!-- authentication/authorization -->
@@ -39,7 +53,6 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	<bean class="com.scrumretro.security.util.SecurityContextUtil" />
 	
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-	
 	
 	
 </beans>
