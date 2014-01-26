@@ -71,10 +71,9 @@
 
 		<!-- servlet, only for compile time -->
 		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.servlet</artifactId>
-			<version>3.0</version>
-			<scope>test</scope>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>7.0.0</version>
 		</dependency>
 
 		<!-- mongo java driver -->
