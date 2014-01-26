@@ -1,5 +1,6 @@
 package com.scrumretro.web.model;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -25,7 +26,7 @@ public class RetrospectiveRequest extends Request {
 	@Size(max=512)
 	private String name;
 	
-	@NotEmpty
+	@NotNull
 	private DateTime time;
 
 	public String getId() {
