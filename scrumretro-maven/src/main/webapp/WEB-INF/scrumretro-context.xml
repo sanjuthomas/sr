@@ -26,31 +26,7 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean id="scrumRetroAuditor" class="com.scrumretro.repository.audit.ScrumRetroAuditor"/>
 	
-	
-	<!-- service classes -->
-	
-	<bean class="com.scrumretro.web.service.ItemService" />
-	
-	<bean class="com.scrumretro.web.service.RetrospectiveService" />
-	
-	<bean class="com.scrumretro.web.service.ProjectService" />
-	
-	<bean class="com.scrumretro.web.service.UserService" />
-	
-	<!-- worker classes -->
-	
-	<bean class="com.scrumretro.worker.ProjectWorker" />
-	
-	<bean class="com.scrumretro.worker.UserWorker" />
-	
-	<bean class="com.scrumretro.worker.ItemWorker" />
-	
-	<bean class="com.scrumretro.worker.RetrospectiveWorker" />
-	
-	
 	<!-- authentication/authorization -->
-	
-	<bean class="com.scrumretro.security.util.SecurityContextUtil" />
 	
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
