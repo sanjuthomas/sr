@@ -1,0 +1,5 @@
+To build war run mvn clean install
+
+to exlode war for development in eclipse run mvn compile war:inplace
+
+to start scrumretro in eclipse, add the tomcat 7 server and attach the code.
