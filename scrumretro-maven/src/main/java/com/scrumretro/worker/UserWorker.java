@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.scrumretro.repository.EmailRepository;
 import com.scrumretro.repository.UserRepository;
@@ -19,6 +20,7 @@ import com.scrumretro.web.model.UserResponse;
  * @author Ragil
  *
  */
+@Component
 public class UserWorker {
 
 	@Autowired
