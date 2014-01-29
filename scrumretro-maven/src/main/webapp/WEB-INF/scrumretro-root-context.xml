@@ -9,11 +9,13 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 
 	<description>application context configuration</description>
     
-	<context:component-scan base-package="com.scrumretro.*" />
-	
+	<context:component-scan base-package="com.scrumretro.worker.*" />
+
+	<context:component-scan base-package="com.scrumretro.security.util.*" />
+		
 	<!-- mongo configuration -->
 	
-	<mongo:mongo id="mongo-test" />
+	<mongo:mongo id="mongo" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo" />

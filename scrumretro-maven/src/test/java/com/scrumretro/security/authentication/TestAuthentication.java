@@ -32,11 +32,11 @@ import com.scrumretro.web.service.UserService;
 /**
  * 
  * @author Ragil
- *
+ * 
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-applicationContext.xml","classpath:test-applicationSecurity.xml" })
+@ContextConfiguration(locations = { "classpath:test-root-context.xml", "classpath:test-servlet-context.xml", "classpath:test-security-context.xml" })
 public class TestAuthentication {
 
 	@Mock

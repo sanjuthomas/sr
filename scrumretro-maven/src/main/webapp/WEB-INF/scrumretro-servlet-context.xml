@@ -62,8 +62,8 @@
 	</bean>
 	
 
-    <import resource="scrumretro-context.xml"/>
-	<import resource="scrumretro-security.xml"/>
+    <import resource="scrumretro-root-context.xml"/>
+	<import resource="scrumretro-security-context.xml"/>
 	
 	
 	
