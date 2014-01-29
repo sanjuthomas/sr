@@ -7,7 +7,6 @@ import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 
 import com.scrumretro.repository.ProjectRepository;
 import com.scrumretro.repository.model.Project;
