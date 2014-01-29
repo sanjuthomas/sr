@@ -9,7 +9,7 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 
 	<description>test application context configuration</description>
 
-	<context:component-scan base-package="com.ourownjava.*" />
+	<context:component-scan base-package="com.scrumretro.*" />
 	
 	<!-- mongo configuration -->
 	
@@ -29,29 +29,11 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<!-- service/controller classes -->
 
-	<bean class="com.scrumretro.web.service.ProjectService" />
 	
-	<bean class="com.scrumretro.web.service.UserService" />
-	
-	<bean class="com.scrumretro.web.service.ItemService" />
-	
-	<bean class="com.scrumretro.web.service.RetrospectiveService" />
-	
-
-	<!-- worker classes -->
-
-	<bean class="com.scrumretro.worker.ProjectWorker" />
-	
-	<bean class="com.scrumretro.worker.UserWorker" />
-	
-	<bean class="com.scrumretro.worker.ItemWorker" />
-	
-	<bean class="com.scrumretro.worker.RetrospectiveWorker" />
 	
 	
 	<!-- authentication/authorization -->
 	
-	<bean class="com.scrumretro.security.util.SecurityContextUtil" />
 	
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
