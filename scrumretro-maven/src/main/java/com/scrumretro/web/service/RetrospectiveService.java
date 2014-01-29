@@ -1,5 +1,6 @@
 package com.scrumretro.web.service;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import com.scrumretro.worker.RetrospectiveWorker;
  * @author Sanju Thomas
  *
  */
+@Controller
 public class RetrospectiveService extends Service{
 	
 	private RetrospectiveWorker retrospectiveWorker;
