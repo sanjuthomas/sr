@@ -21,7 +21,7 @@ import com.scrumretro.security.util.SecurityContextUtil;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:test-root-context.xml" })
 public class TestScrumRetroAuditor {
 
 	@Mock

@@ -34,7 +34,7 @@ import com.scrumretro.repository.model.UserDetail;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-applicationContext.xml", "classpath:test-applicationSecurity.xml" })
+@ContextConfiguration(locations = {"classpath:test-root-context.xml", "classpath:test-security-context.xml" })
 public class TestScrumRetroUserDetailsAuthenticationProvider {
 	
 	@Autowired

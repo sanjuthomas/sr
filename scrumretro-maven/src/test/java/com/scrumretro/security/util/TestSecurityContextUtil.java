@@ -21,7 +21,7 @@ import com.scrumretro.security.authentication.ScrumRetroUser;
  * @author Ragil 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:test-root-context.xml" })
 public class TestSecurityContextUtil {
 
 	@Autowired

@@ -9,7 +9,9 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 
 	<description>test application context configuration</description>
 
-	<context:component-scan base-package="com.scrumretro.*" />
+	<context:component-scan base-package="com.scrumretro.worker*" />
+
+	<context:component-scan base-package="com.scrumretro.security.util*" />
 	
 	<!-- mongo configuration -->
 	
@@ -25,11 +27,6 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	<mongo:auditing auditor-aware-ref="scrumRetroAuditor" />
 	
 	<bean id="scrumRetroAuditor" class="com.scrumretro.repository.audit.ScrumRetroAuditor"/>
-	
-	
-	<!-- service/controller classes -->
-
-	
 	
 	
 	<!-- authentication/authorization -->

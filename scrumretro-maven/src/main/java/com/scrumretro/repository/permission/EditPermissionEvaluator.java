@@ -17,7 +17,6 @@ import com.scrumretro.repository.model.Project;
  * @author Sanju Thomas
  *
  */
-@Component
 public class EditPermissionEvaluator implements PermissionEvaluator{
 	
 	@Autowired
