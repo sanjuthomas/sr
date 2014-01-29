@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<!-- Disable security on static resources 
-	<security:http pattern="/resources/**" security="none" />-->
 
 	<!-- Enable Spring Security -->
 	<security:http pattern="/sr/**" entry-point-ref="restAuthenticationEntryPoint"
