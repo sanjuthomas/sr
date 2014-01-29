@@ -28,7 +28,7 @@ import com.scrumretro.worker.RetrospectiveWorker;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:test-root-context.xml", "classpath:test-servlet-context.xml" })
 public class TestRetrospectiveService {
 	
 	@Autowired

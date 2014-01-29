@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-applicationContext.xml", "classpath:test-applicationSecurity.xml"})
+@ContextConfiguration(locations = {"classpath:test-root-context.xml", "classpath:test-security-context.xml"})
 public class TestFilterChainProxy {
 	
 	@Autowired

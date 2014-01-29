@@ -36,7 +36,7 @@ import com.scrumretro.web.model.UserRegistrationRequest;
  */
 @Category(IntegrationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-applicationContext.xml","classpath:test-applicationWebContext.xml" })
+@ContextConfiguration(locations = { "classpath:test-root-context.xml","classpath:test-servlet-context.xml" })
 @WebAppConfiguration
 public class UserServiceIntegrationTest {
 
