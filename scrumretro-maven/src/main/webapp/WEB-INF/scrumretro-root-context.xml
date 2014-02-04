@@ -6,7 +6,6 @@
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.2.xsd">
 
-
 	<description>application context configuration</description>
     
 	<context:component-scan base-package="com.scrumretro.worker.*" />
@@ -32,5 +31,10 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
+	<bean id="itemWorker" class="com.scrumretro.worker.ItemWorker"/>
+	<bean id="projectWorker" class="com.scrumretro.worker.ProjectWorker"/>
+	<bean id="retrospectiveWorker" class="com.scrumretro.worker.RetrospectiveWorker"/>
+	<bean id="userWorker" class="com.scrumretro.worker.UserWorker"/>
 	
+	<bean id="securityContextUtil" class="com.scrumretro.security.util.SecurityContextUtil"/>
 </beans>
