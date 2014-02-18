@@ -13,6 +13,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import com.scrumretro.exception.ScrumRetroRuntimeException;
+import com.scrumretro.rest.Message;
 
 /**
  * 
@@ -61,8 +62,15 @@ public class WebSocket {
 		throw new ScrumRetroRuntimeException("Error occurred in WebSocket", t);
 	}
 
-	public void broadcast(final String message) throws IOException {
-		this.getSession().getBasicRemote().sendText(message);
+	public void broadcast(final Message message) throws IOException {
+		
+		for(final String userId : connections.keySet()){
+			if(message.getProject().getMembers().contains(userId));
+			this.getSession().getBasicRemote().sendText(message.toString());
+		}
+		
+		
+		
 	}
 
 }

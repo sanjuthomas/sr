@@ -1,6 +1,7 @@
 package com.scrumretro.rest;
 
 import com.scrumretro.enums.MessageType;
+import com.scrumretro.repository.model.Project;
 
 /**
  * 
@@ -13,7 +14,7 @@ public class Message {
 	
 	private String userId;
 	
-	private String project;
+	private Project project;
 
 	public MessageType getMessageType() {
 		return messageType;
@@ -31,11 +32,11 @@ public class Message {
 		this.userId = userId;
 	}
 
-	public String getProject() {
+	public Project getProject() {
 		return project;
 	}
 
-	public void setProject(final String project) {
+	public void setProject(final Project project) {
 		this.project = project;
 	}
 
