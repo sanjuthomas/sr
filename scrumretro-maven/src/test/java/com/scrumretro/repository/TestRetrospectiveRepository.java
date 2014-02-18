@@ -23,6 +23,7 @@ import com.foursquare.fongo.Fongo;
 import com.lordofthejars.nosqlunit.annotation.ShouldMatchDataSet;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.mongodb.Mongo;
+import com.scrumretro.enums.RetrospectiveStatus;
 import com.scrumretro.repository.model.Retrospective;
 import com.scrumretro.test.BaseUnitTest;
 
@@ -84,6 +85,7 @@ public class TestRetrospectiveRepository extends BaseUnitTest{
 		final Retrospective retrospective = new Retrospective();
 		retrospective.setName("retrospective-r1");
 		retrospective.setProjectId("5270269044ae1440f787333a");
+		retrospective.setRetrospectiveStatus(RetrospectiveStatus.OPEN);
 		return retrospective;
 	}
 	
