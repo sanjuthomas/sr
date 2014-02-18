@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.scrumretro.enums.RetrospectiveStatus;
+
 /**
  * 
  * @author Sanju Thomas
@@ -21,6 +23,8 @@ public class Retrospective {
 	private String projectId;
 	
 	private Timestamp meetingTime;
+	
+	private RetrospectiveStatus retrospectiveStatus;
 
 	public String getId() {
 		return id;
@@ -52,6 +56,14 @@ public class Retrospective {
 
 	public void setMeetingTime(final Timestamp meetingTime) {
 		this.meetingTime = (Timestamp) meetingTime.clone();
+	}
+	
+	public RetrospectiveStatus getRetrospectiveStatus() {
+		return retrospectiveStatus;
+	}
+
+	public void setRetrospectiveStatus(final RetrospectiveStatus retrospectiveStatus) {
+		this.retrospectiveStatus = retrospectiveStatus;
 	}
 
 	@Override
