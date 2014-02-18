@@ -19,13 +19,10 @@ import com.scrumretro.exception.InvalidPathException;
 public class ViewResolver extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 		String contextPath = request.getContextPath();
 		String requestURI = request.getRequestURI();
-		System.out.println("contextPath.."+contextPath);
-		System.out.println("requestURI.."+requestURI);
 		String dispatchURL = getDispatchPath(contextPath, requestURI);
-		System.out.println(dispatchURL);
 		request.getRequestDispatcher(dispatchURL).forward(request, response);
 	}
 	protected String getDispatchPath(String contextPath, String requestURI){
