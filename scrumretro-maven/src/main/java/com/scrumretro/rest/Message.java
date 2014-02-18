@@ -1,5 +1,9 @@
 package com.scrumretro.rest;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.scrumretro.enums.MessageType;
 import com.scrumretro.repository.model.Project;
 
@@ -39,5 +43,14 @@ public class Message {
 	public void setProject(final Project project) {
 		this.project = project;
 	}
-
+	
+	@Override
+	public String toString(){
+		final ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(this.messageType.getDescription());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
