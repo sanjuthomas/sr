@@ -64,8 +64,8 @@ public class WebSocket {
 
 	public void broadcast(final Message message) throws IOException {
 		
-		//the logic shall be reversed if possible for better peformance
-		//that is interate thru project memebers and deliver message only to those.
+		//the logic shall be reversed if possible for better performance
+		//that is iterate thru project members and deliver message only to those.
 		for(final String userId : connections.keySet()){
 			if(message.getProject().getMembers().contains(userId));
 			this.getSession().getBasicRemote().sendText(message.toString());
