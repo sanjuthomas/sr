@@ -15,6 +15,10 @@ public class ScrumRetroRuntimeException extends RuntimeException{
 		this.scrumRetroException = scrumRetroException;
 	}
 	
+	public ScrumRetroRuntimeException(String message, Throwable t) {
+		super(message, t);
+	}
+
 	public String getMessage(){
 		return this.scrumRetroException.getMessage();
 	}
@@ -22,4 +26,6 @@ public class ScrumRetroRuntimeException extends RuntimeException{
 	public Integer getErrorCode(){
 		return this.scrumRetroException.getErrorCode();
 	}
+	
+	
 }
