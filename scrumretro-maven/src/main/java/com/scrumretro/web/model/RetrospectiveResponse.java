@@ -16,6 +16,8 @@ public class RetrospectiveResponse extends Response{
 	private String projectId;
 	
 	private String projectName;
+	
+	private String statusDisplayString;
 
 	public String getId() {
 		return id;
@@ -47,6 +49,14 @@ public class RetrospectiveResponse extends Response{
 
 	public void setProjectName(final String projectName) {
 		this.projectName = projectName;
+	}
+
+	public String getStatusDisplayString() {
+		return statusDisplayString;
+	}
+
+	public void setStatusDisplayString(String statusDisplayString) {
+		this.statusDisplayString = statusDisplayString;
 	}
 	
 }

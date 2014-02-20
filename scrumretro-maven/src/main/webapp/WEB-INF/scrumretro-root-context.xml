@@ -37,4 +37,5 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	<bean id="userWorker" class="com.scrumretro.worker.UserWorker"/>
 	
 	<bean id="securityContextUtil" class="com.scrumretro.security.util.SecurityContextUtil"/>
+	<bean id="notificationUtil" class="com.scrumretro.web.util.NotificationUtil"/>
 </beans>
