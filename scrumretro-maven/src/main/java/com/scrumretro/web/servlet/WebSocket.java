@@ -71,5 +71,13 @@ public class WebSocket {
 			this.getSession().getBasicRemote().sendText(message.toString());
 		}
 	}
+	
+   public void broadcast(final String message) throws IOException {
+		 this.getSession().getBasicRemote().sendText(message.toString());
+	}
+   
+   public static Map<String, WebSocket> getConnections(){
+	   return connections;
+   }
 
 }
