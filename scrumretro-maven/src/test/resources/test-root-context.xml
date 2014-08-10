@@ -34,5 +34,4 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 	
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
-	<bean id="notificationUtil" class="com.scrumretro.web.util.NotificationUtil"/>
 </beans>
