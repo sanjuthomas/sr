@@ -5,8 +5,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +21,6 @@ import com.scrumretro.security.authentication.ScrumRetroUser;
 import com.scrumretro.security.util.SecurityContextUtil;
 import com.scrumretro.web.model.RetrospectiveRequest;
 import com.scrumretro.web.model.RetrospectiveResponse;
-import com.scrumretro.web.util.NotificationUtil;
 
 /**
  * 
@@ -46,9 +43,6 @@ public class TestRetrospectiveWorker {
 	private SecurityContextUtil mockSecurityContextUtil;
 	
 	@Mock
-	private NotificationUtil notificationUtil;
-	
-	@Mock
 	private ScrumRetroUser scrumRetroUser;
 	
 	@Before
@@ -68,11 +62,6 @@ public class TestRetrospectiveWorker {
 		when(scrumRetroUser.getUsername()).thenReturn(userName);
 		when(mockSecurityContextUtil.getUserProfile()).thenReturn(scrumRetroUser);
 		retrospectiveWorker.setSecurityContextUtil(mockSecurityContextUtil);
-	}
-	
-	private void setupNotificationUtil(){
-		when(notificationUtil.notifyOpenForVote(any(Project.class),any(Retrospective.class))).thenReturn(new ArrayList<String>());
-		retrospectiveWorker.setNotificationUtil(notificationUtil);
 	}
 	
 	
@@ -111,7 +100,6 @@ public class TestRetrospectiveWorker {
 	@Test
 	public void shouldUpdateOpenForVote(){
 		setupMockSecurityContextUtil(retrospectiveWorker,"info@scrumretro.com");
-		setupNotificationUtil();
 		RetrospectiveResponse retrospectiveResponse = retrospectiveWorker.openForVote("r1");
 		assertEquals("r1", retrospectiveResponse.getId());
 		assertEquals("Open For Voting", retrospectiveResponse.getStatusDisplayString());
