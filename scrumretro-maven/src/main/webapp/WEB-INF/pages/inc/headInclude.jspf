@@ -1,7 +1,0 @@
-<%
-	String contextPath = request.getContextPath();
-	String jspHome = contextPath + "/WEB-INF/pages";
-%>
-<script language="javascript">
-var contextPath = '<%=contextPath%>';
-</script>
