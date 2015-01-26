@@ -11,9 +11,9 @@ import com.scrumretro.repository.UserRepository;
 import com.scrumretro.repository.model.Email;
 import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
-import com.scrumretro.web.model.UserPasswordResetRequest;
-import com.scrumretro.web.model.UserRegistrationRequest;
-import com.scrumretro.web.model.UserResponse;
+import com.scrumretro.web.model.request.UserPasswordResetRequest;
+import com.scrumretro.web.model.request.UserRegistrationRequest;
+import com.scrumretro.web.model.response.UserResponse;
 
 /**
  * 

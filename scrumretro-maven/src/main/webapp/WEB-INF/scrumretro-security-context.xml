@@ -18,7 +18,7 @@
 		<security:intercept-url pattern="/sr/logout"
 			access="permitAll()" />
 		<security:intercept-url pattern="/sr/**"
-			access="hasRole('ROLE_USER')" />
+			access="hasRole('AUTHENTICATED_USER')" />
 
 		<!-- Adds the custom login filter to Spring Security filter chain -->
 		<security:custom-filter ref="loginFilter"

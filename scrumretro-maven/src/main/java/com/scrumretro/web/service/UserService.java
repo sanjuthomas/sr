@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scrumretro.rest.Service;
 import com.scrumretro.security.authentication.ScrumRetroUser;
-import com.scrumretro.web.model.UserPasswordResetRequest;
-import com.scrumretro.web.model.UserRegistrationRequest;
-import com.scrumretro.web.model.UserResponse;
+import com.scrumretro.web.model.request.UserPasswordResetRequest;
+import com.scrumretro.web.model.request.UserRegistrationRequest;
+import com.scrumretro.web.model.response.UserResponse;
 import com.scrumretro.worker.UserWorker;
 
 /**

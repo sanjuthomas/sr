@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scrumretro.rest.Service;
-import com.scrumretro.web.model.ItemRequest;
-import com.scrumretro.web.model.ItemResponse;
+import com.scrumretro.web.model.request.ItemRequest;
+import com.scrumretro.web.model.response.ItemResponse;
 import com.scrumretro.worker.ItemWorker;
 
 /**

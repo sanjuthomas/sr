@@ -12,8 +12,8 @@ import com.scrumretro.repository.RetrospectiveRepository;
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.repository.model.Retrospective;
 import com.scrumretro.security.util.SecurityContextUtil;
-import com.scrumretro.web.model.RetrospectiveRequest;
-import com.scrumretro.web.model.RetrospectiveResponse;
+import com.scrumretro.web.model.request.RetrospectiveRequest;
+import com.scrumretro.web.model.response.RetrospectiveResponse;
 
 /**
  * 

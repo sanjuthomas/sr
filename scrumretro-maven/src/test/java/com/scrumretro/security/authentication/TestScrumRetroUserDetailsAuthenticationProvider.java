@@ -75,11 +75,10 @@ public class TestScrumRetroUserDetailsAuthenticationProvider {
 		final ScrumRetroUser scrumRetroUser =(ScrumRetroUser) authentication.getPrincipal();
 		assertEquals("firstName", scrumRetroUser.getFirstName());
 		assertEquals("lastName", scrumRetroUser.getLastName());
-		assertEquals("organization", scrumRetroUser.getOrganization());
 		assertEquals("password", scrumRetroUser.getPassword());
 		assertEquals("info@scrumretro.com", scrumRetroUser.getUsername());
 		assertFalse(scrumRetroUser.getAuthorities().isEmpty());
-		assertEquals(ScrumRetroRoles.ROLE_USER.getKey(), scrumRetroUser.getAuthorities().
+		assertEquals(ScrumRetroRoles.AUTHENTICATED_USER.getKey(), scrumRetroUser.getAuthorities().
 				iterator().next().getAuthority());
 	}
 	

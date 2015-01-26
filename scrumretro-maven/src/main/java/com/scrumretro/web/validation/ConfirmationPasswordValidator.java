@@ -5,8 +5,8 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.scrumretro.web.model.UserPasswordResetRequest;
-import com.scrumretro.web.model.UserRegistrationRequest;
+import com.scrumretro.web.model.request.UserPasswordResetRequest;
+import com.scrumretro.web.model.request.UserRegistrationRequest;
 
 /**
  * 

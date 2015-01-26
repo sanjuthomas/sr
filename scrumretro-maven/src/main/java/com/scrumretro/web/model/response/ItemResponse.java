@@ -1,4 +1,4 @@
-package com.scrumretro.web.model;
+package com.scrumretro.web.model.response;
 
 import com.scrumretro.rest.Response;
 

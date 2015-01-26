@@ -49,12 +49,12 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 			final UsernamePasswordAuthenticationToken authentication)throws AuthenticationException {
 		
 		if (null == authentication.getCredentials()) {
-			logger.debug("No password is provided for user "+userDetails.getUsername());
+			logger.warn("No password is provided for user "+userDetails.getUsername());
 			throw new BadCredentialsException("No password is provided for user "+userDetails.getUsername());
 		}
 		
 		if(!bCryptPasswordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())){
-			 logger.debug("Authentication failed for user "+userDetails.getUsername());
+			 logger.warn("Authentication failed for user "+userDetails.getUsername());
 			 throw new BadCredentialsException("Incorrect password is provided for user "+userDetails.getUsername());
 		}
 		
@@ -74,18 +74,18 @@ public class ScrumRetroUserDetailsAuthenticationProvider extends AbstractUserDet
 		}
 		
 		if(null == user){
-			logger.debug(username + "is not found in the scrumretro.com");
+			logger.warn(username + "is not found in the scrumretro.com");
 			throw new UsernameNotFoundException(username + "is not registered with scrumretro.com");
 		}
 		
 		logger.info(username + " is found in scrumretro.com");
 		final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(ScrumRetroRoles.ROLE_USER.getKey());
+		final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(ScrumRetroRoles.AUTHENTICATED_USER.getKey());
 		grantedAuthorities.add(simpleGrantedAuthority);
 		
 		return new ScrumRetroUser(user.getUserId(), user.getPassword(),
-				user.getActive(), user.getUserDetail().getFirstName(), user.getUserDetail().getLastName(), 
-				user.getUserDetail().getOrganization(), grantedAuthorities);
+				user.getActive(), user.getUserDetail().getFirstName(), 
+				user.getUserDetail().getLastName(),  grantedAuthorities);
 	}
 
 }

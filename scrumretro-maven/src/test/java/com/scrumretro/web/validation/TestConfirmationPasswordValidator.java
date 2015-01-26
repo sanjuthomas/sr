@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.scrumretro.web.model.UserPasswordResetRequest;
-import com.scrumretro.web.model.UserRegistrationRequest;
+import com.scrumretro.web.model.request.UserPasswordResetRequest;
+import com.scrumretro.web.model.request.UserRegistrationRequest;
 
 /**
  * 

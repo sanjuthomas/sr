@@ -24,8 +24,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.scrumretro.repository.model.Project;
 import com.scrumretro.rest.Response;
-import com.scrumretro.web.model.ProjectRequest;
-import com.scrumretro.web.model.ProjectResponse;
+import com.scrumretro.web.model.request.ProjectRequest;
+import com.scrumretro.web.model.response.ProjectResponse;
 import com.scrumretro.worker.ProjectWorker;
 
 /**

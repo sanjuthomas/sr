@@ -1,4 +1,4 @@
-package com.scrumretro.web.model;
+package com.scrumretro.web.model.request;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

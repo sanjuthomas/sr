@@ -1,4 +1,4 @@
-package com.scrumretro.web.model;
+package com.scrumretro.web.model.request;
 
 import com.scrumretro.enums.ItemType;
 import com.scrumretro.rest.Request;

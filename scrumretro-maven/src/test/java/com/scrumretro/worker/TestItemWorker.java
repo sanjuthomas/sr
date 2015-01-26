@@ -25,8 +25,8 @@ import com.scrumretro.repository.model.User;
 import com.scrumretro.repository.model.UserDetail;
 import com.scrumretro.security.authentication.ScrumRetroUser;
 import com.scrumretro.security.util.SecurityContextUtil;
-import com.scrumretro.web.model.ItemRequest;
-import com.scrumretro.web.model.ItemResponse;
+import com.scrumretro.web.model.request.ItemRequest;
+import com.scrumretro.web.model.response.ItemResponse;
 
 /**
  * 

@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.scrumretro.rest.Response;
-import com.scrumretro.web.model.RetrospectiveResponse;
+import com.scrumretro.web.model.response.RetrospectiveResponse;
 import com.scrumretro.worker.RetrospectiveWorker;
 
 /**

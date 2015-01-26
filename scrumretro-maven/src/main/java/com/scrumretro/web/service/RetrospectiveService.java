@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scrumretro.rest.Service;
-import com.scrumretro.web.model.RetrospectiveResponse;
+import com.scrumretro.web.model.response.RetrospectiveResponse;
 import com.scrumretro.worker.RetrospectiveWorker;
 
 /**

@@ -23,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.scrumretro.rest.Response;
 import com.scrumretro.test.IntegrationTest;
-import com.scrumretro.web.model.UserRegistrationRequest;
+import com.scrumretro.web.model.request.UserRegistrationRequest;
 
 /**
  * Integration test cases for UserService.

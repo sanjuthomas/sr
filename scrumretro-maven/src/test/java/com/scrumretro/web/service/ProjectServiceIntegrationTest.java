@@ -25,7 +25,7 @@ import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.scrumretro.rest.Response;
 import com.scrumretro.test.IntegrationTest;
-import com.scrumretro.web.model.ProjectRequest;
+import com.scrumretro.web.model.request.ProjectRequest;
 
 /**
  * Integration test cases for ProjectService.

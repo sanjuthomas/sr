@@ -21,8 +21,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.scrumretro.rest.Response;
-import com.scrumretro.web.model.UserRegistrationRequest;
-import com.scrumretro.web.model.UserResponse;
+import com.scrumretro.web.model.request.UserRegistrationRequest;
+import com.scrumretro.web.model.response.UserResponse;
 import com.scrumretro.worker.UserWorker;
 
 /**

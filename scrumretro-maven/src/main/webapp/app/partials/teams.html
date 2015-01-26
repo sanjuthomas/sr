@@ -1,0 +1,37 @@
+﻿<div class="teams view">
+    <div class="container">
+        <header>
+            <h3>Team Members</h3>
+        </header>
+        <div class="row">
+            <div class="span3">
+                First Name:
+                <br />
+                <input data-ng-model="newTeamMember.firstName" type="text" placeholder="First Name">
+            </div>
+            <div class="span3">
+                Last Name:
+                <br />
+                <input data-ng-model="newTeamMember.lastName" type="text" placeholder="Last Name">
+            </div>
+            <div class="span6">
+                Email:
+                <br />
+                <input data-ng-model="newTeamMember.email" type="email" placeholder="Email">
+                <button id="submitCustomer" class="btn btn-primary" type="button" 
+                    data-ng-disabled="!newTeamMember.firstName || !newTeamMember.lastName || !newTeamMember.email" 
+                    data-ng-click="insertCustomer()">Add Team Member</button>
+            </div>
+        </div>
+        <br /><br />
+        <div>
+            <div class="row cardContainer">
+                <div class="span3 card" data-ng-repeat="teamMember in teamMembers | orderBy:'active' : reverse">
+                    <button class="btn close cardClose" data-ng-click="deleteTeamMember(teamMember.id)">&times;</button>
+                    <div class="cardHeader">{{teamMember.lastName + ' ' + teamMember.firtName}}</div>
+                    <div class="cardBody">{{teamMember.createdDate}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

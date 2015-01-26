@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.scrumretro.rest.Service;
 import com.scrumretro.security.authentication.ScrumRetroUser;
-import com.scrumretro.web.model.ProjectRequest;
-import com.scrumretro.web.model.ProjectResponse;
+import com.scrumretro.web.model.request.ProjectRequest;
+import com.scrumretro.web.model.response.ProjectResponse;
 import com.scrumretro.worker.ProjectWorker;
 
 /**

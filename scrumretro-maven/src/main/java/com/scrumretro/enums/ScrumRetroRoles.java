@@ -7,7 +7,10 @@ package com.scrumretro.enums;
  */
 public enum ScrumRetroRoles {
 
-	ROLE_USER ("ROLE_USER", "Authenticated User");
+	AUTHENTICATED_USER("AUTHENTICATED_USER", "Authenticated User"),
+	DEVELOPER ("DEVELOPER", "Developer"),
+	SCRUM_MASTER ("SCRUM_MASTER", "Scrum Master");
+	
 	
 	private final String key;
 	

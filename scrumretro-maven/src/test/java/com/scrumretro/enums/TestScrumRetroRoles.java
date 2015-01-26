@@ -13,6 +13,8 @@ public class TestScrumRetroRoles {
 
 	@Test
 	public void shouldReturnKey(){
-		assertEquals("ROLE_USER", ScrumRetroRoles.ROLE_USER.getKey());
+		assertEquals("AUTHENTICATED_USER", ScrumRetroRoles.AUTHENTICATED_USER.getKey());
+		assertEquals("DEVELOPER", ScrumRetroRoles.DEVELOPER.getKey());
+		assertEquals("SCRUM_MASTER", ScrumRetroRoles.SCRUM_MASTER.getKey());
 	}
 }
